@@ -25,24 +25,11 @@ var profile = {
     default: false,
   },
 
-  associates: {
-    type: Boolean,
-    default: false,
-  },
-
-  bachelors: {
-    type: Boolean,
-    default: false,
-  },
-
-  masters: {
-    type: Boolean,
-    default: false,
-  },
-
-  phd: {
-    type: Boolean,
-    default: false,
+  degree:{
+    type: String,
+    enum:{
+      values:'Associate Bachelor Master Ph.D'.split(' '),
+    }
   },
 
   school: {
@@ -373,7 +360,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.firstName.length > 0 &&
     profile.lastName.length > 0 &&
     profile.adult &&
-    (profile.associates || profile.bachelors || profile.masters || profile.phd) &&
+    profile.degree &&
     profile.school.length > 0 &&
 	profile.major.length > 0 &&
     ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].indexOf(profile.graduationMonth) > -1 &&

@@ -23,10 +23,15 @@ angular.module('reg')
 
       // Populate the school & major dropdown
       populateSchools();
-	  populateMajors();
+	    populateMajors();
       _setupForm();
 
       $scope.regIsClosed = Date.now() > Settings.data.timeClose;
+
+      //Where frank started to break shit.
+      $scope.degree = {
+        choices:[ "Associates", "Bachelors", "Masters", "Ph.D", "Other" ]
+      }
 
       /**
        * TODO: JANK WARNING
@@ -126,7 +131,6 @@ angular.module('reg')
         }
         return true;
       }
-
       function _setupForm(){
         // Custom minors validation rule
         $.fn.form.settings.rules.allowMinors = function (value) {
@@ -137,21 +141,12 @@ angular.module('reg')
         $('.ui.form').form({
           inline: true,
           fields: {
-            firstName: {
-              identifier: 'firstName',
+            name: {
+              identifier: 'name',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your first name.'
-                }
-              ]
-            },
-            lastName: {
-              identifier: 'lastName',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your last name.'
+                  prompt: 'Please enter your name.'
                 }
               ]
             },
@@ -173,21 +168,21 @@ angular.module('reg')
                 }
               ]
             },
-            month: {
-              identifier: 'month',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please select your anticipated graduation month.'
-                }
-              ]
-            },
             year: {
               identifier: 'year',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select your anticipated graduation year.'
+                  prompt: 'Please select your anticipated graduation date.'
+                }
+              ]
+            },
+            degree: {
+              identifier: 'degree',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your highest degree achieved or being pursued.'
                 }
               ]
             },
@@ -208,7 +203,7 @@ angular.module('reg')
                   prompt: 'You must be an adult, or an OSU student.'
                 }
               ]
-            }
+            },
           }
         });
       }

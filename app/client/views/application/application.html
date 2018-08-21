@@ -96,7 +96,20 @@
             </select>
         </div>
 
+        <div class="field">
+            <select
+              name="degree"
+              ng-model="user.profile.degree">
+              <option value="">Degree</option>
+              <option value="associate">Associate's</option>
+              <option value="bachelor">Bachelor's</option>
+              <option value="master">Master's</option>
+              <option value="phd">Ph.D</option>
+            </select>
+        </div>
+<!--
         <div class="ui checkbox">
+
           <input type="checkbox" id="associates" ng-model="user.profile.associates">
           <label for="adult">Associate's</label>
         </div>
@@ -112,7 +125,7 @@
           <input type="checkbox" id="phd" ng-model="user.profile.phd">
           <label for="adult">PhD</label>
         </div>
-
+-->
         <div class="field">
           <label>Gender</label>
           <select
