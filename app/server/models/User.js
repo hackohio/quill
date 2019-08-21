@@ -361,8 +361,7 @@ schema.statics.validateProfile = function(profile, cb){
     ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].indexOf(profile.graduationMonth) > -1 &&
     ['2018', '2019', '2020', '2021', '2022'].indexOf(profile.graduationYear) > -1 &&
     ['Associates', 'Bachelors', 'Masters', 'Doctorate'].indexOf(profile.degree) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1 &&
-    ['Yes', 'No'].indexOf(profile.wantsLaptop) > -1
+    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
 
