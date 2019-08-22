@@ -34,11 +34,11 @@ function calculateStats(){
         'December': 0,
       },
       year: {
-        '2018': 0,
         '2019': 0,
         '2020': 0,
         '2021': 0,
         '2022': 0,
+        '2023': 0,
       },
       degree: {
         'Associates': 0,
