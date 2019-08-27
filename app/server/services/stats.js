@@ -14,6 +14,7 @@ function calculateStats(){
       gender: {
         M: 0,
         F: 0,
+        B: 0,
         O: 0,
         N: 0
       },
@@ -58,6 +59,7 @@ function calculateStats(){
 
     confirmedFemale: 0,
     confirmedMale: 0,
+    confirmedNonBinary: 0,
     confirmedOther: 0,
     confirmedNone: 0,
 
@@ -134,6 +136,7 @@ function calculateStats(){
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
+        newStats.confirmedNonBinary += user.status.confirmed && user.profile.gender == "B" ? 1 : 0;
         newStats.confirmedOther += user.status.confirmed && user.profile.gender == "O" ? 1 : 0;
         newStats.confirmedNone += user.status.confirmed && user.profile.gender == "N" ? 1 : 0;
 
