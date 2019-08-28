@@ -16,13 +16,13 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from OSU?
+      /*// Is the student from OSU?
       $scope.isOsuStudent = ($scope.user.email.split('@')[1] == 'osu.edu') || ($scope.user.email.split('@')[1] == 'buckeyemail.osu.edu');
 
       // If so, default them to adult: true
       if ($scope.isOsuStudent){
         $scope.user.profile.adult = true;
-      }
+      }*/
 
       // Populate the school & major dropdowns
       populateSchools();
