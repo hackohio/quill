@@ -99,16 +99,22 @@
 
       <div class="field" ng-show="!autoFilledSchool">
         <label> School </label>
-        <input class="ui input"
-               name="school"
-               ng-model="selectedUser.profile.school">
+        <div id="school" class="ui search">
+          <div class="ui input">
+            <input class="prompt" type="text" placeholder="School" name="school" ng-model="selectedUser.profile.school">
+          </div>
+          <div class="results"></div>
+        </div>
       </div>
 
       <div class="field">
         <label> Major </label>
-        <input class="ui input"
-               name="major"
-               ng-model="selectedUser.profile.major">
+        <div id="major" class="ui search">
+          <div class="ui input">
+            <input class="prompt" type="text" placeholder="Major" name="major" ng-model="selectedUser.profile.major">
+          </div>
+          <div class="results"></div>
+        </div>
       </div>
 
       <div class="field">
@@ -225,8 +231,15 @@
       </div>
 
       <div class="field">
-        <label> Phone </label>
-        <input type="tel" ng-model="selectedUser.confirmation.phoneNumber" />
+        <label> What's your phone number? (required) </label>
+        <p>
+          We need this in case we need to get ahold of you!
+        </p>
+        <input type="tel"
+               name="phone"
+               ng-model="selectedUser.confirmation.phoneNumber"
+               placeholder="(123) - 555 - 1234"
+               required>
       </div>
 
       <div class="field">
@@ -236,51 +249,59 @@
       </div>
 
       <div class="field">
-        <label> Shirt Size </label>
-        <input type="text" ng-model="selectedUser.profile.shirtSize" />
+        <label> Shirt Size (required) </label>
+        <p>
+          Let's get you some swag!
+        </p>
+        <select
+          name="shirt"
+          ng-model="selectedUser.confirmation.shirtSize"
+          required>
+          <option value="">Shirt Size</option>
+          <option value="XS">Unisex X-Small</option>
+          <option value="S">Unisex Small</option>
+          <option value="M">Unisex Medium</option>
+          <option value="L">Unisex Large</option>
+          <option value="XL">Unisex X-Large</option>
+          <option value="XXL">Unisex XX-Large</option>
+          <option value="WXS">Women's X-Small</option>
+          <option value="WS">Women's Small</option>
+          <option value="WM">Women's Medium</option>
+          <option value="WL">Women's Large</option>
+          <option value="WXL">Women's X-Large</option>
+          <option value="WXXL">Women's XX-Large</option>
+        </select>
       </div>
 
-      <div class="field">
-        <label> Major </label>
-        <input type="text" ng-model="selectedUser.profile.major" />
-      </div>
-
-      <div class="field">
+      <!--<div class="field">
         <label> Github </label>
         <input type="url" ng-model="selectedUser.profile.github" />
-      </div>
-
-      <div class="field">
-        <label> Website </label>
-        <input type="url" ng-model="selectedUser.profile.website" />
-      </div>
-
-      <div class="field">
-        <label> Resume </label>
-        <input type="url" ng-model="selectedUser.profile.resume" />
-      </div>
-
-      <div class="ui divider"></div>
+      </div>-->
 
       <div class="field">
         <label>
-          Needs Hardware
+          Will you be needing hardware?
         </label>
         <div class="ui checkbox">
           <input type="checkbox" ng-model="selectedUser.confirmation.wantsHardware">
-          <label> Yup, I need hardware </label>
+          <label> Yes, I would like to use hardware in my hack. </label>
         </div>
       </div>
 
-      <div class="field">
+      <div
+        class="field"
+        ng-show="selectedUser.confirmation.wantsHardware">
         <label>
-        Hardware
+          What kind of hardware would be useful for you?
         </label>
+        <p>
+          We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
+        </p>
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
 
       <div class="field">
-        <label>We will have a limited number of MacBooks available if you will be developing in Swift or do not have a suitable device</label>
+        <label>We will have a limited number of MacBooks available if you: <br>1) Will be developing in Swift<br>2) Do not already have a suitable device.<br>Please indicate if you would like to be considered for this weekend loan. Further information will be sent to you.</label>
         <select
           name="wantsLaptop"
           ng-model="user.confirmation.wantsLaptop">
@@ -290,10 +311,60 @@
         </select>
       </div>
 
+      <div class="ui divider"></div>
+
+      <div class="field">
+        <label> Resume (required) </label>
+        <p>
+          Upload a document outlining any skills or experience you'd like to share. Please upload a PDF with your full name in the file name!
+        </p>
+        <a
+          target="_blank"
+          href="https://www.dropbox.com/request/GcnwLomAlpGbmRc6ign3"
+          class="ui pink button">
+          Upload
+        </a>
+      </div>
+
 
       <div class="ui divider"></div>
 
-      <div class="ui header">
+      <div class="field">
+        <p>
+          <a
+            target="_blank"
+            href="http://hack.osu.edu/2018/pdf/2018_code_of_conduct.pdf">
+            HackOHI/O 2019 Code of Conduct & Liability Waiver
+          </a>
+        </p>
+        <label> Liability Waiver </label>
+        <p>
+          For legal reasons, our university asks that you read and accept the terms of our liability waiver. Again, as we mentioned in the original lottery application - you <strong> must </strong> be 18 years or older or an OSU undergraduate by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
+        </p>
+        <p>
+          By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be either an OSU undergraduate or 18 years or older at the time of the event.
+        </p>
+        <input type="text"
+               name="signatureLiabilityWaiver"
+               placeholder="Your Full Legal Name"
+               ng-model="selectedUser.confirmation.signatureLiability">
+      </div>
+
+      <div class="field">
+        <label> Code of Conduct </label>
+        <p>
+          It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
+        </p>
+        <p>
+          By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+        </p>
+        <input type="text"
+               name="signatureCodeOfConduct"
+               placeholder="Your Full Legal Name"
+               ng-model="selectedUser.confirmation.signatureCodeOfConduct">
+      </div>
+
+      <!--<div class="ui header">
         Hosting
       </div>
 
@@ -437,11 +508,20 @@
       <div class="field">
         <label> Receipt </label>
         <input type="url" ng-model="selectedUser.confirmation.receipt" />
-      </div>
+      </div>-->
 
       <div class="field">
         <label> Additional Notes </label>
         <textarea ng-model="selectedUser.confirmation.notes"></textarea>
+      </div>
+
+      <div class="field">
+        <div
+          ng-click="updateConfirmation()"
+          class="ui positive right labeled icon button">
+          Update Confirmation
+          <i class="checkmark icon"></i>
+        </div>
       </div>
 
     </fieldset>

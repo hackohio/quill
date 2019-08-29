@@ -81,7 +81,7 @@ function calculateStats(){
 
     dietaryRestrictions: {},
 
-    hostNeededFri: 0,
+    /*hostNeededFri: 0,
     hostNeededSat: 0,
     hostNeededUnique: 0,
 
@@ -91,7 +91,7 @@ function calculateStats(){
     hostNeededNone: 0,
 
     reimbursementTotal: 0,
-    reimbursementMissing: 0,
+    reimbursementMissing: 0,*/
 
     wantsHardware: 0,
     wantsLaptop: {
@@ -143,12 +143,12 @@ function calculateStats(){
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
 
-        // Count the number of people who need reimbursements
+        /*// Count the number of people who need reimbursements
         newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
 
         // Count the number of people who still need to be reimbursed
         newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
-          !user.status.reimbursementGiven ? 1 : 0;
+          !user.status.reimbursementGiven ? 1 : 0;*/
 
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
@@ -199,7 +199,7 @@ function calculateStats(){
           newStats.shirtSizes[user.confirmation.shirtSize] += 1;
         }
 
-        // Host needed counts
+        /*// Host needed counts
         newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
         newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
         newStats.hostNeededUnique += user.confirmation.hostNeededFri || user.confirmation.hostNeededSat ? 1 : 0;
@@ -211,7 +211,7 @@ function calculateStats(){
         newStats.hostNeededOther
           += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "O" ? 1 : 0;
         newStats.hostNeededNone
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;
+          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;*/
 
         // Dietary restrictions
         if (user.confirmation.dietaryRestrictions){
