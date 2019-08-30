@@ -244,8 +244,24 @@
 
       <div class="field">
         <label> Dietary Restrictions </label>
-        <input
-          type="text" ng-model="selectedUser.confirmation.dietaryRestrictions" />
+        <p>
+          If your restriction is not included here, please let us know in the additional notes at the bottom.
+        </p>
+        <p>
+          We'll make sure you get fed :)
+        </p>
+      </div>
+
+      <div class="inline fields">
+        <div class="field"
+          ng-repeat="(key, value) in dietaryRestrictions">
+
+          <div class="ui checkbox">
+            <input type="checkbox" ng-model="dietaryRestrictions[key]" />
+            <label>{{key}}</label>
+          </div>
+
+        </div>
       </div>
 
       <div class="field">

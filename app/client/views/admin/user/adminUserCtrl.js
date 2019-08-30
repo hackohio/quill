@@ -47,7 +47,7 @@ angular.module('reg')
                 source: content,
                 cache: true,
                 onSelect: function(result, response) {
-                  $scope.user.profile.school = result.title.trim();
+                  $scope.selectedUser.profile.school = result.title.trim();
                 }
               })
           });
@@ -74,11 +74,29 @@ angular.module('reg')
                 source: content,
                 cache: true,
                 onSelect: function(result, response) {
-                  $scope.user.profile.major = result.title.trim();
+                  $scope.selectedUser.profile.major = result.title.trim();
                 }
               })
           });
       }
+
+      var dietaryRestrictions = {
+        'Vegetarian': false,
+        'Vegan': false,
+        'Halal': false,
+        'Kosher': false,
+        'Nut Allergy': false
+      };
+
+      if ($scope.selectedUser.confirmation.dietaryRestrictions){
+        $scope.selectedUser.confirmation.dietaryRestrictions.forEach(function(restriction){
+          if (restriction in dietaryRestrictions){
+            dietaryRestrictions[restriction] = true;
+          }
+        });
+      }
+
+      $scope.dietaryRestrictions = dietaryRestrictions;
 
       $scope.updateProfile = function(){
         UserService
@@ -92,6 +110,16 @@ angular.module('reg')
       };
 
       $scope.updateConfirmation = function(){
+        var confirmation = $scope.selectedUser.confirmation;
+        // Get the dietary restrictions as an array
+        var drs = [];
+        Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if ($scope.dietaryRestrictions[key]){
+            drs.push(key);
+          }
+        });
+        confirmation.dietaryRestrictions = drs;
+
         UserService
           .updateConfirmation($scope.selectedUser._id, $scope.selectedUser.confirmation)
           .then(response => {
