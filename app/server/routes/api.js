@@ -206,7 +206,13 @@ module.exports = function(router) {
     var code = req.body.code;
     var id = req.params.id;
 
-    UserController.createOrJoinTeam(id, code, defaultResponse(req, res));
+    UserController.createOrJoinTeam(id, code, function(err, data){
+      if (err) {
+        return res.status(500).send(err);
+      } else {
+        return res.json(data);
+      }
+    });
 
   });
 
