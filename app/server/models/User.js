@@ -97,9 +97,16 @@ var confirmation = {
   website: String,
   resume: String,
 
-  /*needsReimbursement: Boolean,
-  address: {
-    name: String,
+  usCitizen: Boolean,
+  needsReimbursement: Boolean,
+  reimbursementType: {
+    type: String,
+    enum: {
+      values: 'Airfare Gas'.split(' '),
+    }
+  },
+  legalName: String,
+  departureAddress: {
     line1: String,
     line2: String,
     city: String,
@@ -107,6 +114,8 @@ var confirmation = {
     zip: String,
     country: String
   },
+
+  /*
   receipt: String,
 
   hostNeededFri: Boolean,
