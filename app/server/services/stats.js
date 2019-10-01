@@ -99,7 +99,11 @@ function calculateStats(){
       'No': 0
     },
 
-    checkedIn: 0
+    checkedIn: 0,
+    
+    usCitizen: 0,
+    airfareReimbursement: 0,
+    gasReimbursement: 0,
   };
 
   User
@@ -184,6 +188,21 @@ function calculateStats(){
         // Count degrees
         if (user.profile.degree){
           newStats.demo.degree[user.profile.degree] += 1;
+        }
+
+        // Count the number of US Citizens
+        if (user.confirmation.usCitizen){
+          newStats.usCitizen += 1;
+        }
+
+        // Count the number of airfare reimbursements
+        if (user.confirmation.reimbursementType === "Airfare"){
+          newStats.airfareReimbursement += 1;
+        }       
+
+        // Count the number of airfare reimbursements
+        if (user.confirmation.reimbursementType === "Gas"){
+          newStats.gasReimbursement += 1;
         }
 
         // Grab the team name if there is one
