@@ -66,7 +66,7 @@
 
   <div class="ui divider"></div>
 
-  <div class="ui form">
+  <div class="ui form" id="profile">
 
     <fieldset ng-disabled="false">
 
@@ -210,7 +210,7 @@
 
       <div class="field">
         <div
-          ng-click="updateProfile()"
+          ng-click="submitProfile()"
           class="ui positive right labeled icon button">
           Update Profile
           <i class="checkmark icon"></i>
@@ -222,11 +222,11 @@
 
   <div class="ui divider"></div>
 
-  <div class="ui form">
+  <div class="ui form" id="confirmation">
 
     <fieldset ng-disabled="false">
 
-      <div class="ui header">
+      <div class="ui header" >
         Confirmation
       </div>
 
@@ -320,13 +320,115 @@
         <label>We will have a limited number of MacBooks available if you: <br>1) Will be developing in Swift<br>2) Do not already have a suitable device.<br>Please indicate if you would like to be considered for this weekend loan. Further information will be sent to you.</label>
         <select
           name="wantsLaptop"
-          ng-model="user.confirmation.wantsLaptop">
+          ng-model="selectedUser.confirmation.wantsLaptop">
           <option value="">Laptop Status</option>
           <option value="No">I do not want a laptop</option>
           <option value="Yes">I want a laptop</option>
         </select>
       </div>
 
+      <div class="ui divider"></div>
+
+      <div class="ui header">Travel</div>
+
+      <div class="field">
+        <label> Would you like to apply for travel reimbursement? </label>
+        <div class="ui checkbox">
+          <input type="checkbox" ng-model="selectedUser.confirmation.needsReimbursement" ng-click="needTravel()">
+          <label> I would like to apply for travel reimbursement. </label>
+        </div>
+      </div>
+
+      <div
+        ng-show="selectedUser.confirmation.needsReimbursement">
+
+        <p>
+          In order to complete the travel reimbursement process, you will need to fill out additional forms at the event. 
+        </p>
+
+        <div class="field">
+          <label>Full Legal Name</label>
+          <input type="text"
+                 name="legalName"
+                 ng-model="selectedUser.confirmation.legalName"
+                 required>
+        </div>
+
+        <div class="field">
+          <label>What kind of reimbursement are you applying for?</label>
+          <select
+            name="reimbursementType"
+            ng-model="selectedUser.confirmation.reimbursementType">
+            <option value="">Reimbursement Type</option>
+            <option value="Airfare">Airfare</option>
+            <option value="Gas">Gas</option>
+          </select>
+        </div>
+
+        
+        <div class="field"
+          ng-show="selectedUser.confirmation.reimbursementType == 'Airfare'">
+          <label> Are you a US citizen? </label>
+          <div class="ui checkbox">
+            <input type="checkbox" ng-model="selectedUser.confirmation.usCitizen">
+            <label> I am a US citizen. </label>
+          </div>
+        </div>
+
+        <h4 class="ui header">
+          Departure Address
+        </h4>
+
+        <div class="field">
+          <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
+          <input
+            type="text"
+            name="addressLine1"
+            ng-model="selectedUser.confirmation.departureAddress.line1">
+        </div>
+
+        <div class="field">
+          <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+          <input
+            type="text"
+            name="addressLine2"
+            ng-model="selectedUser.confirmation.departureAddress.line2">
+        </div>
+
+        <div class="four fields">
+          <div class="field">
+            <label> City </label>
+            <input
+              type="text"
+              name="city"
+              ng-model="selectedUser.confirmation.departureAddress.city">
+          </div>
+          <div class="field">
+            <label> State/Province/Region </label>
+            <input
+              type="text"
+              name="state"
+              ng-model="selectedUser.confirmation.departureAddress.state">
+          </div>
+          <div class="field">
+            <label> ZIP </label>
+            <input
+              type="text"
+              name="zip"
+              ng-model="selectedUser.confirmation.departureAddress.zip">
+          </div>
+          <div class="field">
+            <label> Country </label>
+            <input
+              type="text"
+              name="country"
+              ng-model="selectedUser.confirmation.departureAddress.country">
+          </div>
+        </div>
+
+      </div>
+
+      
       <div class="ui divider"></div>
 
       <div class="field">
@@ -450,81 +552,8 @@
       </div>
 
       <div class="ui divider"></div>
+      -->
 
-      <div class="ui header">
-        Travel
-      </div>
-
-      <div class="field">
-        <strong> Needs Reimbursement</strong>
-        <i
-          ng-if="selectedUser.confirmation.needsReimbursement"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.needsReimbursement"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <label>Full Name</label>
-        <input type="text"
-               name="name"
-               ng-model="selectedUser.confirmation.address.name">
-      </div>
-
-      <div class="field">
-        <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
-        <input
-          type="text"
-          name="addressLine1"
-          ng-model="selectedUser.confirmation.address.line1">
-      </div>
-
-      <div class="field">
-        <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
-        <input
-          type="text"
-          name="addressLine2"
-          ng-model="selectedUser.confirmation.address.line2">
-      </div>
-
-      <div class="four fields">
-        <div class="field">
-          <label> City </label>
-          <input
-            type="text"
-            name="city"
-            ng-model="selectedUser.confirmation.address.city">
-        </div>
-        <div class="field">
-          <label> State/Province/Region </label>
-          <input
-            type="text"
-            name="state"
-            ng-model="selectedUser.confirmation.address.state">
-        </div>
-        <div class="field">
-          <label> ZIP </label>
-          <input
-            type="text"
-            name="zip"
-            ng-model="selectedUser.confirmation.address.zip">
-        </div>
-        <div class="field">
-          <label> Country </label>
-          <input
-            type="text"
-            name="country"
-            ng-model="selectedUser.confirmation.address.country">
-        </div>
-      </div>
-
-      <div class="field">
-        <label> Receipt </label>
-        <input type="url" ng-model="selectedUser.confirmation.receipt" />
-      </div>-->
 
       <div class="field">
         <label> Additional Notes </label>
@@ -533,7 +562,7 @@
 
       <div class="field">
         <div
-          ng-click="updateConfirmation()"
+          ng-click="submitConfirmation()"
           class="ui positive right labeled icon button">
           Update Confirmation
           <i class="checkmark icon"></i>
