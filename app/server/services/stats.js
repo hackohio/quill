@@ -101,7 +101,8 @@ function calculateStats(){
 
     checkedIn: 0,
     
-    usCitizen: 0,
+    // Number of people requesting airfare reimbursment and are US Citizens
+    usCitizen: 0, 
     airfareReimbursement: 0,
     gasReimbursement: 0,
   };

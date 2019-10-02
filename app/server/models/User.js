@@ -97,7 +97,11 @@ var confirmation = {
   website: String,
   resume: String,
 
-  usCitizen: Boolean,
+  usCitizen: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   needsReimbursement: Boolean,
   reimbursementType: {
     type: String,

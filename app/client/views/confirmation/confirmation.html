@@ -104,14 +104,6 @@
             </select>
           </div>
 
-          <div class="field">
-            <label> Are you a US citizen? </label>
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.usCitizen">
-              <label> I am a US citizen. </label>
-            </div>
-          </div>
-
           <br>
           <br>
 
@@ -149,6 +141,16 @@
                 <option value="Airfare">Airfare</option>
                 <option value="Gas">Gas</option>
               </select>
+            </div>
+
+            
+            <div class="field"
+              ng-show="user.confirmation.reimbursementType == 'Airfare'">
+              <label> Are you a US citizen? </label>
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="user.confirmation.usCitizen">
+                <label> I am a US citizen. </label>
+              </div>
             </div>
 
             <div class="ui header">
