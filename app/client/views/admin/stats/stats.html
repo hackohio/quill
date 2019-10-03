@@ -181,16 +181,16 @@
         <div class="ui divider"></div>
         
         <div class="item">
-          <strong>Needs Reimbursement (Total):</strong> {{stats.airfareReimbursement + stats.gasReimbursement}} ({{(stats.airfareReimbursement + stats.gasReimbursement) / stats.confirmed * 100 | number: 1}}%)
+          <strong>Needs Reimbursement (Total):</strong> {{stats.airfareReimbursement + stats.gasReimbursement}}
         </div>
         <div class="item content">
-          <strong>Needs Reimbursement (Gas):</strong> {{stats.gasReimbursement}} ({{stats.gasReimbursement / stats.confirmed * 100 | number: 1}}%)
+          <strong>Needs Reimbursement (Gas):</strong> {{stats.gasReimbursement}}
         </div>
         <div class="item content">
-          <strong>Needs Reimbursement (AirFare Total):</strong> {{stats.airfareReimbursement}} ({{stats.airfareReimbursement / stats.confirmed * 100 | number: 1}}%)
+          <strong>Needs Reimbursement (AirFare Total):</strong> {{stats.airfareReimbursement}}
         </div>
         <div class="item content">
-          <strong>Needs Reimbursement (AirFare US Citizens):</strong> {{stats.usCitizen}} ({{stats.usCitizen / stats.airfareReimbursement * 100 | number: 1}}% of Airfare reimbursement requests)
+          <strong>Needs Reimbursement (AirFare US Citizens):</strong> {{stats.usCitizen}}
         </div>
       </div>
     </div>
