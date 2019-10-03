@@ -201,7 +201,7 @@ function calculateStats(){
           newStats.airfareReimbursement += 1;
         }       
 
-        // Count the number of airfare reimbursements
+        // Count the number of gas reimbursements
         if (user.confirmation.reimbursementType === "Gas"){
           newStats.gasReimbursement += 1;
         }
