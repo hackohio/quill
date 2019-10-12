@@ -88,10 +88,10 @@ function calculateStats(){
     hostNeededFemale: 0,
     hostNeededMale: 0,
     hostNeededOther: 0,
-    hostNeededNone: 0,
+    hostNeededNone: 0,*/
 
     reimbursementTotal: 0,
-    reimbursementMissing: 0,*/
+    //reimbursementMissing: 0,
 
     wantsHardware: 0,
     wantsLaptop: 0,
@@ -145,10 +145,10 @@ function calculateStats(){
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
 
-        /*// Count the number of people who need reimbursements
+        // Count the number of people who need reimbursements
         newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
 
-        // Count the number of people who still need to be reimbursed
+        /*// Count the number of people who still need to be reimbursed
         newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
           !user.status.reimbursementGiven ? 1 : 0;*/
 
