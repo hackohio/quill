@@ -218,15 +218,6 @@ angular.module('reg')
                 }
               ]
             },
-            wantsLaptop: {
-              identifier: 'wantsLaptop',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please give us a laptop preference!'
-                }
-              ]
-            },
             phone: {
               identifier: 'phone',
               rules: [
@@ -269,7 +260,7 @@ angular.module('reg')
         $scope.selectedUser.confirmation.needsReimbursement && _addTravelRequirments();
       }
 
-      
+
       function _addTravelRequirments(){
         let uiForm = $('.ui.form#confirmation');
         uiForm.form('add rule', 'legalName', {
@@ -335,21 +326,21 @@ angular.module('reg')
             }
           ]
         });
-        
+
       }
 
       function _removeTravelRequirments(){
         let uiForm = $('.ui.form#confirmation');
         uiForm.form('remove fields', [
-          'legalName', 
+          'legalName',
           'reimbursementType',
-          'addressLine1', 
-          'city', 
-          'state', 
-          'zip', 
+          'addressLine1',
+          'city',
+          'state',
+          'zip',
           'country'
-        ])        
-      }      
+        ])
+      }
 
       function _updateProfile(){
         UserService
@@ -372,7 +363,7 @@ angular.module('reg')
           }
         });
         confirmation.dietaryRestrictions = drs;
-        
+
         UserService
           .updateConfirmation($scope.selectedUser._id, $scope.selectedUser.confirmation)
           .then(response => {

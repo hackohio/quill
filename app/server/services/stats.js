@@ -94,15 +94,12 @@ function calculateStats(){
     reimbursementMissing: 0,*/
 
     wantsHardware: 0,
-    wantsLaptop: {
-      'Yes': 0,
-      'No': 0
-    },
+    wantsLaptop: 0,
 
     checkedIn: 0,
-    
+
     // Number of people requesting airfare reimbursment and are US Citizens
-    usCitizen: 0, 
+    usCitizen: 0,
     airfareReimbursement: 0,
     gasReimbursement: 0,
   };
@@ -158,10 +155,9 @@ function calculateStats(){
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
 
-        // //Count the number of people who want Laptop
-        if (user.confirmation.wantsLaptop in newStats.wantsLaptop){
-          newStats.wantsLaptop[user.confirmation.wantsLaptop] += 1;
-        }
+        // //Count the number of people who want a laptop
+        newStats.wantsLaptop += user.confirmation.wantsLaptop ? 1 : 0;
+
         // Count schools
         if (!newStats.demo.schools[email]){
           newStats.demo.schools[email] = {
@@ -199,7 +195,7 @@ function calculateStats(){
         // Count the number of airfare reimbursements
         if (user.confirmation.reimbursementType === "Airfare"){
           newStats.airfareReimbursement += 1;
-        }       
+        }
 
         // Count the number of gas reimbursements
         if (user.confirmation.reimbursementType === "Gas"){

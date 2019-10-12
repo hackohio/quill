@@ -81,15 +81,6 @@ angular.module('reg')
                 }
               ]
             },
-            wantsLaptop: {
-              identifier: 'wantsLaptop',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please give us a laptop preference!'
-                }
-              ]
-            },
             phone: {
               identifier: 'phone',
               rules: [
@@ -197,20 +188,20 @@ angular.module('reg')
             }
           ]
         });
-        
+
       }
 
       function _removeTravelRequirments(){
         let uiForm = $('.ui.form');
         uiForm.form('remove fields', [
-          'legalName', 
+          'legalName',
           'reimbursementType',
-          'addressLine1', 
-          'city', 
-          'state', 
-          'zip', 
+          'addressLine1',
+          'city',
+          'state',
+          'zip',
           'country'
-        ])        
+        ])
       }
 
       $scope.needTravel = function(){

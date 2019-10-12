@@ -94,14 +94,20 @@
           </div>
 
           <div class="field">
-            <label>We will have a limited number of MacBooks available if you: <br>1) Will be developing in Swift<br>2) Do not already have a suitable device.<br>Please indicate if you would like to be considered for this weekend loan. Further information will be sent to you.</label>
-            <select
-              name="wantsLaptop"
-              ng-model="user.confirmation.wantsLaptop">
-              <option value="">Laptop Status</option>
-              <option value="No">I do not want a laptop</option>
-              <option value="Yes">I want a laptop</option>
-            </select>
+            <label>
+              We will have a limited number of MacBooks available if you:
+            </label>
+            <p>
+              1) Will be developing in Swift
+              <br>
+              2) Do not already have a suitable device
+              <br>
+              <b>Please indicate if you would like to be considered for this weekend loan. Further information will be sent to you.</b>
+            </p>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.wantsLaptop">
+              <label> Yes, I would like loan a MacBook. </label>
+            </div>
           </div>
 
           <br>
@@ -121,7 +127,7 @@
             ng-show="user.confirmation.needsReimbursement">
 
             <p>
-              In order to complete the travel reimbursement process, you will need to fill out additional forms at the event. 
+              In order to complete the travel reimbursement process, you will need to fill out additional forms at the event.
             </p>
 
             <div class="field">
@@ -143,7 +149,7 @@
               </select>
             </div>
 
-            
+
             <div class="field"
               ng-show="user.confirmation.reimbursementType == 'Airfare'">
               <label> Are you a US citizen? </label>
