@@ -128,9 +128,161 @@ angular.module('reg')
             },
           }
         });
+<<<<<<< Updated upstream
+=======
+
+        $scope.user.confirmation.needsReimbursement && _addTravelRequirments();
+      }
+
+      function _addTravelRequirments(){
+        let uiForm = $('.ui.form');
+        uiForm.form('add rule', 'legalName', {
+          identifier: 'legalName',
+          rules: [
+            {
+              type: 'empty',
+              prompt: 'Please type your full legal name.'
+            }
+          ]
+        });
+        uiForm.form('add rule', 'reimbursementType', {
+          identifier: 'reimbursementType',
+          rules: [
+            {
+              type: 'empty',
+              prompt: 'Please indicate the kind of reimbursement.'
+            }
+          ]
+        });
+        uiForm.form('add rule', 'addressLine1', {
+          identifier: 'addressLine1',
+          rules: [
+            {
+              type: 'empty',
+              prompt: 'Please type your address.'
+            }
+          ]
+        });
+        uiForm.form('add rule', 'city', {
+          identifier: 'city',
+          rules: [
+            {
+              type: 'empty',
+              prompt: 'Please provide your city.'
+            }
+          ]
+        });
+        uiForm.form('add rule', 'state', {
+          identifier: 'state',
+          rules: [
+            {
+              type: 'empty',
+              prompt: 'Please provide your state.'
+            }
+          ]
+        });
+        uiForm.form('add rule', 'zip', {
+          identifier: 'zip',
+          rules: [
+            {
+              type: 'empty',
+              prompt: 'Please provide your zip.'
+            }
+          ]
+        });
+        uiForm.form('add rule', 'country', {
+          identifier: 'country',
+          rules: [
+            {
+              type: 'empty',
+              prompt: 'Please provide your country.'
+            }
+          ]
+        });
+      }
+
+      function _resumeRequirements(){
+          let uiForm = $('.ui.form');
+          if(!user.confirmation.resume){
+              console.log('called');
+              uiForm.form('add rule', 'resume', {
+                identifier: 'resume_file',
+                rules: [
+                  {
+                    type: 'empty',
+                    prompt: 'Please choose a file for your resume.'
+                  }
+                ]
+            });
+        }
+      }
+
+
+      function uploadResume(){
+          $("#resume").submit(function(e) {
+             //console.log($scope.user.email);
+             e.preventDefault();
+             var formData = new FormData(this);
+             formData.append('email',$scope.user.email);
+             $.ajax({
+                 url: "http://hack2019-resume-upload.s3.amazonaws.com",
+                 type: 'POST',
+                 data: formData,
+                 success: function (data) {
+                     console.log('sucess');
+                     user.confirmation.resume = true;
+                 },
+                 error: function () {
+                     console.log('err'); // replace with proper error handling
+                 },
+                 cache: false,
+                 contentType: false,
+                 processData: false
+             });
+         });
+         let uiForm = $('.ui.form');
+         if(!user.confirmation.resume){
+             console.log('called');
+             uiForm.form('add rule', 'resume', {
+               identifier: 'resume_file',
+               rules: [
+                 {
+                   type: 'empty',
+                   prompt: 'Please choose a file for your resume.'
+                 }
+               ]
+           });
+       }
+       console.log(user.confirmation.resume);
+       console.log('submit');
+       $("#resume").submit();
+     }
+
+      function _removeTravelRequirments(){
+        let uiForm = $('.ui.form');
+        uiForm.form('remove fields', [
+          'legalName',
+          'reimbursementType',
+          'addressLine1',
+          'city',
+          'state',
+          'zip',
+          'country'
+        ])
+      }
+
+      $scope.needTravel = function(){
+        let needsReimbursement = !$scope.user.confirmation.needsReimbursement;
+        if (needsReimbursement) {
+          _addTravelRequirments()
+        } else {
+          _removeTravelRequirments();
+        }
+>>>>>>> Stashed changes
       }
 
       $scope.submitForm = function(){
+        uploadResume();
         if ($('.ui.form').form('is valid')){
           _updateUser();
         }
