@@ -95,11 +95,29 @@ var confirmation = {
   },
   github: String,
   website: String,
+<<<<<<< Updated upstream
   resume: String,
 
   /*needsReimbursement: Boolean,
   address: {
     name: String,
+=======
+  resume: {
+  type: Boolean,
+  required: true,
+  default: false,
+  },
+  usCitizen: Boolean,
+  needsReimbursement: Boolean,
+  reimbursementType: {
+    type: String,
+    enum: {
+      values: 'Airfare Gas'.split(' '),
+    }
+  },
+  legalName: String,
+  departureAddress: {
+>>>>>>> Stashed changes
     line1: String,
     line2: String,
     city: String,
