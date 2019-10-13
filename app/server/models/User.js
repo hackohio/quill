@@ -96,9 +96,9 @@ var confirmation = {
   github: String,
   website: String,
   resume: {
-  type: Boolean,
-  required: true,
-  default: false,
+    type: Boolean,
+    required: true,
+    default: false,
   },
   usCitizen: Boolean,
   needsReimbursement: Boolean,
@@ -117,17 +117,16 @@ var confirmation = {
     zip: String,
     country: String
   },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
-
-  notes: String,
-
+  // receipt: String,
+  //
+  // hostNeededFri: Boolean,
+  // hostNeededSat: Boolean,
+  // genderNeutral: Boolean,
+  // catFriendly: Boolean,
+  // smokingFriendly: Boolean,
+  // hostNotes: String,
+  //
+  // notes: String,
   signatureLiability: String,
   signaturePhotoRelease: String,
   signatureCodeOfConduct: String,
