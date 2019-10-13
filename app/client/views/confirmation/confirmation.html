@@ -104,6 +104,117 @@
             </select>
           </div>
 
+<<<<<<< Updated upstream
+=======
+          <div class="field">
+            <label> Are you a US citizen? </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.usCitizen">
+              <label> I am a US citizen. </label>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">Travel</div>
+
+          <div class="field">
+            <label> Would you like to apply for travel reimbursement? </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.needsReimbursement" ng-click="needTravel()">
+              <label> I would like to apply for travel reimbursement. </label>
+            </div>
+          </div>
+
+          <div
+            ng-show="user.confirmation.needsReimbursement">
+
+            <p>
+              In order to complete the travel reimbursement process, you will need to fill out additional forms at the event.
+            </p>
+                We’ll be offering gas reimbursements to anyone driving to HackOHI/O, as long as the trip is over 100 miles roundtrip.
+                If you’re located over 350 miles out of Columbus, OH we’ll be offering flight reimbursements up to $200.
+                <br>
+                Just remember to indicate that you’ll need to be reimbursed during the confirmation stage.
+            <p>
+
+            <div class="field">
+              <label>Full Legal Name</label>
+              <input type="text"
+                     name="legalName"
+                     ng-model="user.confirmation.legalName"
+                     required>
+            </div>
+
+            <div class="field">
+              <label>What kind of reimbursement are you applying for?</label>
+              <select
+                name="reimbursementType"
+                ng-model="user.confirmation.reimbursementType">
+                <option value="">Reimbursement Type</option>
+                <option value="Airfare">Airfare</option>
+                <option value="Gas">Gas</option>
+              </select>
+            </div>
+
+            <div class="ui header">
+              Departure Address
+            </div>
+
+            <div class="field">
+              <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
+              <input
+                type="text"
+                name="addressLine1"
+                ng-model="user.confirmation.departureAddress.line1">
+            </div>
+
+            <div class="field">
+              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+              <input
+                type="text"
+                name="addressLine2"
+                ng-model="user.confirmation.departureAddress.line2">
+            </div>
+
+            <div class="four fields">
+              <div class="field">
+                <label> City </label>
+                <input
+                  type="text"
+                  name="city"
+                  ng-model="user.confirmation.departureAddress.city">
+              </div>
+              <div class="field">
+                <label> State/Province/Region </label>
+                <input
+                  type="text"
+                  name="state"
+                  ng-model="user.confirmation.departureAddress.state">
+              </div>
+              <div class="field">
+                <label> ZIP </label>
+                <input
+                  type="text"
+                  name="zip"
+                  ng-model="user.confirmation.departureAddress.zip">
+              </div>
+              <div class="field">
+                <label> Country </label>
+                <input
+                  type="text"
+                  name="country"
+                  ng-model="user.confirmation.departureAddress.country">
+              </div>
+            </div>
+
+          </div>
+
+          <br>
+          <br>
+
+>>>>>>> Stashed changes
 
           <br>
           <br>
@@ -118,18 +229,15 @@
                    ng-model="user.confirmation.github">
           </div>-->
 
-          <div class="field">
-            <label> Resume (required) </label>
-            <p>
-              Upload a document outlining any skills or experience you'd like to share. Please upload a PDF with your full name in the file name!
-            </p>
-            <a
-              target="_blank"
-              href="https://www.dropbox.com/request/GcnwLomAlpGbmRc6ign3"
-              class="ui pink button">
-              Upload
-            </a>
-          </div>
+
+      		<div class="field">
+      		<label>Resume</label>
+      			<form id="resume" method="post" enctype="multipart/form-data">
+                    <input type="hidden"  name="key" value="{{user.email}}" />
+      				<input id="resume_file"name="file" type="file" accept=".pdf"/>
+      			</form>
+      			<h6 style="padding:none"><strong>You must submit your resume as a PDF, no exceptions!</strong></h6>
+            </div>
 
           <br>
           <br>
@@ -315,7 +423,7 @@
             <p>
               <a
                 target="_blank"
-                href="http://hack.osu.edu/2018/pdf/2018_code_of_conduct.pdf">
+                href="https://docs.google.com/document/d/1axtqVIWyeQafHZpIFBM4Ks1VQSImYAos4PrQK4CfggI/edit?usp=sharing">
                 HackOHI/O 2019 Code of Conduct & Liability Waiver
               </a>
             </p>
