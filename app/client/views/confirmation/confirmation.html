@@ -94,127 +94,16 @@
           </div>
 
           <div class="field">
-            <label>
-              We will have a limited number of MacBooks available if you:
-            </label>
-            <p>
-              1) Will be developing in Swift
-              <br>
-              2) Do not already have a suitable device
-              <br>
-              <b>Please indicate if you would like to be considered for this weekend loan. Further information will be sent to you.</b>
-            </p>
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.wantsLaptop">
-              <label> Yes, I would like loan a MacBook. </label>
-            </div>
+            <label>We will have a limited number of MacBooks available if you: <br>1) Will be developing in Swift<br>2) Do not already have a suitable device.<br>Please indicate if you would like to be considered for this weekend loan. Further information will be sent to you.</label>
+            <select
+              name="wantsLaptop"
+              ng-model="user.confirmation.wantsLaptop">
+              <option value="">Laptop Status</option>
+              <option value="No">I do not want a laptop</option>
+              <option value="Yes">I want a laptop</option>
+            </select>
           </div>
 
-          <br>
-          <br>
-
-          <div class="divided title">Travel</div>
-
-          <div class="field">
-            <label> Would you like to apply for travel reimbursement? </label>
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.needsReimbursement" ng-click="needTravel()">
-              <label> I would like to apply for travel reimbursement. </label>
-            </div>
-          </div>
-
-          <div
-            ng-show="user.confirmation.needsReimbursement">
-
-            <p>
-              In order to complete the travel reimbursement process, you will need to fill out additional forms at the event.
-            </p>
-
-            <div class="field">
-              <label>Full Legal Name</label>
-              <input type="text"
-                     name="legalName"
-                     ng-model="user.confirmation.legalName"
-                     required>
-            </div>
-
-            <div class="field">
-              <label>What kind of reimbursement are you applying for?</label>
-              <select
-                name="reimbursementType"
-                ng-model="user.confirmation.reimbursementType">
-                <option value="">Reimbursement Type</option>
-                <option value="Airfare">Airfare</option>
-                <option value="Gas">Gas</option>
-              </select>
-            </div>
-
-
-            <div class="field"
-              ng-show="user.confirmation.reimbursementType == 'Airfare'">
-              <label> Are you a US citizen? </label>
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.usCitizen">
-                <label> I am a US citizen. </label>
-              </div>
-            </div>
-
-            <div class="ui header">
-              Departure Address
-            </div>
-
-            <div class="field">
-              <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
-              <input
-                type="text"
-                name="addressLine1"
-                ng-model="user.confirmation.departureAddress.line1">
-            </div>
-
-            <div class="field">
-              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
-              <input
-                type="text"
-                name="addressLine2"
-                ng-model="user.confirmation.departureAddress.line2">
-            </div>
-
-            <div class="four fields">
-              <div class="field">
-                <label> City </label>
-                <input
-                  type="text"
-                  name="city"
-                  ng-model="user.confirmation.departureAddress.city">
-              </div>
-              <div class="field">
-                <label> State/Province/Region </label>
-                <input
-                  type="text"
-                  name="state"
-                  ng-model="user.confirmation.departureAddress.state">
-              </div>
-              <div class="field">
-                <label> ZIP </label>
-                <input
-                  type="text"
-                  name="zip"
-                  ng-model="user.confirmation.departureAddress.zip">
-              </div>
-              <div class="field">
-                <label> Country </label>
-                <input
-                  type="text"
-                  name="country"
-                  ng-model="user.confirmation.departureAddress.country">
-              </div>
-            </div>
-
-          </div>
-
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
           <div class="field">
             <label> Are you a US citizen? </label>
             <div class="ui checkbox">
@@ -323,13 +212,6 @@
           <br>
           <br>
 
->>>>>>> Stashed changes
-=======
-          <br>
-          <br>
-
->>>>>>> refs/remotes/origin/Hack2019
-
           <br>
           <br>
 
@@ -421,6 +303,11 @@
 
           </div>
 
+          <br>
+          <br>
+
+          <div class="divided title">Travel</div>
+
           <div class="field">
             <p>
               As a reminder, our reimbursement policy is as follows:
@@ -433,7 +320,98 @@
             <p>
               We’ll also be sending buses free of charge to Princeton, NJ; New York, NY; New Haven, CT; and Providence, RI. Again, we only reimburse the minimum-cost travel path. Head back to the dashboard to read our full travel policy.
             </p>
-          </div>-->
+          </div>
+
+          <div class="field">
+            <label> Will you be needing travel reimbursement? </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.needsReimbursement">
+              <label> I will be needing travel reimbursement. </label>
+            </div>
+          </div>
+
+          <div
+            ng-show="user.confirmation.needsReimbursement">
+
+            <div class="ui header">
+              Mailing Address
+            </div>
+
+            <p>
+              Travel reimbursement is processed and sent by check after the event. To expedite the reimbursement process and ensure that you receive your reimbursement as quickly as possible, make sure that your mailing address is accurate and you upload your receipts.
+            </p>
+
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text"
+                     name="name"
+                     ng-model="user.confirmation.address.name">
+            </div>
+
+            <div class="field">
+              <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
+              <input
+                type="text"
+                name="addressLine1"
+                ng-model="user.confirmation.address.line1">
+            </div>
+
+            <div class="field">
+              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+              <input
+                type="text"
+                name="addressLine2"
+                ng-model="user.confirmation.address.line2">
+            </div>
+
+            <div class="four fields">
+              <div class="field">
+                <label> City </label>
+                <input
+                  type="text"
+                  name="city"
+                  ng-model="user.confirmation.address.city">
+              </div>
+              <div class="field">
+                <label> State/Province/Region </label>
+                <input
+                  type="text"
+                  name="state"
+                  ng-model="user.confirmation.address.state">
+              </div>
+              <div class="field">
+                <label> ZIP </label>
+                <input
+                  type="text"
+                  name="zip"
+                  ng-model="user.confirmation.address.zip">
+              </div>
+              <div class="field">
+                <label> Country </label>
+                <input
+                  type="text"
+                  name="country"
+                  ng-model="user.confirmation.address.country">
+              </div>
+            </div>
+
+            <div class="field">
+              <label> Travel Receipt </label>
+              <p>
+                So that we can process your reimbursement faster, please name your receipt: <strong>{{fileName}}</strong>
+              </p>
+              <a
+                target="_blank"
+                href="https://go.hackmit.org/travel-receipts"
+                class="ui pink button">
+                Upload Receipt
+              </a>
+            </div>
+
+          </div>
+
+          <br>
+          <br>-->
 
           <div class="divided title">Legal</div>
 
