@@ -86,13 +86,7 @@ var confirmation = {
   },
   wantsHardware: Boolean,
   hardware: String,
-
-  wantsLaptop: {
-    type: String,
-    enum: {
-      values: 'Yes No'.split(' '),
-    }
-  },
+  wantsLaptop: Boolean,
   github: String,
   website: String,
   resume: {
