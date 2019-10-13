@@ -329,6 +329,9 @@ angular.module('reg')
                 name: 'Laptop Requested',
                 value: user.confirmation.wantsLaptop
               },{
+                name: 'Resume Uploaded',
+                value: user.confirmation.resume
+              },{
                 name: 'Additional Notes',
                 value: user.confirmation.notes
               }
