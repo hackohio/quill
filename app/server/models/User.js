@@ -124,7 +124,7 @@ var confirmation = {
   genderNeutral: Boolean,
   catFriendly: Boolean,
   smokingFriendly: Boolean,
-  hostNotes: String,*/
+  hostNotes: String,
 
   notes: String,
 
