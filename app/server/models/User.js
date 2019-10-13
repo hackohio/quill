@@ -87,17 +87,13 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  wantsLaptop: {
-    type: String,
-    enum: {
-      values: 'Yes No'.split(' '),
-    }
-  },
+  wantsLaptop: Boolean,
   github: String,
   website: String,
 <<<<<<< Updated upstream
   resume: String,
 
+<<<<<<< HEAD
   /*needsReimbursement: Boolean,
   address: {
     name: String,
@@ -108,6 +104,13 @@ var confirmation = {
   default: false,
   },
   usCitizen: Boolean,
+=======
+  usCitizen: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+>>>>>>> refs/remotes/origin/Hack2019
   needsReimbursement: Boolean,
   reimbursementType: {
     type: String,
@@ -117,7 +120,10 @@ var confirmation = {
   },
   legalName: String,
   departureAddress: {
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> refs/remotes/origin/Hack2019
     line1: String,
     line2: String,
     city: String,
@@ -125,6 +131,8 @@ var confirmation = {
     zip: String,
     country: String
   },
+
+  /*
   receipt: String,
 
   hostNeededFri: Boolean,

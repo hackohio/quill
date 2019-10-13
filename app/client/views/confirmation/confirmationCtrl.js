@@ -81,15 +81,6 @@ angular.module('reg')
                 }
               ]
             },
-            wantsLaptop: {
-              identifier: 'wantsLaptop',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please give us a laptop preference!'
-                }
-              ]
-            },
             phone: {
               identifier: 'phone',
               rules: [
@@ -128,8 +119,11 @@ angular.module('reg')
             },
           }
         });
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> refs/remotes/origin/Hack2019
 
         $scope.user.confirmation.needsReimbursement && _addTravelRequirments();
       }
@@ -199,6 +193,7 @@ angular.module('reg')
             }
           ]
         });
+<<<<<<< HEAD
       }
 
       function _resumeRequirements(){
@@ -258,6 +253,11 @@ angular.module('reg')
        $("#resume").submit();
      }
 
+=======
+
+      }
+
+>>>>>>> refs/remotes/origin/Hack2019
       function _removeTravelRequirments(){
         let uiForm = $('.ui.form');
         uiForm.form('remove fields', [
@@ -278,12 +278,19 @@ angular.module('reg')
         } else {
           _removeTravelRequirments();
         }
+<<<<<<< HEAD
 >>>>>>> Stashed changes
       }
 
       $scope.submitForm = function(){
         uploadResume();
         if ($('.ui.form').form('is valid')){
+=======
+      }
+
+      $scope.submitForm = function(){
+        if ($('.ui.form').form('validate form')){
+>>>>>>> refs/remotes/origin/Hack2019
           _updateUser();
         }
         else{
