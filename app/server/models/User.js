@@ -120,7 +120,7 @@ var confirmation = {
   // smokingFriendly: Boolean,
   // hostNotes: String,
   //
-  // notes: String,
+  notes: String,
   signatureLiability: String,
   signaturePhotoRelease: String,
   signatureCodeOfConduct: String,
