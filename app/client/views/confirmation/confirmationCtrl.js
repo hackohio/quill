@@ -119,7 +119,6 @@ angular.module('reg')
             },
           }
         });
-
         $scope.user.confirmation.needsReimbursement && _addTravelRequirments();
       }
 
@@ -188,8 +187,48 @@ angular.module('reg')
             }
           ]
         });
-
       }
+
+
+      function uploadResume(){
+          $("#resume").submit(function(e) {
+             //console.log($scope.user.email);
+             e.preventDefault();
+             var formData = new FormData(this);
+             formData.append('email',$scope.user.email);
+             $.ajax({
+                 url: "http://hack2019-resume-upload.s3.amazonaws.com",
+                 type: 'POST',
+                 data: formData,
+                 success: function (data) {
+                     console.log('sucess');
+                     user.confirmation.resume = true;
+                 },
+                 error: function () {
+                     console.log('err'); // replace with proper error handling
+                 },
+                 cache: false,
+                 contentType: false,
+                 processData: false
+             });
+         });
+         let uiForm = $('.ui.form');
+         if(!user.confirmation.resume){
+             console.log('called');
+             uiForm.form('add rule', 'resume', {
+               identifier: 'resume_file',
+               rules: [
+                 {
+                   type: 'empty',
+                   prompt: 'Please choose a file for your resume.'
+                 }
+               ]
+           });
+       }
+       console.log(user.confirmation.resume);
+       console.log('submit');
+       $("#resume").submit();
+     }
 
       function _removeTravelRequirments(){
         let uiForm = $('.ui.form');
@@ -214,6 +253,7 @@ angular.module('reg')
       }
 
       $scope.submitForm = function(){
+        uploadResume();
         if ($('.ui.form').form('validate form')){
           _updateUser();
         }

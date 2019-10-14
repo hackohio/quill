@@ -95,7 +95,7 @@
 
           <div class="field">
             <label>
-              We will have a limited number of MacBooks available if you:
+            We will have a limited number of MacBooks available if you:
             </label>
             <p>
               1) Will be developing in Swift
@@ -129,6 +129,19 @@
             <p>
               In order to complete the travel reimbursement process, you will need to fill out additional forms at the event.
             </p>
+                We’ll be offering gas reimbursements to anyone driving to HackOHI/O, as long as the trip is over 100 miles roundtrip.
+                If you’re located over 350 miles out of Columbus, OH we’ll be offering flight reimbursements up to $200.
+                <br>
+                Just remember to indicate that you’ll need to be reimbursed during the confirmation stage.
+            <p>
+
+            <div class="field">
+              <label> Are you a US citizen? </label>
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="user.confirmation.usCitizen">
+                <label> I am a US citizen. </label>
+              </div>
+            </div>
 
             <div class="field">
               <label>Full Legal Name</label>
@@ -147,16 +160,6 @@
                 <option value="Airfare">Airfare</option>
                 <option value="Gas">Gas</option>
               </select>
-            </div>
-
-
-            <div class="field"
-              ng-show="user.confirmation.reimbursementType == 'Airfare'">
-              <label> Are you a US citizen? </label>
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.usCitizen">
-                <label> I am a US citizen. </label>
-              </div>
             </div>
 
             <div class="ui header">
@@ -215,114 +218,22 @@
           <br>
           <br>
 
-
           <br>
           <br>
 
           <div class="divided title"> Skills & Accomplishments </div>
 
-          <!--<div class="field">
-            <label> Github </label>
-            <input type="text"
-                   name="github"
-                   placeholder="https://github.com/foobar"
-                   ng-model="user.confirmation.github">
-          </div>-->
-
-          <div class="field">
-            <label> Resume (required) </label>
-            <p>
-              Upload a document outlining any skills or experience you'd like to share. Please upload a PDF with your full name in the file name!
-            </p>
-            <a
-              target="_blank"
-              href="https://www.dropbox.com/request/GcnwLomAlpGbmRc6ign3"
-              class="ui pink button">
-              Upload
-            </a>
-          </div>
+      		<div class="field">
+      		<label>Resume</label>
+      			<form id="resume" method="post" enctype="multipart/form-data">
+                    <input type="hidden"  name="key" value="{{user.email}}.pdf" />
+      				<input id="resume_file"name="file" type="file" accept=".pdf"/>
+      			</form>
+      			<h6 style="padding:none"><strong>You must submit your resume as a PDF!</strong></h6>
+            </div>
 
           <br>
           <br>
-
-          <!--<div class="divided title">Hosting Details</div>
-
-          <p>
-            Would you like us to find you a host? We can match you with someone so you can catch some zzz's the night before and/or the night of the event!
-          </p>
-
-          <div class="field">
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.hostNeededFri">
-              <label>
-                <strong>
-                  I would like a host for Friday, Sept. 18th.
-                </strong>
-              </label>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.hostNeededSat">
-              <label>
-                <strong>
-                I would like a host for Saturday, Sept. 19th.
-                </strong>
-              </label>
-            </div>
-          </div>
-
-          <div
-            ng-show="user.confirmation.hostNeededFri || user.confirmation.hostNeededSat">
-
-            <div class="field">
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.genderNeutral">
-                <label> I would be okay with gender neutral housing. </label>
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.smokingFriendly">
-                <label> I would be okay in housing with smoking-friendly policies. </label>
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.catFriendly">
-                <label> I would be okay in housing that has cats. Meow! </label>
-              </div>
-            </div>
-
-
-            <div class="field">
-              <label>
-                Let us know if there's anything else we should know about matching you with a host.
-              </label>
-              <textarea
-                name="hostNotes"
-                ng-model="user.confirmation.hostNotes">
-              </textarea>
-            </div>
-
-          </div>
-
-          <div class="field">
-            <p>
-              As a reminder, our reimbursement policy is as follows:
-            </p>
-            <ul>
-              <li> Up to $100 from within Massachusetts </li>
-              <li> Up to $200 from anywhere else in North America </li>
-              <li> Up to $500 from outside North America </li>
-            </ul>
-            <p>
-              We’ll also be sending buses free of charge to Princeton, NJ; New York, NY; New Haven, CT; and Providence, RI. Again, we only reimburse the minimum-cost travel path. Head back to the dashboard to read our full travel policy.
-            </p>
-          </div>-->
 
           <div class="divided title">Legal</div>
 
@@ -330,7 +241,7 @@
             <p>
               <a
                 target="_blank"
-                href="http://hack.osu.edu/2018/pdf/2018_code_of_conduct.pdf">
+                href="https://hack.osu.edu/2019/pdf/2019_code_of_conduct.pdf">
                 HackOHI/O 2019 Code of Conduct & Liability Waiver
               </a>
             </p>
@@ -346,27 +257,6 @@
                    placeholder="Your Full Legal Name"
                    ng-model="user.confirmation.signatureLiability">
           </div>
-
-          <!--<div class="field">
-            <label> Photo Release </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/photo-release">
-                Photo Release
-              </a>
-            </p>
-            <p>
-              Signing this photo release means if we take photos or photos of you, we can share it with the world.
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
-            </p>
-            <input type="text"
-                   name="signaturePhotoRelease"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease">
-          </div>-->
 
           <div class="field">
             <label> Code of Conduct </label>

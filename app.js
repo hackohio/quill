@@ -7,6 +7,7 @@ var express         = require('express');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var morgan          = require('morgan');
+var fileUpload      = require('express-fileupload');
 
 var mongoose        = require('mongoose');
 var port            = process.env.PORT || 3000;
@@ -42,6 +43,7 @@ require('./app/server/routes/auth')(authRouter);
 app.use('/auth', authRouter);
 
 require('./app/server/routes')(app);
+
 
 // listen (start app with node server.js) ======================================
 app.listen(port);
