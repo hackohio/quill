@@ -188,17 +188,17 @@ function calculateStats(){
         }
 
         // Count the number of US Citizens
-        if (user.confirmation.usCitizen){
+        if (user.confirmation.reimbursementType === "Airfare" && user.confirmation.usCitizen){
           newStats.usCitizen += 1;
         }
 
         // Count the number of airfare reimbursements
-        if (user.confirmation.reimbursementType === "Airfare"){
+        if (user.confirmation.needsReimbursement && user.confirmation.reimbursementType === "Airfare"){
           newStats.airfareReimbursement += 1;
         }
 
         // Count the number of gas reimbursements
-        if (user.confirmation.reimbursementType === "Gas"){
+        if (user.confirmation.needsReimbursement && user.confirmation.reimbursementType === "Gas"){
           newStats.gasReimbursement += 1;
         }
 

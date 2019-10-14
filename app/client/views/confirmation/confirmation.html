@@ -95,7 +95,7 @@
 
           <div class="field">
             <label>
-            We will have a limited number of MacBooks available if you:
+              We will have a limited number of MacBooks available if you:
             </label>
             <p>
               1) Will be developing in Swift
@@ -129,11 +129,13 @@
             <p>
               In order to complete the travel reimbursement process, you will need to fill out additional forms at the event.
             </p>
-                We’ll be offering gas reimbursements to anyone driving to HackOHI/O, as long as the trip is over 100 miles roundtrip.
-                If you’re located over 350 miles out of Columbus, OH we’ll be offering flight reimbursements up to $200.
-                <br>
-                Just remember to indicate that you’ll need to be reimbursed during the confirmation stage.
             <p>
+              We’ll be offering gas reimbursements to anyone driving to HackOHI/O, as long as the trip is over 100 miles roundtrip.
+              If you’re located over 350 miles out of Columbus, OH we’ll be offering flight reimbursements up to $200.
+            </p>
+            <p>
+              Just remember to indicate that you’ll need to be reimbursed during the confirmation stage.
+            </p>
 
             <div class="field">
               <label>Full Legal Name</label>
@@ -219,19 +221,15 @@
           <br>
           <br>
 
-          <br>
-          <br>
-
           <div class="divided title"> Skills & Accomplishments </div>
 
       		<div class="field">
-      		<label>Resume</label>
-      			<form id="resume" method="post" enctype="multipart/form-data">
-                    <input type="hidden"  name="key" value="{{user.email}}.pdf" />
-      				<input id="resume_file"name="file" type="file" accept=".pdf"/>
-      			</form>
-      			<h6 style="padding:none"><strong>You must submit your resume as a PDF!</strong></h6>
-            </div>
+            <label> Please upload your resume as a PDF. </label>
+            <form id="resume" method="post" enctype="multipart/form-data">
+              <input type="hidden"  name="key" value="{{user.email}}.pdf" />
+              <input id="resume_file"name="file" type="file" accept=".pdf"/>
+            </form>
+          </div>
 
           <br>
           <br>
