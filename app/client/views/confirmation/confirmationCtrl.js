@@ -197,7 +197,7 @@ angular.module('reg')
              var formData = new FormData(this);
              formData.append('email',$scope.user.email);
              $.ajax({
-                 url: "http://hack2019-resume-upload.s3.amazonaws.com",
+                 url: "https://hack2019-resume-upload.s3.amazonaws.com",
                  type: 'POST',
                  data: formData,
                  success: function (data) {
