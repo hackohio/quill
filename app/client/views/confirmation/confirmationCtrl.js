@@ -81,15 +81,6 @@ angular.module('reg')
                 }
               ]
             },
-            wantsLaptop: {
-              identifier: 'wantsLaptop',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please give us a laptop preference!'
-                }
-              ]
-            },
             phone: {
               identifier: 'phone',
               rules: [
