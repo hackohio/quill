@@ -330,6 +330,9 @@ angular.module('reg')
                 value: user.confirmation.wantsLaptop,
                 type: 'boolean'
               },{
+                name: 'Resume Uploaded',
+                value: user.confirmation.resume
+              },{
                 name: 'Additional Notes',
                 value: user.confirmation.notes
               }

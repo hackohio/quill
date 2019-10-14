@@ -86,17 +86,15 @@ var confirmation = {
   },
   wantsHardware: Boolean,
   hardware: String,
-
   wantsLaptop: Boolean,
   github: String,
   website: String,
-  resume: String,
-
-  usCitizen: {
+  resume: {
     type: Boolean,
     required: true,
     default: false,
   },
+  usCitizen: Boolean,
   needsReimbursement: Boolean,
   reimbursementType: {
     type: String,
@@ -113,19 +111,16 @@ var confirmation = {
     zip: String,
     country: String
   },
-
-  /*
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,*/
-
+  // receipt: String,
+  //
+  // hostNeededFri: Boolean,
+  // hostNeededSat: Boolean,
+  // genderNeutral: Boolean,
+  // catFriendly: Boolean,
+  // smokingFriendly: Boolean,
+  // hostNotes: String,
+  //
   notes: String,
-
   signatureLiability: String,
   signaturePhotoRelease: String,
   signatureCodeOfConduct: String,
