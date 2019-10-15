@@ -117,6 +117,20 @@
 
           <div class="field">
             <label> Would you like to apply for travel reimbursement? </label>
+            <div>
+                <p>
+                  In order to complete the travel reimbursement process, you will need to fill out additional forms at the event.
+                </p>
+                <p>
+                  We’ll be offering gas reimbursements to anyone driving to HackOHI/O, as long as the trip is over 100 miles roundtrip.
+                  If you’re located over 350 miles out of Columbus, OH we’ll be offering flight reimbursements up to $200.
+                </p>
+                <p>
+                  Just remember to indicate that you’ll need to be reimbursed during the confirmation stage.
+                </p>
+            </div>
+
+            <br>
             <div class="ui checkbox">
               <input type="checkbox" ng-model="user.confirmation.needsReimbursement" ng-click="needTravel()">
               <label> I would like to apply for travel reimbursement. </label>
@@ -125,18 +139,6 @@
 
           <div
             ng-show="user.confirmation.needsReimbursement">
-
-            <p>
-              In order to complete the travel reimbursement process, you will need to fill out additional forms at the event.
-            </p>
-            <p>
-              We’ll be offering gas reimbursements to anyone driving to HackOHI/O, as long as the trip is over 100 miles roundtrip.
-              If you’re located over 350 miles out of Columbus, OH we’ll be offering flight reimbursements up to $200.
-            </p>
-            <p>
-              Just remember to indicate that you’ll need to be reimbursed during the confirmation stage.
-            </p>
-
             <div class="field">
               <label>Full Legal Name</label>
               <input type="text"
