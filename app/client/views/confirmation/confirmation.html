@@ -128,7 +128,7 @@
             </div>
 
             <br>
-            
+
             <div class="ui checkbox">
               <input type="checkbox" ng-model="user.confirmation.needsReimbursement" ng-click="needTravel()">
               <label> I would like to apply for travel reimbursement. </label>
@@ -226,7 +226,7 @@
       		<div class="field">
             <label> Please upload your resume as a PDF. </label>
             <form id="resume" method="post" enctype="multipart/form-data">
-              <input type="hidden"  name="key" value="{{user.email}}.pdf" />
+              <input type="hidden"  name="key" value="{{user.email}}" />
               <input id="resume_file" name="file" type="file" accept=".pdf"/>
             </form>
           </div>
