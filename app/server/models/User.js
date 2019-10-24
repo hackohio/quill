@@ -84,9 +84,17 @@ var confirmation = {
       values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
     }
   },
-  wantsHardware: Boolean,
+  wantsHardware: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   hardware: String,
-  wantsLaptop: Boolean,
+  wantsLaptop: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   github: String,
   website: String,
   resume: {
@@ -95,7 +103,11 @@ var confirmation = {
     default: false,
   },
   usCitizen: Boolean,
-  needsReimbursement: Boolean,
+  needsReimbursement: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   reimbursementType: {
     type: String,
     enum: {
@@ -169,11 +181,11 @@ var status = {
   },
   confirmBy: {
     type: Number
-  },
+  }/*,
   reimbursementGiven: {
     type: Boolean,
     default: false
-  }
+  }*/
 };
 
 // define the schema for our admin model

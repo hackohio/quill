@@ -377,15 +377,15 @@ angular.module('reg')
                 value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
               },*/{
                 name: 'Address',
-                value: user.confirmation.address ? [
-                  user.confirmation.address.line1,
-                  user.confirmation.address.line2,
-                  user.confirmation.address.city,
+                value: user.confirmation.departureAddress ? [
+                  user.confirmation.departureAddress.line1,
+                  user.confirmation.departureAddress.line2,
+                  user.confirmation.departureAddress.city,
                   ',',
-                  user.confirmation.address.state,
-                  user.confirmation.address.zip,
+                  user.confirmation.departureAddress.state,
+                  user.confirmation.departureAddress.zip,
                   ',',
-                  user.confirmation.address.country,
+                  user.confirmation.departureAddress.country,
                 ].join(' ') : ''
               }
             ]
