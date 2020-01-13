@@ -192,7 +192,6 @@ angular.module('reg')
 
       function uploadResume(){
           $("#resume").submit(function(e) {
-             //console.log($scope.user.email);
              e.preventDefault();
              var formData = new FormData(this);
              formData.append('email',$scope.user.email);
