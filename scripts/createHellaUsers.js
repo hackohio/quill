@@ -1,4 +1,12 @@
+/**
+ * IMPORTANT! READ FIRST!
+ * 
+ * Ensure your .env file is configured to the proper enviorment prior to 
+ * running this script.
+ */
+
 // Connect to mongodb
+require('dotenv').load({silent: true});
 var mongoose        = require('mongoose');
 var database        = process.env.DATABASE || "mongodb://localhost:27017";
 mongoose.connect(database);
