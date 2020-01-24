@@ -1,20 +1,43 @@
 require('dotenv').load();
-var mongoose        = require('mongoose');
-var database        = process.env.DATABASE || "mongodb://localhost:27017";
-var jwt             = require('jsonwebtoken');
-mongoose.connect(database);
+const mongoose        = require('mongoose');
+const database        = process.env.DATABASE || "mongodb://localhost:27017";
 
-var UserController = require('../app/server/controllers/UserController');
+const ADMIN = { email: process.env.ADMIN_EMAIL };
+const userArray = require('fs').readFileSync('./accepted.txt').toString().split('\n');
 
-var user = { email: process.env.ADMIN_EMAIL };
+function logError(context, err) {
+  console.log(`An error occured while ${context}: ${err}`)
+}
 
-var userArray = require('fs').readFileSync('accepted.txt').toString().split('\n');
-var count = 0;
-userArray.forEach(function (id) {
-  UserController.admitUser( id, user, function() {
-    count += 1;
-    if (count == userArray.length) {
-      console.log("Done");
-    }
+// Setup the connection to the database
+async function connectToDB() {
+  try {
+    await mongoose.connect(database);
+    mongoose.connection.on('error', err => {
+      logError('in connection', err);
+    });
+  } catch (error) {
+    logError('connecting', error)
+  }
+}
+
+// Accept the users in the userArray.
+// Note: The database connection must be made prior to running this.
+function acceptUsers(){
+  const UserController = require('../app/server/controllers/UserController');
+  let count = 0;
+  userArray.forEach((rawID) => {
+    const id = rawID.trim();
+    UserController.admitUser( id, ADMIN, (err, user) => {
+      if(err){
+        logError(`admitting user ${id}`,err)
+      }
+      count += 1;
+      if (count == userArray.length) {
+        console.log("All Accepted");
+      }
+    });
   });
-});
+}
+
+connectToDB().then(acceptUsers)
