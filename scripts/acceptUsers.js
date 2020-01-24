@@ -1,6 +1,6 @@
 require('dotenv').load();
 const mongoose        = require('mongoose');
-const database        =  "mongodb://localhost:27017";
+const database        = process.env.DATABASE || "mongodb://localhost:27017";
 
 const ADMIN = { email: process.env.ADMIN_EMAIL };
 const userArray = require('fs').readFileSync('./accepted.txt').toString().split('\n');
