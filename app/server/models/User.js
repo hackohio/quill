@@ -90,11 +90,6 @@ var confirmation = {
     default: false,
   },
   hardware: String,
-  wantsLaptop: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
   github: String,
   website: String,
   resume: {
@@ -102,27 +97,7 @@ var confirmation = {
     required: true,
     default: false,
   },
-  usCitizen: Boolean,
-  needsReimbursement: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-  reimbursementType: {
-    type: String,
-    enum: {
-      values: 'Airfare Gas'.split(' '),
-    }
-  },
   legalName: String,
-  departureAddress: {
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
   // receipt: String,
   //
   // hostNeededFri: Boolean,
@@ -181,11 +156,7 @@ var status = {
   },
   confirmBy: {
     type: Number
-  }/*,
-  reimbursementGiven: {
-    type: Boolean,
-    default: false
-  }*/
+  }
 };
 
 // define the schema for our admin model
