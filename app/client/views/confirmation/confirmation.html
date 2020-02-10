@@ -226,7 +226,8 @@
       		<div class="field">
             <label> Please upload your resume as a PDF. </label>
             <form id="resume" method="post" enctype="multipart/form-data">
-              <input type="hidden"  name="key" value="{{user.email}}" />
+              <input type="hidden"  name="acl" value="bucket-owner-full-control" />
+              <input type="hidden"  name="key" value="{{user.profile.name}} Resume" />
               <input id="resume_file" name="file" type="file" accept=".pdf"/>
             </form>
           </div>
