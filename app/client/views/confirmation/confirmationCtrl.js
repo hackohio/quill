@@ -119,74 +119,6 @@ angular.module('reg')
             },
           }
         });
-        $scope.user.confirmation.needsReimbursement && _addTravelRequirments();
-      }
-
-      function _addTravelRequirments(){
-        let uiForm = $('.ui.form');
-        uiForm.form('add rule', 'legalName', {
-          identifier: 'legalName',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please type your full legal name.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'reimbursementType', {
-          identifier: 'reimbursementType',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please indicate the kind of reimbursement.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'addressLine1', {
-          identifier: 'addressLine1',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please type your address.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'city', {
-          identifier: 'city',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your city.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'state', {
-          identifier: 'state',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your state.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'zip', {
-          identifier: 'zip',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your zip.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'country', {
-          identifier: 'country',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your country.'
-            }
-          ]
-        });
       }
 
 
@@ -228,28 +160,6 @@ angular.module('reg')
        console.log('submit');
        $("#resume").submit();
      }
-
-      function _removeTravelRequirments(){
-        let uiForm = $('.ui.form');
-        uiForm.form('remove fields', [
-          'legalName',
-          'reimbursementType',
-          'addressLine1',
-          'city',
-          'state',
-          'zip',
-          'country'
-        ])
-      }
-
-      $scope.needTravel = function(){
-        let needsReimbursement = !$scope.user.confirmation.needsReimbursement;
-        if (needsReimbursement) {
-          _addTravelRequirments()
-        } else {
-          _removeTravelRequirments();
-        }
-      }
 
       $scope.submitForm = function(){
         uploadResume();
