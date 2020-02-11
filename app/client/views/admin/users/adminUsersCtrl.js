@@ -326,10 +326,6 @@ angular.module('reg')
                 name: 'Hardware Requested',
                 value: user.confirmation.hardware
               },{
-                name: 'Laptop Requested',
-                value: user.confirmation.wantsLaptop,
-                type: 'boolean'
-              },{
                 name: 'Resume Uploaded',
                 value: user.confirmation.resume
               },{
@@ -365,31 +361,7 @@ angular.module('reg')
                 value: user.confirmation.hostNotes
               }
             ]
-          },*/{
-            name: 'Travel',
-            fields: [
-              {
-                name: 'Needs Reimbursement',
-                value: user.confirmation.needsReimbursement,
-                type: 'boolean'
-              },/*{
-                name: 'Received Reimbursement',
-                value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
-              },*/{
-                name: 'Address',
-                value: user.confirmation.departureAddress ? [
-                  user.confirmation.departureAddress.line1,
-                  user.confirmation.departureAddress.line2,
-                  user.confirmation.departureAddress.city,
-                  ',',
-                  user.confirmation.departureAddress.state,
-                  user.confirmation.departureAddress.zip,
-                  ',',
-                  user.confirmation.departureAddress.country,
-                ].join(' ') : ''
-              }
-            ]
-          }
+          },*/
         ];
       }
 
