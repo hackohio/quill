@@ -642,7 +642,7 @@ UserController.admitUser = function(id, user, callback){
 
       userModel.status.admitted = true;
       userModel.status.admittedBy = user.email;
-      userModel.status.confirmBy = times.confirmBy
+      userModel.status.confirmBy = times.timeConfirm
 
       userModel.save(callback)
     });  
