@@ -31,8 +31,148 @@ angular.module('reg')
           });
       }
 
+      var dietaryRestrictions = {
+        'Vegetarian': false,
+        'Vegan': false,
+        'Halal': false,
+        'Kosher': false,
+        'Nut Allergy': false
+      };
 
-      $scope.updateProfile = function(){
+      if ($scope.selectedUser.confirmation.dietaryRestrictions){
+        $scope.selectedUser.confirmation.dietaryRestrictions.forEach(function(restriction){
+          if (restriction in dietaryRestrictions){
+            dietaryRestrictions[restriction] = true;
+          }
+        });
+      }
+
+      $scope.dietaryRestrictions = dietaryRestrictions;
+
+      $scope.submitProfile = function(){
+        if ($('.ui.form#profile').form('validate form')){
+          _updateProfile();
+        }
+        else{
+          sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
+        }
+      };
+
+      $scope.submitConfirmation = function(){
+        if ($('.ui.form#confirmation').form('validate form')){
+          _updateConfirmation();
+        }
+        else{
+          sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
+        }
+      }
+
+      function _setupForm(){
+        // Semantic-UI form validation
+        $('.ui.form#profile').form({
+          inline: true,
+          fields: {
+            name: {
+              identifier: 'name',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your name.'
+                }
+              ]
+            },
+            school: {
+              identifier: 'school',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your school name.'
+                }
+              ]
+            },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
+                }
+              ]
+            },
+            gender: {
+              identifier: 'gender',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a gender.'
+                }
+              ]
+            },
+            adult: {
+              identifier: 'adult',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must be an adult, or an OSU student.'
+                }
+              ]
+            }
+          }
+        });
+
+        $('.ui.form#confirmation').form({
+          inline: true,
+          fields: {
+            shirt: {
+              identifier: 'shirt',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please give us a shirt size!'
+                }
+              ]
+            },
+            phone: {
+              identifier: 'phone',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter a phone number.'
+                }
+              ]
+            },
+            signatureLiability: {
+              identifier: 'signatureLiabilityWaiver',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+            signaturePhotoRelease: {
+              identifier: 'signaturePhotoRelease',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+            signatureCodeOfConduct: {
+              identifier: 'signatureCodeOfConduct',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+          }
+        });
+      }
+
+      function _updateProfile(){
         UserService
           .updateProfile($scope.selectedUser._id, $scope.selectedUser.profile)
           .then(response => {
@@ -41,5 +181,27 @@ angular.module('reg')
           }, response => {
             swal("Oops, you forgot something.");
           });
+      }
+
+      function _updateConfirmation(){
+        var confirmation = $scope.selectedUser.confirmation;
+        // Get the dietary restrictions as an array
+        var drs = [];
+        Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if ($scope.dietaryRestrictions[key]){
+            drs.push(key);
+          }
+        });
+        confirmation.dietaryRestrictions = drs;
+
+        UserService
+          .updateConfirmation($scope.selectedUser._id, $scope.selectedUser.confirmation)
+          .then(response => {
+            $selectedUser = response.data;
+            swal("Updated!", "Confirmation updated.", "success");
+          }, response => {
+            swal("Oops, you forgot something.");
+          });
       };
+
     }]);

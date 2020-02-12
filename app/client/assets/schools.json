@@ -13,7 +13,11 @@
         "state": "Texas"
     },
     "osu.edu": {
-        "school": "Ohio State University-Main Campus",
+        "school": "The Ohio State University",
+        "state": "Ohio"
+    },
+    "buckeyemail.osu.edu": {
+        "school": "The Ohio State University",
         "state": "Ohio"
     },
     "berea.edu": {
