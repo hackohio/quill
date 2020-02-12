@@ -89,18 +89,10 @@ function calculateStats(){
     hostNeededOther: 0,
     hostNeededNone: 0,*/
 
-    reimbursementTotal: 0,
-    //reimbursementMissing: 0,
 
     wantsHardware: 0,
-    wantsLaptop: 0,
 
     checkedIn: 0,
-
-    // Number of people requesting airfare reimbursment and are US Citizens
-    usCitizen: 0,
-    airfareReimbursement: 0,
-    gasReimbursement: 0,
   };
 
   User
@@ -144,18 +136,8 @@ function calculateStats(){
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
 
-        // Count the number of people who need reimbursements
-        newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
-
-        /*// Count the number of people who still need to be reimbursed
-        newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
-          !user.status.reimbursementGiven ? 1 : 0;*/
-
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
-
-        // //Count the number of people who want a laptop
-        newStats.wantsLaptop += user.confirmation.wantsLaptop ? 1 : 0;
 
         // Count schools
         if (!newStats.demo.schools[email]){
@@ -184,21 +166,6 @@ function calculateStats(){
         // Count degrees
         if (user.profile.degree){
           newStats.demo.degree[user.profile.degree] += 1;
-        }
-
-        // Count the number of US Citizens
-        if (user.confirmation.reimbursementType === "Airfare" && user.confirmation.usCitizen){
-          newStats.usCitizen += 1;
-        }
-
-        // Count the number of airfare reimbursements
-        if (user.confirmation.needsReimbursement && user.confirmation.reimbursementType === "Airfare"){
-          newStats.airfareReimbursement += 1;
-        }
-
-        // Count the number of gas reimbursements
-        if (user.confirmation.needsReimbursement && user.confirmation.reimbursementType === "Gas"){
-          newStats.gasReimbursement += 1;
         }
 
         // Grab the team name if there is one
