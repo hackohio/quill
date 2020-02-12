@@ -59,21 +59,18 @@ angular.module('reg')
         });
         confirmation.dietaryRestrictions = drs;
 
-        UserService
-          .updateConfirmation(user._id, confirmation)
-          .then(_response => {
-            swal("Woo!", "You're confirmed!", "success").then(value => {
-              $state.go("app.dashboard");
-            });
-          }, _error => {
-            swal("Uh oh!", "Something went wrong.", "error");
-          });
+        return UserService.updateConfirmation(user._id, confirmation);
       }
 
       /**
        * Attach the sematntic UI form validations rules to the page. 
        */
       function _setupForm(){
+        // Create rule to ensure resume file has been uploaded.
+        $.fn.form.settings.rules.resumeUpload = function(value) {
+          return user.confirmation.resume || value != "";
+        };
+        
         // Semantic-UI form validation
         $('.ui.form').form({
           inline: true,
@@ -114,6 +111,15 @@ angular.module('reg')
                 }
               ]
             },
+            resume: {
+              identifier: 'resume_file',
+              rules: [
+                {
+                  type: 'resumeUpload',
+                  prompt: 'Please choose a file for your resume.'
+                }
+              ]
+            }
           }
         });
       }
@@ -122,51 +128,30 @@ angular.module('reg')
        * Upload the resume to the S3 bucket
        */
       function _uploadResume() {
-        $("#resume").submit(function (e) {
-          e.preventDefault();
-          var formData = new FormData(this);
-          formData.append('email', $scope.user.email);
-          $.ajax({
-            url: "https://make-ohio-2020.s3.amazonaws.com",
-            type: 'POST',
-            data: formData,
-            success: function (data) {
-              console.log('sucess');
-              user.confirmation.resume = true;
-            },
-            error: function (e) {
-              console.log('err'); // replace with proper error handling
-              console.log(e)
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-          });
+        const resumeUploadData = new FormData($("#resume")[0]);
+        return $.ajax({
+          url: "https://make-ohio-2020.s3.amazonaws.com",
+          type: 'POST',
+          data: resumeUploadData,
+          cache: false,
+          contentType: false,
+          processData: false
+        })
+        .then(response => {
+          user.confirmation.resume = true;
+          return response
         });
-        let uiForm = $('.ui.form');
-        if (!user.confirmation.resume) {
-          console.log('called');
-          uiForm.form('add rule', 'resume', {
-            identifier: 'resume_file',
-            rules: [
-              {
-                type: 'empty',
-                prompt: 'Please choose a file for your resume.'
-              }
-            ]
-          });
-        }
-        console.log(user.confirmation.resume);
-        console.log('submit');
-        $("#resume").submit();
       }
-
-      $scope.submitForm = function(){
-        if ($('.ui.form').form('validate form')){
-          _updateUserConfirmation();
-          _uploadResume();
+      
+      $scope.submitForm = function (){
+        if ($('.ui.form').form('validate form')) {
+            _uploadResume()
+            .then(_updateUserConfirmation)
+            .then(_response => swal("Woo!", "You're confirmed!", "success"))
+            .then(_value => $state.go("app.dashboard"))
+            .catch(_error => swal("Uh oh!", "Something went wrong.", "error"));
         }
-        else{
+        else {
           sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
