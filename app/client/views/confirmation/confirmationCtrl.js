@@ -22,9 +22,7 @@ angular.module('reg')
 
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
 
-      // -------------------------------
-      // All this just for dietary restriction checkboxes fml
-
+      // Update dietary restriction checkboxes
       var dietaryRestrictions = {
         'Vegetarian': false,
         'Vegan': false,
@@ -32,15 +30,12 @@ angular.module('reg')
         'Kosher': false,
         'Nut Allergy': false
       };
-
-      if (user.confirmation.dietaryRestrictions){
-        user.confirmation.dietaryRestrictions.forEach(function(restriction){
-          if (restriction in dietaryRestrictions){
-            dietaryRestrictions[restriction] = true;
-          }
+      const userDR = user.confirmation.dietaryRestrictions
+      if (userDR != null){
+        userDR.forEach(function(restriction){
+          dietaryRestrictions[restriction] = restriction in dietaryRestrictions;
         });
       }
-
       $scope.dietaryRestrictions = dietaryRestrictions;
 
       // -------------------------------
