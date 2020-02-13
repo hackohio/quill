@@ -312,22 +312,32 @@ angular.module('reg')
               },{
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
-              },{
+              },/*{
                 name: 'Github',
                 value: user.confirmation.github
               },{
                 name: 'Website',
                 value: user.confirmation.website
-              },{
+              },*/{
                 name: 'Needs Hardware',
                 value: user.confirmation.wantsHardware,
                 type: 'boolean'
               },{
                 name: 'Hardware Requested',
                 value: user.confirmation.hardware
+              },{
+                name: 'Laptop Requested',
+                value: user.confirmation.wantsLaptop,
+                type: 'boolean'
+              },{
+                name: 'Resume Uploaded',
+                value: user.confirmation.resume
+              },{
+                name: 'Additional Notes',
+                value: user.confirmation.notes
               }
             ]
-          },{
+          },/*{
             name: 'Hosting',
             fields: [
               {
@@ -355,17 +365,17 @@ angular.module('reg')
                 value: user.confirmation.hostNotes
               }
             ]
-          },{
+          },*/{
             name: 'Travel',
             fields: [
               {
                 name: 'Needs Reimbursement',
                 value: user.confirmation.needsReimbursement,
                 type: 'boolean'
-              },{
+              },/*{
                 name: 'Received Reimbursement',
                 value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
-              },{
+              },*/{
                 name: 'Address',
                 value: user.confirmation.address ? [
                   user.confirmation.address.line1,
@@ -377,9 +387,6 @@ angular.module('reg')
                   ',',
                   user.confirmation.address.country,
                 ].join(' ') : ''
-              },{
-                name: 'Additional Notes',
-                value: user.confirmation.notes
               }
             ]
           }

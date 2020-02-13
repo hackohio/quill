@@ -81,21 +81,26 @@ function calculateStats(){
 
     dietaryRestrictions: {},
 
-    hostNeededFri: 0,
+    /*hostNeededFri: 0,
     hostNeededSat: 0,
     hostNeededUnique: 0,
 
     hostNeededFemale: 0,
     hostNeededMale: 0,
     hostNeededOther: 0,
-    hostNeededNone: 0,
+    hostNeededNone: 0,*/
 
     reimbursementTotal: 0,
-    reimbursementMissing: 0,
+    //reimbursementMissing: 0,
 
     wantsHardware: 0,
+    wantsLaptop: 0,
 
-    checkedIn: 0
+    checkedIn: 0,
+    // Number of people requesting airfare reimbursment and are US Citizens
+    usCitizen: 0,
+    airfareReimbursement: 0,
+    gasReimbursement: 0,
   };
 
   User
@@ -142,12 +147,15 @@ function calculateStats(){
         // Count the number of people who need reimbursements
         newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
 
-        // Count the number of people who still need to be reimbursed
+        /*// Count the number of people who still need to be reimbursed
         newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
-          !user.status.reimbursementGiven ? 1 : 0;
+          !user.status.reimbursementGiven ? 1 : 0;*/
 
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
+
+        // Count the number of people who want a laptop
+        newStats.wantsLaptop += user.confirmation.wantsLaptop ? 1 : 0;
 
         // Count schools
         if (!newStats.demo.schools[email]){
@@ -168,6 +176,11 @@ function calculateStats(){
           newStats.demo.month[user.profile.graduationMonth] += 1;
         }
 
+        // Count graduation months
+        if (user.profile.graduationMonth){
+          newStats.demo.month[user.profile.graduationMonth] += 1;
+        }
+
         // Count graduation years
         if (user.profile.graduationYear){
           newStats.demo.year[user.profile.graduationYear] += 1;
@@ -176,6 +189,21 @@ function calculateStats(){
         // Count degrees
         if (user.profile.degree){
           newStats.demo.degree[user.profile.degree] += 1;
+        }
+
+        // Count the number of US Citizens who are requesting airfare 
+        if (user.confirmation.needsReimbursement && user.confirmation.reimbursementType === "Airfare" && user.confirmation.usCitizen){
+          newStats.usCitizen += 1;
+        }
+
+        // Count the number of airfare reimbursements
+        if (user.confirmation.needsReimbursement && user.confirmation.reimbursementType === "Airfare"){
+          newStats.airfareReimbursement += 1;
+        }
+
+        // Count the number of gas reimbursements
+        if (user.confirmation.needsReimbursement && user.confirmation.reimbursementType === "Gas"){
+          newStats.gasReimbursement += 1;
         }
 
         // Grab the team name if there is one
@@ -191,7 +219,7 @@ function calculateStats(){
           newStats.shirtSizes[user.confirmation.shirtSize] += 1;
         }
 
-        // Host needed counts
+        /*// Host needed counts
         newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
         newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
         newStats.hostNeededUnique += user.confirmation.hostNeededFri || user.confirmation.hostNeededSat ? 1 : 0;
@@ -203,7 +231,7 @@ function calculateStats(){
         newStats.hostNeededOther
           += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "O" ? 1 : 0;
         newStats.hostNeededNone
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;
+          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;*/
 
         // Dietary restrictions
         if (user.confirmation.dietaryRestrictions){

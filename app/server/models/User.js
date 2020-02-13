@@ -84,15 +84,40 @@ var confirmation = {
       values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
     }
   },
-  wantsHardware: Boolean,
+  wantsHardware: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   hardware: String,
+  wantsLaptop: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 
   github: String,
-  twitter: String,
   website: String,
-  resume: String,
 
-  needsReimbursement: Boolean,
+  /*needsReimbursement: Boolean,*/
+  resume: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  usCitizen: Boolean,
+  needsReimbursement: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  reimbursementType: {
+    type: String,
+    enum: {
+      values: 'Airfare Gas'.split(' '),
+    }
+  },
+  legalName: String,
   address: {
     name: String,
     line1: String,
@@ -102,14 +127,13 @@ var confirmation = {
     zip: String,
     country: String
   },
-  receipt: String,
 
-  hostNeededFri: Boolean,
+  /*hostNeededFri: Boolean,
   hostNeededSat: Boolean,
   genderNeutral: Boolean,
   catFriendly: Boolean,
   smokingFriendly: Boolean,
-  hostNotes: String,
+  hostNotes: String,*/
 
   notes: String,
 
@@ -161,11 +185,11 @@ var status = {
   },
   confirmBy: {
     type: Number
-  },
+  }/*,
   reimbursementGiven: {
     type: Boolean,
     default: false
-  }
+  }*/
 };
 
 // define the schema for our admin model
