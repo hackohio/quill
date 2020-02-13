@@ -11,63 +11,66 @@ angular.module('reg')
     function($scope, $rootScope, $state, currentUser, Utils, UserService){
 
       // Set up the user
-      var user = currentUser.data;
+      const user = currentUser.data;
       $scope.user = user;
+      _setupDietaryRestictions();
 
+      // Setup various constants
       $scope.pastConfirmation = Date.now() > user.status.confirmBy;
-
       $scope.formatTime = Utils.formatTime;
-
-      _setupForm();
-
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
 
-      // -------------------------------
-      // All this just for dietary restriction checkboxes fml
+      // Setup Form Validation
+      _setupForm();
 
-      var dietaryRestrictions = {
-        'Vegetarian': false,
-        'Vegan': false,
-        'Halal': false,
-        'Kosher': false,
-        'Nut Allergy': false
-      };
 
-      if (user.confirmation.dietaryRestrictions){
-        user.confirmation.dietaryRestrictions.forEach(function(restriction){
-          if (restriction in dietaryRestrictions){
+      /**
+       * Update dietary restriction checkboxes
+       */
+      function _setupDietaryRestictions(){
+        const dietaryRestrictions = {
+          'Vegetarian': false,
+          'Vegan': false,
+          'Halal': false,
+          'Kosher': false,
+          'Nut Allergy': false
+        };
+        const userDR = user.confirmation.dietaryRestrictions
+        if (userDR != null){
+          userDR.forEach(function(restriction){
             dietaryRestrictions[restriction] = true;
-          }
-        });
+          });
+        }
+        $scope.dietaryRestrictions = dietaryRestrictions;
       }
 
-      $scope.dietaryRestrictions = dietaryRestrictions;
+      /**
+       * Update the user confirmation using the user object in the scope.
+       */
+      function _updateUserConfirmation(){
+        const confirmation = $scope.user.confirmation;
 
-      // -------------------------------
-
-      function _updateUser(e){
-        var confirmation = $scope.user.confirmation;
-        // Get the dietary restrictions as an array
-        var drs = [];
+        // Transform dietary restrictions form JSON to Array
+        const drs = [];
         Object.keys($scope.dietaryRestrictions).forEach(function(key){
-          if ($scope.dietaryRestrictions[key]){
+          if ($scope.dietaryRestrictions[key] === true){
             drs.push(key);
           }
         });
         confirmation.dietaryRestrictions = drs;
 
-        UserService
-          .updateConfirmation(user._id, confirmation)
-          .then(response => {
-            swal("Woo!", "You're confirmed!", "success").then(value => {
-              $state.go("app.dashboard");
-            });
-          }, response => {
-            swal("Uh oh!", "Something went wrong.", "error");
-          });
+        return UserService.updateConfirmation(user._id, confirmation);
       }
 
+      /**
+       * Attach the sematntic UI form validations rules to the page. 
+       */
       function _setupForm(){
+        // Create rule to ensure resume file has been uploaded.
+        $.fn.form.settings.rules.resumeUpload = function(value) {
+          return user.confirmation.resume || value != "";
+        };
+        
         // Semantic-UI form validation
         $('.ui.form').form({
           inline: true,
@@ -99,15 +102,6 @@ angular.module('reg')
                 }
               ]
             },
-            /*signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },*/
             signatureCodeOfConduct: {
               identifier: 'signatureCodeOfConduct',
               rules: [
@@ -117,146 +111,47 @@ angular.module('reg')
                 }
               ]
             },
+            resume: {
+              identifier: 'resume_file',
+              rules: [
+                {
+                  type: 'resumeUpload',
+                  prompt: 'Please choose a file for your resume.'
+                }
+              ]
+            }
           }
         });
-        $scope.user.confirmation.needsReimbursement && _addTravelRequirments();
       }
 
-      function _addTravelRequirments(){
-        let uiForm = $('.ui.form');
-        uiForm.form('add rule', 'legalName', {
-          identifier: 'legalName',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please type your full legal name.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'reimbursementType', {
-          identifier: 'reimbursementType',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please indicate the kind of reimbursement.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'addressLine1', {
-          identifier: 'addressLine1',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please type your address.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'city', {
-          identifier: 'city',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your city.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'state', {
-          identifier: 'state',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your state.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'zip', {
-          identifier: 'zip',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your zip.'
-            }
-          ]
-        });
-        uiForm.form('add rule', 'country', {
-          identifier: 'country',
-          rules: [
-            {
-              type: 'empty',
-              prompt: 'Please provide your country.'
-            }
-          ]
+      /***
+       * Upload the resume to the S3 bucket
+       */
+      function _uploadResume() {
+        const resumeUploadData = new FormData($("#resume")[0]);
+        return $.ajax({
+          url: "https://make-ohio-2020.s3.amazonaws.com",
+          type: 'POST',
+          data: resumeUploadData,
+          cache: false,
+          contentType: false,
+          processData: false
+        })
+        .then(response => {
+          user.confirmation.resume = true;
+          return response
         });
       }
-
-
-      function uploadResume(){
-          $("#resume").submit(function(e) {
-             e.preventDefault();
-             var formData = new FormData(this);
-             formData.append('email',$scope.user.email);
-             $.ajax({
-                 url: "https://make-ohio-2020.s3.amazonaws.com",
-                 type: 'POST',
-                 data: formData,
-                 success: function (data) {
-                     console.log('sucess');
-                     user.confirmation.resume = true;
-                 },
-                 error: function () {
-                     console.log('err'); // replace with proper error handling
-                 },
-                 cache: false,
-                 contentType: false,
-                 processData: false
-             });
-         });
-         let uiForm = $('.ui.form');
-         if(!user.confirmation.resume){
-             console.log('called');
-             uiForm.form('add rule', 'resume', {
-               identifier: 'resume_file',
-               rules: [
-                 {
-                   type: 'empty',
-                   prompt: 'Please choose a file for your resume.'
-                 }
-               ]
-           });
-       }
-       console.log(user.confirmation.resume);
-       console.log('submit');
-       $("#resume").submit();
-     }
-
-      function _removeTravelRequirments(){
-        let uiForm = $('.ui.form');
-        uiForm.form('remove fields', [
-          'legalName',
-          'reimbursementType',
-          'addressLine1',
-          'city',
-          'state',
-          'zip',
-          'country'
-        ])
-      }
-
-      $scope.needTravel = function(){
-        let needsReimbursement = !$scope.user.confirmation.needsReimbursement;
-        if (needsReimbursement) {
-          _addTravelRequirments()
-        } else {
-          _removeTravelRequirments();
+      
+      $scope.submitForm = function (){
+        if ($('.ui.form').form('validate form')) {
+            _uploadResume()
+            .then(_updateUserConfirmation)
+            .then(_response => swal("Woo!", "You're confirmed!", "success"))
+            .then(_value => $state.go("app.dashboard"))
+            .catch(_error => swal("Uh oh!", "Something went wrong.", "error"));
         }
-      }
-
-      $scope.submitForm = function(){
-        uploadResume();
-        if ($('.ui.form').form('validate form')){
-          _updateUser();
-        }
-        else{
+        else {
           sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };

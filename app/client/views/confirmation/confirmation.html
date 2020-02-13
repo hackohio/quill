@@ -99,10 +99,18 @@
           <div class="divided title"> Skills & Accomplishments </div>
 
       		<div class="field">
-            <label> Please upload your resume as a PDF. </label>
+            <label ng-if="user.confirmation.resume" for="resume_file">
+              Thank you for uploading your resume! If you wish to change your resume, upload your new version below!
+            </label>
+            <label ng-if="!user.confirmation.resume" for="resume_file">
+              Please upload your resume as a PDF.
+            </label>
             <form id="resume" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="key" value="uploads/{{user.profile.name}} Resume"> 
+              <input type="hidden" name="AWSAccessKeyId" value="AKIA5UVY2JRH7IHITYXX">
               <input type="hidden"  name="acl" value="bucket-owner-full-control" />
-              <input type="hidden"  name="key" value="{{user.profile.name}} Resume" />
+              <input type="hidden" name="policy" value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImJ1Y2tldCI6ICJtYWtlLW9oaW8tMjAyMCJ9LCAKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAogICAgeyJhY2wiOiAiYnVja2V0LW93bmVyLWZ1bGwtY29udHJvbCJ9LAogICAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDEwNDg1NzZdCiAgXQp9">
+              <input type="hidden" name="signature" value="dofYCmxWXazEnQZVaPm4TZQabsk=">
               <input id="resume_file" name="file" type="file" accept=".pdf"/>
             </form>
           </div>
