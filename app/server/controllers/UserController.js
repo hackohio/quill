@@ -265,53 +265,53 @@ UserController.getById = function (id, callback){
  * @param  {Object}   profile  Profile object
  * @param  {Function} callback Callback with args (err, user)
  */
-UserController.updateProfileById = function (id, profile, callback){
+UserController.updateProfileById = function (id, profile, callback) {
 
   // Validate the user profile, and mark the user as profile completed
   // when successful.
-  User.validateProfile(profile, function(err){
-
-    if (err){
-      return callback({message: 'invalid profile'});
+  User.validateProfile(profile, function (isInvalid) {
+    if (isInvalid === true) {
+      return callback({ message: 'invalid profile' });
     }
 
     // Check if its within the registration window.
-    Settings.getRegistrationTimes(function(err, times){
-      if (err) {
+    Settings.getRegistrationTimes(function (err, times) {
+      if (err != null) {
         callback(err);
       }
 
-      var now = Date.now();
-
-      if (now < times.timeOpen){
+      // Invoke callback with error if registration is closed
+      const now = Date.now();
+      if (now < times.timeOpen) {
         return callback({
+          status: 423,
           message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
         });
       }
-
-      if (now > times.timeClose){
+      if (now > times.timeClose) {
         return callback({
+          status: 423,
           message: "Sorry, registration is closed."
         });
       }
+
+      // Update the user progile
+      User.findOneAndUpdate({
+        _id: id,
+        verified: true
+      },
+        {
+          $set: {
+            'lastUpdated': Date.now(),
+            'profile': profile,
+            'status.completedProfile': true
+          }
+        },
+        {
+          new: true
+        },
+        callback);
     });
-
-    User.findOneAndUpdate({
-      _id: id,
-      verified: true
-    },
-      {
-        $set: {
-          'lastUpdated': Date.now(),
-          'profile': profile,
-          'status.completedProfile': true
-        }
-      },
-      {
-        new: true
-      },
-      callback);
-
   });
 };
 
