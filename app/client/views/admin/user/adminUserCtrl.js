@@ -11,14 +11,15 @@ angular.module('reg')
 
       // Populate the school dropdown
       populateSchools();
+      populateMajors();
+      _setupForm();
 
       /**
        * TODO: JANK WARNING
        */
       function populateSchools(){
-
         $http
-          .get('/assets/schools.json')
+          .get('assets/schools.json')
           .then(function(res){
             var schools = res.data;
             var email = $scope.selectedUser.email.split('@')[1];
@@ -27,7 +28,56 @@ angular.module('reg')
               $scope.selectedUser.profile.school = schools[email].school;
               $scope.autoFilledSchool = true;
             }
+          });
 
+          $http
+            .get('/assets/schools.csv')
+            .then(function(res){
+              $scope.schools = res.data.split('\n');
+              $scope.schools.push('Other');
+
+              var content = [];
+
+              for(i = 0; i < $scope.schools.length; i++) {
+                $scope.schools[i] = $scope.schools[i].trim();
+                content.push({title: $scope.schools[i]})
+              }
+
+              $('#school.ui.search')
+                .search({
+                  source: content,
+                  cache: true,
+                  onSelect: function(result, response) {
+                    $scope.selectedUser.profile.school = result.title.trim();
+                  }
+                })
+            });
+      }
+
+      /**
+       * TODO: JANK WARNING
+       */
+      function populateMajors(){
+        $http
+          .get('/assets/majors.csv')
+          .then(function(res){
+            $scope.majors = res.data.split('\n');
+
+            var content = [];
+
+            for(i = 0; i < $scope.majors.length; i++) {
+              $scope.majors[i] = $scope.majors[i].trim();
+              content.push({title: $scope.majors[i]})
+            }
+
+            $('#major.ui.search')
+              .search({
+                source: content,
+                cache: true,
+                onSelect: function(result, response) {
+                  $scope.selectedUser.profile.major = result.title.trim();
+                }
+              })
           });
       }
 
@@ -96,6 +146,33 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter your major.'
+                }
+              ]
+            },
+            month: {
+              identifier: 'month',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your anticipated graduation month.'
+                }
+              ]
+            },
+            year: {
+              identifier: 'year',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your anticipated graduation year.'
+                }
+              ]
+            },
+            degree: {
+              identifier: 'degree',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your anticipated degree.'
                 }
               ]
             },

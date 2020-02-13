@@ -25,10 +25,30 @@ var profile = {
     max: 150,
   },
 
+  major: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+
+  graduationMonth: {
+    type: String,
+    enum: {
+      values: 'January February March April May June July August September October November December'.split(' '),
+    }
+  },
+
   graduationYear: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: '2019 2020 2021 2022 2023'.split(' '),
+    }
+  },
+
+  degree: {
+    type: String,
+    enum: {
+      values: 'Associates Bachelors Masters Doctorate'.split(' '),
     }
   },
 
@@ -48,7 +68,7 @@ var profile = {
   gender: {
     type: String,
     enum : {
-      values: 'M F O N'.split(' ')
+      values: 'M F O N B'.split(' ')
     }
   },
 
@@ -67,7 +87,6 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   github: String,
   twitter: String,
   website: String,
@@ -333,8 +352,11 @@ schema.statics.validateProfile = function(profile, cb){
     profile.name.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+    profile.major.length > 0 &&
+    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].indexOf(profile.graduationMonth) > -1 &&
+    ['2019', '2020', '2021', '2022', '2023'].indexOf(profile.graduationYear) > -1 &&
+    ['Associates', 'Bachelors', 'Masters', 'Doctorate'].indexOf(profile.degree) > -1 &&
+    ['M', 'F', 'O', 'N', 'B'].indexOf(profile.gender) > -1
     ));
 };
 

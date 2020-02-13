@@ -46,7 +46,7 @@ angular.module('reg')
       $scope.sendResetEmail = function() {
         var email = $scope.email;
         AuthService.sendResetEmail(email);
-        swal("Don't sweat!", "An email should be sent to you shortly.", "success");
+        swal("Don't sweat!", "An email should be sent to you shortly.\nIf you can't find your email, please check your spam folder.", "success");
       };
 
     }
