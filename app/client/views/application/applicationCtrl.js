@@ -76,7 +76,7 @@ angular.module('reg')
        */
       function populateMajors(){
         $http
-          .get('/assets/majors.csv')
+          .get('assets/majors.csv')
           .then(function(res){
             $scope.majors = res.data.split('\n');
 

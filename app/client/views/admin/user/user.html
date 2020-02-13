@@ -99,21 +99,67 @@
 
       <div class="field" ng-show="!autoFilledSchool">
         <label> School </label>
-        <input class="ui input"
-               name="school"
-               ng-model="selectedUser.profile.school">
+        <div id="school" class="ui search">
+          <div class="ui input">
+            <input class="prompt" type="text" placeholder="School" name="school" ng-model="selectedUser.profile.school">
+          </div>
+          <div class="results"></div>
+        </div>
       </div>
 
       <div class="field">
-        <label>Graduation Year</label>
+        <label> Major </label>
+        <div id="major" class="ui search">
+          <div class="ui input">
+            <input class="prompt" type="text" placeholder="Major" name="major" ng-model="selectedUser.profile.major">
+          </div>
+          <div class="results"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Anticipated Graduation</label>
+        <select
+          name="month"
+          ng-model="selectedUser.profile.graduationMonth">
+          <option value="">Anticipated Graduation Month</option>
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+      </div>
+
+      <div class="field">
         <select
           name="year"
           ng-model="selectedUser.profile.graduationYear">
-          <option value="">Graduation Year</option>
-          <option value="2016">2016</option>
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
+          <option value="">Anticipated Graduation Year</option>
           <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <select
+          name="degree"
+          ng-model="selectedUser.profile.degree">
+          <option value="">Anticipated Degree</option>
+          <option value="Associates">Associate's</option>
+          <option value="Bachelors">Bachelor's</option>
+          <option value="Masters">Master's</option>
+          <option value="Doctorate">Doctorate</option>
         </select>
       </div>
 
@@ -125,6 +171,7 @@
           <option value="">Gender</option>
           <option value="M">Male</option>
           <option value="F">Female</option>
+          <option value="B">Non-Binary</option>
           <option value="O">Other</option>
           <option value="N">I prefer not to answer.</option>
         </select>
@@ -139,21 +186,20 @@
 
       <div class="field">
         <label>
-            What would you like to learn or get out of HackOHI/O? (optional)
+            What would you like to learn or get out of HackOSU? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
       </div>
 
-      <div class="field"
-           ng-hide="isOsuStudent">
+      <div class="field">
         <p>
           Because of limitations imposed by OSU, we are not legally allowed to host
-          non-OSU minors (those under 18) for HackOHI/O 2019. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+          non-OSU undergraduate minors (those under 18) for HackOHI/O 2019. Checking the box below affirms that you are or will be either an OSU undergraduate or 18 years or older by November 2nd, 2019.
         </p>
         <p>
           <strong>
-          We will be checking ID. If you are a non-OSU minor, you will be turned away at the door.
+          We will be checking ID. If you are a minor, you will be turned away at the door.
           </strong>
         </p>
         <div class="ui checkbox">
@@ -164,7 +210,7 @@
 
       <div class="field">
         <div
-          ng-click="updateProfile()"
+          ng-click="submitProfile()"
           class="ui positive right labeled icon button">
           Update Profile
           <i class="checkmark icon"></i>
