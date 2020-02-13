@@ -99,7 +99,7 @@ module.exports = function(router) {
               }
             );
         } else {
-          return res.status(500).send(err);
+          return res.status(err.status || 500).send(err);
         }
       } else {
         return res.json(data);

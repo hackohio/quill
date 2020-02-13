@@ -255,8 +255,8 @@ angular.module('reg')
           .then(response => {
             $selectedUser = response.data;
             swal("Updated!", "Profile updated.", "success");
-          }, response => {
-            swal("Oops, you forgot something.");
+          }, error => {
+            swal(error.status === 423 ? error.data.message : "Oops, you forgot something.");
           });
       }
 
