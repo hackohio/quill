@@ -18,7 +18,7 @@ let stats = {};
 const shouldCalculateDemo = (user, registrationTimes) => {
   const {timeClose = 0} = registrationTimes == null ? {} : registrationTimes
   const now = Date.now();
-  let shouldCalculate = user.status.submitted;
+  let shouldCalculate = user.status.completedProfile;
   if(now > timeClose) {
     shouldCalculate = shouldCalculate && user.status.confirmed;
   }
