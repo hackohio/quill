@@ -1,12 +1,36 @@
-var _ = require('underscore');
-var async = require('async');
-var User = require('../models/User');
+const _ = require('underscore');
+const async = require('async');
+
+const SettingsController = require('../controllers/SettingsController')
+const User = require('../models/User');
 
 // In memory stats.
-var stats = {};
-function calculateStats(){
+let stats = {};
+
+/**
+ * This is a function used to filter the demographics stats between sumbitted,
+ * confirmed, and checkedIn based on when in the registation timeline it
+ * currently is. 
+ * 
+ * @param {*} user The user to check
+ * @returns Whether or not this user should be included in demographic information
+ */
+const shouldCalculateDemo = (user, registrationTimes) => {
+  const {timeClose = 0} = registrationTimes == null ? {} : registrationTimes
+  const now = Date.now();
+  let shouldCalculate = user.status.submitted;
+  if(now > timeClose) {
+    shouldCalculate = shouldCalculate && user.status.confirmed;
+  }
+  if(now > process.env.EVENT_START_TIME){
+    shouldCalculate = shouldCalculate && user.status.checkedIn;
+  }
+  return shouldCalculate;
+}
+
+function calculateStats(_err, registrationTimes){
   console.log('Calculating stats...');
-  var newStats = {
+  const newStats = {
     lastUpdated: 0,
 
     total: 0,
@@ -102,15 +126,12 @@ function calculateStats(){
         throw err;
       }
 
-      newStats.total = users.length;
+      newStats.total = users.length; 
 
       async.each(users, function(user, callback){
 
         // Grab the email extension
         var email = user.email.split('@')[1];
-
-        // Add to the gender
-        newStats.demo.gender[user.profile.gender] += 1;
 
         // Count verified
         newStats.verified += user.verified ? 1 : 0;
@@ -125,7 +146,7 @@ function calculateStats(){
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
         // Count confirmed that are osu
-        newStats.confirmedOsu += user.status.confirmed && ((email === "osu.edu") || (email === "buckeyemail.osu.edu")) ? 1 : 0;
+        newStats.confirmedOsu += (user.status.confirmed && (email === "osu.edu") || (email === "buckeyemail.osu.edu"));
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
@@ -135,9 +156,37 @@ function calculateStats(){
 
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
+        
+        // Count checked in
+        newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
+
+        // Count shirt sizes
+        if (user.confirmation.shirtSize in newStats.shirtSizes){
+          newStats.shirtSizes[user.confirmation.shirtSize] += 1;
+        }
+        
+        // Dietary restrictions
+        if (user.confirmation.dietaryRestrictions){
+          user.confirmation.dietaryRestrictions.forEach(function(restriction){
+            if (!newStats.dietaryRestrictions[restriction]){
+              newStats.dietaryRestrictions[restriction] = 0;
+            }
+            newStats.dietaryRestrictions[restriction] += 1;
+          });
+        }
+
+        // If the user should not have demographic information calculated for
+        // it, skip the remaining stat calculations
+        if(!shouldCalculateDemo(user, registrationTimes)){
+          callback()
+          return
+        }
+
+        // Add to the gender
+        newStats.demo.gender[user.profile.gender] += 1; 
 
         // Count schools
         if (!newStats.demo.schools[email]){
@@ -176,11 +225,6 @@ function calculateStats(){
         //   newStats.teams[user.teamCode].push(user.profile.name);
         // }
 
-        // Count shirt sizes
-        if (user.confirmation.shirtSize in newStats.shirtSizes){
-          newStats.shirtSizes[user.confirmation.shirtSize] += 1;
-        }
-
         /*// Host needed counts
         newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
         newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
@@ -195,15 +239,6 @@ function calculateStats(){
         newStats.hostNeededNone
           += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;*/
 
-        // Dietary restrictions
-        if (user.confirmation.dietaryRestrictions){
-          user.confirmation.dietaryRestrictions.forEach(function(restriction){
-            if (!newStats.dietaryRestrictions[restriction]){
-              newStats.dietaryRestrictions[restriction] = 0;
-            }
-            newStats.dietaryRestrictions[restriction] += 1;
-          });
-        }
 
         // Majors
         if (user.profile.major){
@@ -212,9 +247,6 @@ function calculateStats(){
           }
           newStats.demo.majors[user.profile.major] += 1;
         }
-
-        // Count checked in
-        newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
         callback(); // let async know we've finished
       }, function() {
@@ -246,11 +278,26 @@ function calculateStats(){
           .forEach(function(key){
             schools.push({
               email: key,
-              count: newStats.demo.schools[key].submitted,
+              count: newStats.demo.schools[key].confirmed,
               stats: newStats.demo.schools[key]
             });
           });
         newStats.demo.schools = schools;
+
+        const demoSummary = {
+          basedOff: 'Submitted',
+          count: newStats.submitted
+        }
+        const now = Date.now();
+        if(now > registrationTimes.timeClose) {
+          demoSummary.basedOff = 'Confirmed';
+          demoSummary.count = newStats.confirmed
+        }
+        if(now > process.env.EVENT_START_TIME){
+          demoSummary.basedOff = 'Checked In';
+          demoSummary.count = newStats.checkedIn
+        }
+        newStats.demoSummary = demoSummary;
 
         // Likewise, transform the teams into an array of objects
         // var teams = [];
@@ -272,10 +319,10 @@ function calculateStats(){
 }
 
 // Calculate once every five minutes.
-calculateStats();
-setInterval(calculateStats, 300000);
+SettingsController.getRegistrationTimes(calculateStats);
+setInterval(SettingsController.getRegistrationTimes.bind(this, calculateStats), 300000);
 
-var Stats = {};
+const Stats = {};
 
 Stats.getUserStats = function(){
   return stats;
