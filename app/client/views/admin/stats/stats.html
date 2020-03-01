@@ -162,71 +162,71 @@
       <div class="item">
         <i class="users icon"></i>
         <div class="content">
-          <strong>Total submitted users</strong>: {{stats.submitted}}
+          <strong>Total {{stats.demoSummary.basedOff}} users</strong>: {{stats.demoSummary.count}}
         </div>
       </div>
       <div class="item">
         <i class="female icon"></i>
         <div class="content">
-          <strong>Female</strong>: {{stats.demo.gender['F']}} ({{stats.demo.gender['F'] / stats.submitted * 100 | number:1}}%)
+          <strong>Female</strong>: {{stats.demo.gender['F']}} ({{stats.demo.gender['F'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="male icon"></i>
         <div class="content">
-          <strong>Male</strong>: {{stats.demo.gender['M']}} ({{stats.demo.gender['M'] / stats.submitted * 100 | number:1}}%)
+          <strong>Male</strong>: {{stats.demo.gender['M']}} ({{stats.demo.gender['M'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="non binary transgender icon"></i>
         <div class="content">
-          <strong>Non-Binary</strong>: {{stats.demo.gender['B']}} ({{stats.demo.gender['B'] / stats.submitted * 100 | number:1}}%)
+          <strong>Non-Binary</strong>: {{stats.demo.gender['B']}} ({{stats.demo.gender['B'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="other gender icon"></i>
         <div class="content">
-          <strong>Other</strong>: {{stats.demo.gender['O']}} ({{stats.demo.gender['O'] / stats.submitted * 100 | number:1}}%)
+          <strong>Other</strong>: {{stats.demo.gender['O']}} ({{stats.demo.gender['O'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="question icon"></i>
         <div class="content">
-          <strong>Did not respond</strong>: {{stats.demo.gender['N']}} ({{stats.demo.gender['N'] / stats.submitted * 100 | number:1 }}%)
+          <strong>Did not respond</strong>: {{stats.demo.gender['N']}} ({{stats.demo.gender['N'] / stats.demoSummary.count * 100 | number:1 }}%)
         </div>
       </div>
     </div>
     <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2023']}} ({{stats.demo.year['2023'] / stats.submitted * 100 | number: 1}}%)
+          <strong>Fresh:</strong> {{stats.demo.year['2023']}} ({{stats.demo.year['2023'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2022']}} ({{stats.demo.year['2022'] / stats.submitted * 100 | number: 1}}%)
+          <strong>Soph:</strong> {{stats.demo.year['2022']}} ({{stats.demo.year['2022'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
         <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.submitted * 100 | number: 1}}%)
+         <strong>Junior:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.submitted * 100 | number: 1}}%)
+          <strong>Senior:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Graduating this year:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.submitted * 100 | number: 1}}%)
+          <strong>Graduating this year:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
-          <strong>Associate's:</strong> {{stats.demo.degree['Associates']}} ({{stats.demo.degree['Associates'] / stats.submitted * 100 | number: 1}}%)
+          <strong>Associate's:</strong> {{stats.demo.degree['Associates']}} ({{stats.demo.degree['Associates'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Bachelor's:</strong> {{stats.demo.degree['Bachelors']}} ({{stats.demo.degree['Bachelors'] / stats.submitted * 100 | number: 1}}%)
+          <strong>Bachelor's:</strong> {{stats.demo.degree['Bachelors']}} ({{stats.demo.degree['Bachelors'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
         <div class="item">
-         <strong>Master's:</strong> {{stats.demo.degree['Masters']}} ({{stats.demo.degree['Masters'] / stats.submitted * 100 | number: 1}}%)
+         <strong>Master's:</strong> {{stats.demo.degree['Masters']}} ({{stats.demo.degree['Masters'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Doctorate:</strong> {{stats.demo.degree['Doctorate']}} ({{stats.demo.degree['Doctorate'] / stats.submitted * 100 | number: 1}}%)
+          <strong>Doctorate:</strong> {{stats.demo.degree['Doctorate']}} ({{stats.demo.degree['Doctorate'] / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>
@@ -235,7 +235,7 @@
         class="item"
         ng-repeat="school in stats.demo.schools | orderBy: '-count'">
         <div class="content">
-          <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.submitted * 100 | number: 1}}%)
+          <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.demoSummary.count * 100 | number: 1}}%)
           <p>
           <div class="ui purple mini label">
             Submitted: {{school.stats.submitted}}
@@ -259,7 +259,7 @@
         class="item"
         ng-repeat="major in stats.demo.majors | orderBy: '-count'">
         <div class="content">
-          <strong>{{major.name}}</strong> : {{major.count}} ({{major.count / stats.submitted * 100 | number: 1}}%)
+          <strong>{{major.name}}</strong> : {{major.count}} ({{major.count / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
       </div>
     </div>
