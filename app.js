@@ -1,49 +1,57 @@
 // Load the dotfiles.
-require('dotenv').load({silent: true});
+require('dotenv').load({ silent: true });
 
-var express         = require('express');
+const express = require('express');
 
 // Middleware!
-var bodyParser      = require('body-parser');
-var methodOverride  = require('method-override');
-var morgan          = require('morgan');
-var fileUpload      = require('express-fileupload');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const morgan = require('morgan');
+const fileUpload = require('express-fileupload');
 
-var mongoose        = require('mongoose');
-var port            = process.env.PORT || 3000;
-var database        = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";
+const app = express();
+const port = process.env.PORT || 3000;
 
-var settingsConfig  = require('./config/settings');
-var adminConfig     = require('./config/admin');
+const setupDB = () => {
+  const mongoose = require('mongoose');
+  const database = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";
 
-var app             = express();
+  const settingsConfig = require('./config/settings');
+  const adminConfig = require('./config/admin');
 
-// Connect to mongodb
-mongoose.connect(database);
+  // Connect to mongodb
+  mongoose.connect(database);
 
-app.use(morgan('dev'));
+  return Promise.all([settingsConfig(), adminConfig()]);
+};
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
+const setupApp = () => {
+  app.use(morgan('dev'));
 
-app.use(methodOverride());
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+  app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/app/client'));
+  app.use(methodOverride());
 
-// Routers =====================================================================
+  app.use(express.static(__dirname + '/app/client'));
 
-var apiRouter = express.Router();
-require('./app/server/routes/api')(apiRouter);
-app.use('/api', apiRouter);
+  // Routers =====================================================================
 
-var authRouter = express.Router();
-require('./app/server/routes/auth')(authRouter);
-app.use('/auth', authRouter);
+  const apiRouter = express.Router();
+  require('./app/server/routes/api')(apiRouter);
+  app.use('/api', apiRouter);
 
-require('./app/server/routes')(app);
+  const authRouter = express.Router();
+  require('./app/server/routes/auth')(authRouter);
+  app.use('/auth', authRouter);
 
-// listen (start app with node server.js) ======================================
-app.listen(port);
-console.log("App listening on port " + port);
+  require('./app/server/routes')(app);
+
+  // listen (start app with node server.js) ======================================
+  app.listen(port, '0.0.0.0');
+  console.log("App listening on port " + port);
+};
+
+setupDB().then(setupApp);

@@ -1,10 +1,15 @@
 var Settings = require('../app/server/models/Settings');
 
-Settings
-  .findOne({})
-  .exec(function(err, settings){
-    if (!settings){
-      var settings = new Settings();
-      settings.save();
-    }
-  });
+const setupSettings = () => {
+  return Settings.findOne({})
+    .exec().then((settings) => {
+      if (!settings) {
+        console.log("Initial boot, setting up settings.");
+        var settings = new Settings();
+        return settings.save();
+      }
+      return Promise.resolve();
+    });
+};
+
+module.exports = setupSettings;
