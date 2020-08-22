@@ -300,6 +300,9 @@ angular.module('reg')
               }, {
                 name: 'Essay',
                 value: user.profile.essay
+              }, {
+                name: 'Wants Swag',
+                value: user.profile.swag
               }
             ]
           }, {

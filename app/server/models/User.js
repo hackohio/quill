@@ -72,6 +72,12 @@ var profile = {
     }
   },
 
+  swag: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+
 };
 
 // Only after confirmed
