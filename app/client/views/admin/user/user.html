@@ -2,8 +2,7 @@
 
   <div class="ui header">
     {{selectedUser.profile.name ? selectedUser.profile.name : selectedUser.email}}
-    <span
-      ng-show="selectedUser.admin">
+    <span ng-show="selectedUser.admin">
       (Admin)
     </span>
   </div>
@@ -15,13 +14,13 @@
   <div>
     <p>
       <strong> Status: </strong>
-      <span
-        class="ui label">
+      <span class="ui label">
         {{selectedUser.status.name.toUpperCase()}}
       </span>
     </p>
     <p>
-      <strong> Admitted by: </strong> {{selectedUser.status.admittedBy ? selectedUser.status.admittedBy : 'N/A'}}
+      <strong> Admitted by: </strong>
+      {{selectedUser.status.admittedBy ? selectedUser.status.admittedBy : 'N/A'}}
     </p>
   </div>
 
@@ -71,37 +70,32 @@
     <fieldset ng-disabled="false">
 
       <div class="ui header">
-       Profile
+        Profile
       </div>
 
       <div class="field">
         <label> Email </label>
-        <input type="email"
-               name="email"
-               disabled="disabled"
-               ng-model="selectedUser.email">
+        <input type="email" name="email" disabled="disabled"
+          ng-model="selectedUser.email">
       </div>
 
       <div class="field">
         <label> Full Name </label>
-        <input type="text"
-               name="name"
-               ng-model="selectedUser.profile.name">
+        <input type="text" name="name" ng-model="selectedUser.profile.name">
       </div>
 
       <div class="field" ng-show="autoFilledSchool">
         <label> School </label>
-        <input class="ui input"
-               disabled="disabled"
-               ng-show="autoFilledSchool"
-               ng-model="selectedUser.profile.school">
+        <input class="ui input" disabled="disabled" ng-show="autoFilledSchool"
+          ng-model="selectedUser.profile.school">
       </div>
 
       <div class="field" ng-show="!autoFilledSchool">
         <label> School </label>
         <div id="school" class="ui search">
           <div class="ui input">
-            <input class="prompt" type="text" placeholder="School" name="school" ng-model="selectedUser.profile.school">
+            <input class="prompt" type="text" placeholder="School" name="school"
+              ng-model="selectedUser.profile.school">
           </div>
           <div class="results"></div>
         </div>
@@ -111,7 +105,8 @@
         <label> Major </label>
         <div id="major" class="ui search">
           <div class="ui input">
-            <input class="prompt" type="text" placeholder="Major" name="major" ng-model="selectedUser.profile.major">
+            <input class="prompt" type="text" placeholder="Major" name="major"
+              ng-model="selectedUser.profile.major">
           </div>
           <div class="results"></div>
         </div>
@@ -119,9 +114,7 @@
 
       <div class="field">
         <label>Anticipated Graduation</label>
-        <select
-          name="month"
-          ng-model="selectedUser.profile.graduationMonth">
+        <select name="month" ng-model="selectedUser.profile.graduationMonth">
           <option value="">Anticipated Graduation Month</option>
           <option value="January">January</option>
           <option value="February">February</option>
@@ -139,9 +132,7 @@
       </div>
 
       <div class="field">
-        <select
-          name="year"
-          ng-model="selectedUser.profile.graduationYear">
+        <select name="year" ng-model="selectedUser.profile.graduationYear">
           <option value="">Anticipated Graduation Year</option>
           <option value="2020">2020</option>
           <option value="2021">2021</option>
@@ -151,9 +142,7 @@
       </div>
 
       <div class="field">
-        <select
-          name="degree"
-          ng-model="selectedUser.profile.degree">
+        <select name="degree" ng-model="selectedUser.profile.degree">
           <option value="">Anticipated Degree</option>
           <option value="Associates">Associate's</option>
           <option value="Bachelors">Bachelor's</option>
@@ -164,9 +153,7 @@
 
       <div class="field">
         <label>Gender</label>
-        <select
-          name="gender"
-          ng-model="selectedUser.profile.gender">
+        <select name="gender" ng-model="selectedUser.profile.gender">
           <option value="">Gender</option>
           <option value="M">Male</option>
           <option value="F">Female</option>
@@ -179,13 +166,13 @@
       <div class="field">
         <label>I would describe myself as a...</label>
         <input type="text"
-               placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-               ng-model="selectedUser.profile.description">
+          placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
+          ng-model="selectedUser.profile.description">
       </div>
 
       <div class="field">
         <label>
-            What would you like to learn or get out of MakeOHI/O? (optional)
+          What would you like to learn or get out of HackOHI/O? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
@@ -193,23 +180,27 @@
 
       <div class="field">
         <p>
-          Because of limitations imposed by OSU, we are not legally allowed to host
-          non-OSU undergraduate minors (those under 18) for MakeOHI/O 2020. Checking the box below affirms that you are or will be either an OSU undergraduate or 18 years or older by February 29, 2020.
+          Because of limitations imposed by OSU, we are not legally allowed to
+          host
+          non-OSU undergraduate minors (those under 18) for HackOHI/O 2020.
+          Checking the box below affirms that you are or will be either an OSU
+          undergraduate or 18 years or older by February 29, 2020.
         </p>
         <p>
           <strong>
-          We will be checking ID. If you are a minor, you will be turned away at the door.
+            We will be checking ID. If you are a minor, you will be turned away
+            at the door.
           </strong>
         </p>
         <div class="ui checkbox">
-          <input type="checkbox" id="adult" ng-model="selectedUser.profile.adult">
+          <input type="checkbox" id="adult"
+            ng-model="selectedUser.profile.adult">
           <label for="adult">I am 18 or older.</label>
         </div>
       </div>
 
       <div class="field">
-        <div
-          ng-click="submitProfile()"
+        <div ng-click="submitProfile()"
           class="ui positive right labeled icon button">
           Update Profile
           <i class="checkmark icon"></i>
@@ -225,7 +216,7 @@
 
     <fieldset ng-disabled="false">
 
-      <div class="ui header" >
+      <div class="ui header">
         Confirmation
       </div>
 
@@ -234,17 +225,16 @@
         <p>
           We need this in case we need to get ahold of you!
         </p>
-        <input type="tel"
-               name="phone"
-               ng-model="selectedUser.confirmation.phoneNumber"
-               placeholder="(123) - 555 - 1234"
-               required>
+        <input type="tel" name="phone"
+          ng-model="selectedUser.confirmation.phoneNumber"
+          placeholder="(123) - 555 - 1234" required>
       </div>
 
       <div class="field">
         <label> Dietary Restrictions </label>
         <p>
-          If your restriction is not included here, please let us know in the additional notes at the bottom.
+          If your restriction is not included here, please let us know in the
+          additional notes at the bottom.
         </p>
         <p>
           We'll make sure you get fed :)
@@ -252,8 +242,7 @@
       </div>
 
       <div class="inline fields">
-        <div class="field"
-          ng-repeat="(key, value) in dietaryRestrictions">
+        <div class="field" ng-repeat="(key, value) in dietaryRestrictions">
 
           <div class="ui checkbox">
             <input type="checkbox" ng-model="dietaryRestrictions[key]" />
@@ -268,9 +257,7 @@
         <p>
           Let's get you some swag!
         </p>
-        <select
-          name="shirt"
-          ng-model="selectedUser.confirmation.shirtSize"
+        <select name="shirt" ng-model="selectedUser.confirmation.shirtSize"
           required>
           <option value="">Shirt Size</option>
           <option value="XS">Unisex X-Small</option>
@@ -293,19 +280,21 @@
           Will you be needing hardware?
         </label>
         <div class="ui checkbox">
-          <input type="checkbox" ng-model="selectedUser.confirmation.wantsHardware">
+          <input type="checkbox"
+            ng-model="selectedUser.confirmation.wantsHardware">
           <label> Yes, I would like to use hardware in my hack. </label>
         </div>
       </div>
 
-      <div
-        class="field"
-        ng-show="selectedUser.confirmation.wantsHardware">
+      <div class="field" ng-show="selectedUser.confirmation.wantsHardware">
         <label>
           What kind of hardware would be useful for you?
         </label>
         <p>
-          We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
+          We will have a hardware checkout, and we'll try our best to provide
+          things that would be useful to you - however, we can't guarantee
+          everything. We will publish a list of available hardware closer to the
+          day of the event.
         </p>
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
@@ -315,10 +304,10 @@
       <div class="field">
         <label> Resume (required) </label>
         <p>
-          Upload a document outlining any skills or experience you'd like to share. Please upload a PDF with your full name in the file name!
+          Upload a document outlining any skills or experience you'd like to
+          share. Please upload a PDF with your full name in the file name!
         </p>
-        <a
-          target="_blank"
+        <a target="_blank"
           href="https://www.dropbox.com/request/GcnwLomAlpGbmRc6ign3"
           class="ui pink button">
           Upload
@@ -330,37 +319,43 @@
 
       <div class="field">
         <p>
-          <a
-            target="_blank"
+          <a target="_blank"
             href="http://hack.osu.edu/2018/pdf/2018_code_of_conduct.pdf">
-            MakeOHI/O 2020 Code of Conduct & Liability Waiver
+            HackOHI/O 2020 Code of Conduct & Liability Waiver
           </a>
         </p>
         <label> Liability Waiver </label>
         <p>
-          For legal reasons, our university asks that you read and accept the terms of our liability waiver. Again, as we mentioned in the original lottery application - you <strong> must </strong> be 18 years or older or an OSU undergraduate by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
+          For legal reasons, our university asks that you read and accept the
+          terms of our liability waiver. Again, as we mentioned in the original
+          lottery application - you <strong> must </strong> be 18 years or older
+          or an OSU undergraduate by the day of the event, or <strong> we will
+            refuse you admission at the door. We will be checking ID. </strong>
         </p>
         <p>
-          By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be either an OSU undergraduate or 18 years or older at the time of the event.
+          By writing my name below, I affirm that I have read and accepted the
+          terms of the liability waiver above, and will be either an OSU
+          undergraduate or 18 years or older at the time of the event.
         </p>
-        <input type="text"
-               name="signatureLiabilityWaiver"
-               placeholder="Your Full Legal Name"
-               ng-model="selectedUser.confirmation.signatureLiability">
+        <input type="text" name="signatureLiabilityWaiver"
+          placeholder="Your Full Legal Name"
+          ng-model="selectedUser.confirmation.signatureLiability">
       </div>
 
       <div class="field">
         <label> Code of Conduct </label>
         <p>
-          It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
+          It is extremely important to us that attendees follow a set of
+          guidelines to make the event fun for everyone involved. Please read
+          through and make sure you understand what we will be expecting of you.
         </p>
         <p>
-          By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+          By writing my name below, I affirm that I have read and will abide by
+          the code of conduct detailed above.
         </p>
-        <input type="text"
-               name="signatureCodeOfConduct"
-               placeholder="Your Full Legal Name"
-               ng-model="selectedUser.confirmation.signatureCodeOfConduct">
+        <input type="text" name="signatureCodeOfConduct"
+          placeholder="Your Full Legal Name"
+          ng-model="selectedUser.confirmation.signatureCodeOfConduct">
       </div>
 
       <!--<div class="ui header">
@@ -442,8 +437,7 @@
       </div>
 
       <div class="field">
-        <div
-          ng-click="submitConfirmation()"
+        <div ng-click="submitConfirmation()"
           class="ui positive right labeled icon button">
           Update Confirmation
           <i class="checkmark icon"></i>

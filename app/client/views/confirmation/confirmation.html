@@ -17,17 +17,16 @@
             <p>
               We need this in case we need to get ahold of you!
             </p>
-            <input type="tel"
-                   name="phone"
-                   ng-model="user.confirmation.phoneNumber"
-                   placeholder="(123) - 555 - 1234"
-                   required>
+            <input type="tel" name="phone"
+              ng-model="user.confirmation.phoneNumber"
+              placeholder="(123) - 555 - 1234" required>
           </div>
 
           <div class="field">
             <label> Dietary Restrictions </label>
             <p>
-              If your restriction is not included here, please let us know in the additional notes at the bottom.
+              If your restriction is not included here, please let us know in
+              the additional notes at the bottom.
             </p>
             <p>
               We'll make sure you get fed :)
@@ -35,8 +34,7 @@
           </div>
 
           <div class="inline fields">
-            <div class="field"
-              ng-repeat="(key, value) in dietaryRestrictions">
+            <div class="field" ng-repeat="(key, value) in dietaryRestrictions">
 
               <div class="ui checkbox">
                 <input type="checkbox" ng-model="dietaryRestrictions[key]" />
@@ -51,9 +49,7 @@
             <p>
               Let's get you some swag!
             </p>
-            <select
-              name="shirt"
-              ng-model="user.confirmation.shirtSize"
+            <select name="shirt" ng-model="user.confirmation.shirtSize"
               required>
               <option value="">Shirt Size</option>
               <option value="XS">Unisex X-Small</option>
@@ -81,14 +77,15 @@
             </div>
           </div>
 
-          <div
-            class="field"
-            ng-show="user.confirmation.wantsHardware">
+          <div class="field" ng-show="user.confirmation.wantsHardware">
             <label>
               What kind of hardware would be useful for you?
             </label>
             <p>
-              We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
+              We will have a hardware checkout, and we'll try our best to
+              provide things that would be useful to you - however, we can't
+              guarantee everything. We will publish a list of available hardware
+              closer to the day of the event.
             </p>
             <input type="text" ng-model="user.confirmation.hardware">
           </div>
@@ -98,20 +95,26 @@
 
           <div class="divided title"> Skills & Accomplishments </div>
 
-      		<div class="field">
+          <div class="field">
             <label ng-if="user.confirmation.resume" for="resume_file">
-              Thank you for uploading your resume! If you wish to change your resume, upload your new version below!
+              Thank you for uploading your resume! If you wish to change your
+              resume, upload your new version below!
             </label>
             <label ng-if="!user.confirmation.resume" for="resume_file">
               Please upload your resume as a PDF.
             </label>
             <form id="resume" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="key" value="uploads/{{user.profile.name}} Resume"> 
-              <input type="hidden" name="AWSAccessKeyId" value="AKIA5UVY2JRH7IHITYXX">
-              <input type="hidden"  name="acl" value="bucket-owner-full-control" />
-              <input type="hidden" name="policy" value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImJ1Y2tldCI6ICJtYWtlLW9oaW8tMjAyMCJ9LCAKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAogICAgeyJhY2wiOiAiYnVja2V0LW93bmVyLWZ1bGwtY29udHJvbCJ9LAogICAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDEwNDg1NzZdCiAgXQp9">
-              <input type="hidden" name="signature" value="dofYCmxWXazEnQZVaPm4TZQabsk=">
-              <input id="resume_file" name="file" type="file" accept=".pdf"/>
+              <input type="hidden" name="key"
+                value="uploads/{{user.profile.name}} Resume">
+              <input type="hidden" name="AWSAccessKeyId"
+                value="AKIA5UVY2JRH7IHITYXX">
+              <input type="hidden" name="acl"
+                value="bucket-owner-full-control" />
+              <input type="hidden" name="policy"
+                value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImJ1Y2tldCI6ICJtYWtlLW9oaW8tMjAyMCJ9LCAKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAogICAgeyJhY2wiOiAiYnVja2V0LW93bmVyLWZ1bGwtY29udHJvbCJ9LAogICAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDEwNDg1NzZdCiAgXQp9">
+              <input type="hidden" name="signature"
+                value="dofYCmxWXazEnQZVaPm4TZQabsk=">
+              <input id="resume_file" name="file" type="file" accept=".pdf" />
             </form>
           </div>
 
@@ -122,37 +125,45 @@
 
           <div class="field">
             <p>
-              <a
-                target="_blank"
+              <a target="_blank"
                 href="https://hack.osu.edu/make/2020/pdf/2020_code_of_conduct.pdf">
-                MakeOHI/O 2020 Code of Conduct & Liability Waiver
+                HackOHI/O 2020 Code of Conduct & Liability Waiver
               </a>
             </p>
             <label> Liability Waiver </label>
             <p>
-              For legal reasons, our university asks that you read and accept the terms of our liability waiver. Again, as we mentioned in the original lottery application - you <strong> must </strong> be 18 years or older or an OSU undergraduate by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
+              For legal reasons, our university asks that you read and accept
+              the terms of our liability waiver. Again, as we mentioned in the
+              original lottery application - you <strong> must </strong> be 18
+              years or older or an OSU undergraduate by the day of the event, or
+              <strong> we will refuse you admission at the door. We will be
+                checking ID. </strong>
             </p>
             <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be either an OSU undergraduate or 18 years or older at the time of the event.
+              By writing my name below, I affirm that I have read and accepted
+              the terms of the liability waiver above, and will be either an OSU
+              undergraduate or 18 years or older at the time of the event.
             </p>
-            <input type="text"
-                   name="signatureLiabilityWaiver"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureLiability">
+            <input type="text" name="signatureLiabilityWaiver"
+              placeholder="Your Full Legal Name"
+              ng-model="user.confirmation.signatureLiability">
           </div>
 
           <div class="field">
             <label> Code of Conduct </label>
             <p>
-              It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
+              It is extremely important to us that attendees follow a set of
+              guidelines to make the event fun for everyone involved. Please
+              read through and make sure you understand what we will be
+              expecting of you.
             </p>
             <p>
-              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+              By writing my name below, I affirm that I have read and will abide
+              by the code of conduct detailed above.
             </p>
-            <input type="text"
-                   name="signatureCodeOfConduct"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
+            <input type="text" name="signatureCodeOfConduct"
+              placeholder="Your Full Legal Name"
+              ng-model="user.confirmation.signatureCodeOfConduct">
           </div>
 
           <br>
@@ -167,14 +178,12 @@
             <p>
               If there's anything else you need to let us know, tell us here!
             </p>
-            <textarea
-              ng-model="user.confirmation.notes"></textarea>
+            <textarea ng-model="user.confirmation.notes"></textarea>
           </div>
 
           <div class="field" ng-hide="regIsClosed">
-            <button type="submit"
-                    class="fluid ui purple button"
-                    ng-click="submitForm()">
+            <button type="submit" class="fluid ui purple button"
+              ng-click="submitForm()">
               Submit
             </button>
           </div>
