@@ -1,47 +1,43 @@
 <div id="stats">
 
-  <div
-    class="ui green segment"
-    ng-class="{'loading': loading}">
+  <div class="ui green segment" ng-class="{'loading': loading}">
     <div class="ui header">
       Stats
     </div>
     <div class="content">
       <em> Last updated: {{fromNow(stats.lastUpdated)}}</em>
       <div class="ui list">
-        <div
-          class="item">
+        <div class="item">
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-            Total Users
+              Total Users
             </strong> :
             {{stats.total}}
           </div>
         </div>
-        <div
-          class="item">
+        <div class="item">
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-            Verified Users
+              Verified Users
             </strong> :
-            {{stats.verified}} ({{stats.verified / stats.total * 100 | number: 1}}%)
+            {{stats.verified}}
+            ({{stats.verified / stats.total * 100 | number: 1}}%)
           </div>
         </div>
-        <div
-          class="item">
+        <div class="item">
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-            Submitted Users
+              Submitted Users
             </strong> :
-            {{stats.submitted}} ({{stats.submitted / stats.total * 100 | number: 1}}%)
+            {{stats.submitted}}
+            ({{stats.submitted / stats.total * 100 | number: 1}}%)
           </div>
         </div>
         <div class="ui divider"></div>
-        <div
-          class="item">
+        <div class="item">
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
@@ -50,8 +46,7 @@
             {{stats.admitted}}
           </div>
         </div>
-        <div
-          class="item">
+        <div class="item">
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
@@ -60,8 +55,7 @@
             {{stats.confirmed}}
           </div>
         </div>
-        <div
-          class="item">
+        <div class="item">
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
@@ -76,7 +70,7 @@
             <strong>
               Declined
             </strong> :
-              {{stats.declined}}
+            {{stats.declined}}
           </div>
         </div>
 
@@ -86,7 +80,7 @@
             <strong>
               Checked In
             </strong> :
-              {{stats.checkedIn}}
+            {{stats.checkedIn}}
           </div>
         </div>
 
@@ -98,12 +92,12 @@
             <strong>
               Unisex shirt sizes:
             </strong> :
-              XS ({{stats.shirtSizes['XS']}})
-              S ({{stats.shirtSizes['S']}})
-              M ({{stats.shirtSizes['M']}})
-              L ({{stats.shirtSizes['L']}})
-              XL ({{stats.shirtSizes['XL']}})
-              XXL ({{stats.shirtSizes['XXL']}})
+            XS ({{stats.shirtSizes['XS']}})
+            S ({{stats.shirtSizes['S']}})
+            M ({{stats.shirtSizes['M']}})
+            L ({{stats.shirtSizes['L']}})
+            XL ({{stats.shirtSizes['XL']}})
+            XXL ({{stats.shirtSizes['XXL']}})
           </div>
         </div>
 
@@ -113,12 +107,12 @@
             <strong>
               Women's shirt sizes:
             </strong> :
-              XS ({{stats.shirtSizes['WXS']}})
-              S ({{stats.shirtSizes['WS']}})
-              M ({{stats.shirtSizes['WM']}})
-              L ({{stats.shirtSizes['WL']}})
-              XL ({{stats.shirtSizes['WXL']}})
-              XXL ({{stats.shirtSizes['WXXL']}})
+            XS ({{stats.shirtSizes['WXS']}})
+            S ({{stats.shirtSizes['WS']}})
+            M ({{stats.shirtSizes['WM']}})
+            L ({{stats.shirtSizes['WL']}})
+            XL ({{stats.shirtSizes['WXL']}})
+            XXL ({{stats.shirtSizes['WXXL']}})
           </div>
         </div>
 
@@ -152,9 +146,7 @@
     </div>
   </div>
 
-  <div
-    class="ui pink segment"
-    ng-class="{'loading': loading}">
+  <div class="ui pink segment" ng-class="{'loading': loading}">
     <div class="ui header">
       Demographics
     </div>
@@ -162,80 +154,95 @@
       <div class="item">
         <i class="users icon"></i>
         <div class="content">
-          <strong>Total {{stats.demoSummary.basedOff}} users</strong>: {{stats.demoSummary.count}}
+          <strong>Total {{stats.demoSummary.basedOff}} users</strong>:
+          {{stats.demoSummary.count}}
         </div>
       </div>
       <div class="item">
         <i class="female icon"></i>
         <div class="content">
-          <strong>Female</strong>: {{stats.demo.gender['F']}} ({{stats.demo.gender['F'] / stats.demoSummary.count * 100 | number:1}}%)
+          <strong>Female</strong>: {{stats.demo.gender['F']}}
+          ({{stats.demo.gender['F'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="male icon"></i>
         <div class="content">
-          <strong>Male</strong>: {{stats.demo.gender['M']}} ({{stats.demo.gender['M'] / stats.demoSummary.count * 100 | number:1}}%)
+          <strong>Male</strong>: {{stats.demo.gender['M']}}
+          ({{stats.demo.gender['M'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="non binary transgender icon"></i>
         <div class="content">
-          <strong>Non-Binary</strong>: {{stats.demo.gender['B']}} ({{stats.demo.gender['B'] / stats.demoSummary.count * 100 | number:1}}%)
+          <strong>Non-Binary</strong>: {{stats.demo.gender['B']}}
+          ({{stats.demo.gender['B'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="other gender icon"></i>
         <div class="content">
-          <strong>Other</strong>: {{stats.demo.gender['O']}} ({{stats.demo.gender['O'] / stats.demoSummary.count * 100 | number:1}}%)
+          <strong>Other</strong>: {{stats.demo.gender['O']}}
+          ({{stats.demo.gender['O'] / stats.demoSummary.count * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="question icon"></i>
         <div class="content">
-          <strong>Did not respond</strong>: {{stats.demo.gender['N']}} ({{stats.demo.gender['N'] / stats.demoSummary.count * 100 | number:1 }}%)
+          <strong>Did not respond</strong>: {{stats.demo.gender['N']}}
+          ({{stats.demo.gender['N'] / stats.demoSummary.count * 100 | number:1 }}%)
         </div>
       </div>
     </div>
     <div class="ui divider"></div>
-      <div class="ui list">
-        <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2023']}} ({{stats.demo.year['2023'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2022']}} ({{stats.demo.year['2022'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Graduating this year:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
+    <div class="ui list">
+      <div class="item">
+        <strong>Fresh:</strong> {{stats.demo.year['2023']}}
+        ({{stats.demo.year['2023'] / stats.demoSummary.count * 100 | number: 1}}%)
       </div>
-    <div class="ui divider"></div>
-      <div class="ui list">
-        <div class="item">
-          <strong>Associate's:</strong> {{stats.demo.degree['Associates']}} ({{stats.demo.degree['Associates'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Bachelor's:</strong> {{stats.demo.degree['Bachelors']}} ({{stats.demo.degree['Bachelors'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-         <strong>Master's:</strong> {{stats.demo.degree['Masters']}} ({{stats.demo.degree['Masters'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Doctorate:</strong> {{stats.demo.degree['Doctorate']}} ({{stats.demo.degree['Doctorate'] / stats.demoSummary.count * 100 | number: 1}}%)
-        </div>
+      <div class="item">
+        <strong>Soph:</strong> {{stats.demo.year['2022']}}
+        ({{stats.demo.year['2022'] / stats.demoSummary.count * 100 | number: 1}}%)
       </div>
+      <div class="item">
+        <strong>Junior:</strong> {{stats.demo.year['2021']}}
+        ({{stats.demo.year['2021'] / stats.demoSummary.count * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Senior:</strong> {{stats.demo.year['2020']}}
+        ({{stats.demo.year['2020'] / stats.demoSummary.count * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Graduating this year:</strong> {{stats.demo.year['2020']}}
+        ({{stats.demo.year['2020'] / stats.demoSummary.count * 100 | number: 1}}%)
+      </div>
+    </div>
     <div class="ui divider"></div>
     <div class="ui list">
-      <div
-        class="item"
+      <div class="item">
+        <strong>Associate's:</strong> {{stats.demo.degree['Associates']}}
+        ({{stats.demo.degree['Associates'] / stats.demoSummary.count * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Bachelor's:</strong> {{stats.demo.degree['Bachelors']}}
+        ({{stats.demo.degree['Bachelors'] / stats.demoSummary.count * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Master's:</strong> {{stats.demo.degree['Masters']}}
+        ({{stats.demo.degree['Masters'] / stats.demoSummary.count * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Doctorate:</strong> {{stats.demo.degree['Doctorate']}}
+        ({{stats.demo.degree['Doctorate'] / stats.demoSummary.count * 100 | number: 1}}%)
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui list">
+      <div class="item"
         ng-repeat="school in stats.demo.schools | orderBy: '-count'">
         <div class="content">
-          <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.demoSummary.count * 100 | number: 1}}%)
+          <strong>{{school.email}}</strong> : {{school.count}}
+          ({{school.count / stats.demoSummary.count * 100 | number: 1}}%)
           <p>
           <div class="ui purple mini label">
             Submitted: {{school.stats.submitted}}
@@ -255,18 +262,18 @@
       </div>
     </div>
     <div class="ui list">
-      <div
-        class="item"
+      <div class="item"
         ng-repeat="major in stats.demo.majors | orderBy: '-count'">
         <div class="content">
-          <strong>{{major.name}}</strong> : {{major.count}} ({{major.count / stats.demoSummary.count * 100 | number: 1}}%)
+          <strong>{{major.name}}</strong> : {{major.count}}
+          ({{major.count / stats.demoSummary.count * 100 | number: 1}}%)
         </div>
       </div>
     </div>
     <div class="ui divider"></div>
   </div>
 
-<!--   <div
+  <!--   <div
     class="ui purple segment"
     ng-class="{'loading': loading}">
     <div class="ui header">

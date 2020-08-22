@@ -11,7 +11,7 @@ angular.module('reg')
     'settings',
     'Session',
     'UserService',
-    function($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
+    function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
 
       // Set up the user
       $scope.user = currentUser.data;
@@ -34,14 +34,14 @@ angular.module('reg')
       /**
        * TODO: JANK WARNING
        */
-      function populateSchools(){
+      function populateSchools() {
         $http
           .get('/assets/schools.json')
-          .then(function(res){
+          .then(function (res) {
             var schools = res.data;
             var email = $scope.user.email.split('@')[1];
 
-            if (schools[email]){
+            if (schools[email]) {
               $scope.user.profile.school = schools[email].school;
               $scope.autoFilledSchool = true;
             }
@@ -49,56 +49,56 @@ angular.module('reg')
 
         $http
           .get('/assets/schools.csv')
-          .then(function(res){
+          .then(function (res) {
             $scope.schools = res.data.split('\n');
             $scope.schools.push('Other');
 
             var content = [];
 
-            for(i = 0; i < $scope.schools.length; i++) {
+            for (i = 0; i < $scope.schools.length; i++) {
               $scope.schools[i] = $scope.schools[i].trim();
-              content.push({title: $scope.schools[i]})
+              content.push({ title: $scope.schools[i] });
             }
 
             $('#school.ui.search')
               .search({
                 source: content,
                 cache: true,
-                onSelect: function(result, response) {
+                onSelect: function (result, response) {
                   $scope.user.profile.school = result.title.trim();
                 }
-              })
+              });
           });
       }
 
       /**
        * TODO: JANK WARNING
        */
-      function populateMajors(){
+      function populateMajors() {
         $http
           .get('/assets/majors.csv')
-          .then(function(res){
+          .then(function (res) {
             $scope.majors = res.data.split('\n');
 
             var content = [];
 
-            for(i = 0; i < $scope.majors.length; i++) {
+            for (i = 0; i < $scope.majors.length; i++) {
               $scope.majors[i] = $scope.majors[i].trim();
-              content.push({title: $scope.majors[i]})
+              content.push({ title: $scope.majors[i] });
             }
 
             $('#major.ui.search')
               .search({
                 source: content,
                 cache: true,
-                onSelect: function(result, response) {
+                onSelect: function (result, response) {
                   $scope.user.profile.major = result.title.trim();
                 }
-              })
+              });
           });
       }
 
-      function _updateUser(e){
+      function _updateUser(e) {
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
@@ -126,7 +126,7 @@ angular.module('reg')
         return true;
       }
 
-      function _setupForm(){
+      function _setupForm() {
         // Custom minors validation rule
         $.fn.form.settings.rules.allowMinors = function (value) {
           return minorsValidation();
@@ -212,8 +212,8 @@ angular.module('reg')
         });
       }
 
-      $scope.submitForm = function(){
-        if ($('.ui.form').form('validate form')){
+      $scope.submitForm = function () {
+        if ($('.ui.form').form('validate form')) {
           _updateUser();
         } else {
           swal("Uh oh!", "Please Fill The Required Fields", "error");

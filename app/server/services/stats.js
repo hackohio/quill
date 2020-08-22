@@ -1,7 +1,7 @@
 const _ = require('underscore');
 const async = require('async');
 
-const SettingsController = require('../controllers/SettingsController')
+const SettingsController = require('../controllers/SettingsController');
 const User = require('../models/User');
 
 // In memory stats.
@@ -16,19 +16,19 @@ let stats = {};
  * @returns Whether or not this user should be included in demographic information
  */
 const shouldCalculateDemo = (user, registrationTimes) => {
-  const {timeClose = 0} = registrationTimes == null ? {} : registrationTimes
+  const { timeClose = 0 } = registrationTimes == null ? {} : registrationTimes;
   const now = Date.now();
   let shouldCalculate = user.status.completedProfile;
-  if(now > timeClose) {
+  if (now > timeClose) {
     shouldCalculate = shouldCalculate && user.status.confirmed;
   }
-  if(now > process.env.EVENT_START_TIME){
+  if (now > process.env.EVENT_START_TIME) {
     shouldCalculate = shouldCalculate && user.status.checkedIn;
   }
   return shouldCalculate;
-}
+};
 
-function calculateStats(_err, registrationTimes){
+function calculateStats(_err, registrationTimes) {
   console.log('Calculating stats...');
   const newStats = {
     lastUpdated: 0,
@@ -121,14 +121,14 @@ function calculateStats(_err, registrationTimes){
 
   User
     .find({})
-    .exec(function(err, users){
-      if (err || !users){
+    .exec(function (err, users) {
+      if (err || !users) {
         throw err;
       }
 
-      newStats.total = users.length; 
+      newStats.total = users.length;
 
-      async.each(users, function(user, callback){
+      async.each(users, function (user, callback) {
 
         // Grab the email extension
         var email = user.email.split('@')[1];
@@ -156,7 +156,7 @@ function calculateStats(_err, registrationTimes){
 
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
-        
+
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
@@ -164,14 +164,14 @@ function calculateStats(_err, registrationTimes){
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
 
         // Count shirt sizes
-        if (user.confirmation.shirtSize in newStats.shirtSizes){
+        if (user.confirmation.shirtSize in newStats.shirtSizes) {
           newStats.shirtSizes[user.confirmation.shirtSize] += 1;
         }
-        
+
         // Dietary restrictions
-        if (user.confirmation.dietaryRestrictions){
-          user.confirmation.dietaryRestrictions.forEach(function(restriction){
-            if (!newStats.dietaryRestrictions[restriction]){
+        if (user.confirmation.dietaryRestrictions) {
+          user.confirmation.dietaryRestrictions.forEach(function (restriction) {
+            if (!newStats.dietaryRestrictions[restriction]) {
               newStats.dietaryRestrictions[restriction] = 0;
             }
             newStats.dietaryRestrictions[restriction] += 1;
@@ -180,16 +180,16 @@ function calculateStats(_err, registrationTimes){
 
         // If the user should not have demographic information calculated for
         // it, skip the remaining stat calculations
-        if(!shouldCalculateDemo(user, registrationTimes)){
-          callback()
-          return
+        if (!shouldCalculateDemo(user, registrationTimes)) {
+          callback();
+          return;
         }
 
         // Add to the gender
-        newStats.demo.gender[user.profile.gender] += 1; 
+        newStats.demo.gender[user.profile.gender] += 1;
 
         // Count schools
-        if (!newStats.demo.schools[email]){
+        if (!newStats.demo.schools[email]) {
           newStats.demo.schools[email] = {
             submitted: 0,
             admitted: 0,
@@ -203,17 +203,17 @@ function calculateStats(_err, registrationTimes){
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
 
         // Count graduation months
-        if (user.profile.graduationMonth){
+        if (user.profile.graduationMonth) {
           newStats.demo.month[user.profile.graduationMonth] += 1;
         }
 
         // Count graduation years
-        if (user.profile.graduationYear){
+        if (user.profile.graduationYear) {
           newStats.demo.year[user.profile.graduationYear] += 1;
         }
 
         // Count degrees
-        if (user.profile.degree){
+        if (user.profile.degree) {
           newStats.demo.degree[user.profile.degree] += 1;
         }
 
@@ -241,19 +241,19 @@ function calculateStats(_err, registrationTimes){
 
 
         // Majors
-        if (user.profile.major){
-          if (!newStats.demo.majors[user.profile.major]){
+        if (user.profile.major) {
+          if (!newStats.demo.majors[user.profile.major]) {
             newStats.demo.majors[user.profile.major] = 0;
           }
           newStats.demo.majors[user.profile.major] += 1;
         }
 
         callback(); // let async know we've finished
-      }, function() {
+      }, function () {
         // Transform dietary restrictions into a series of objects
         var restrictions = [];
         _.keys(newStats.dietaryRestrictions)
-          .forEach(function(key){
+          .forEach(function (key) {
             restrictions.push({
               name: key,
               count: newStats.dietaryRestrictions[key],
@@ -264,7 +264,7 @@ function calculateStats(_err, registrationTimes){
         // Transform majors into a series of objects
         var majors = [];
         _.keys(newStats.demo.majors)
-          .forEach(function(key){
+          .forEach(function (key) {
             majors.push({
               name: key,
               count: newStats.demo.majors[key],
@@ -275,7 +275,7 @@ function calculateStats(_err, registrationTimes){
         // Transform schools into an array of objects
         var schools = [];
         _.keys(newStats.demo.schools)
-          .forEach(function(key){
+          .forEach(function (key) {
             schools.push({
               email: key,
               count: newStats.demo.schools[key].confirmed,
@@ -287,15 +287,15 @@ function calculateStats(_err, registrationTimes){
         const demoSummary = {
           basedOff: 'Submitted',
           count: newStats.submitted
-        }
+        };
         const now = Date.now();
-        if(now > registrationTimes.timeClose) {
+        if (now > registrationTimes.timeClose) {
           demoSummary.basedOff = 'Confirmed';
-          demoSummary.count = newStats.confirmed
+          demoSummary.count = newStats.confirmed;
         }
-        if(now > process.env.EVENT_START_TIME){
+        if (now > process.env.EVENT_START_TIME) {
           demoSummary.basedOff = 'Checked In';
-          demoSummary.count = newStats.checkedIn
+          demoSummary.count = newStats.checkedIn;
         }
         newStats.demoSummary = demoSummary;
 
@@ -324,7 +324,7 @@ setInterval(SettingsController.getRegistrationTimes.bind(this, calculateStats), 
 
 const Stats = {};
 
-Stats.getUserStats = function(){
+Stats.getUserStats = function () {
   return stats;
 };
 
