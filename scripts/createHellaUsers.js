@@ -6,20 +6,20 @@
  */
 
 // Connect to mongodb
-require('dotenv').load({silent: true});
-var mongoose        = require('mongoose');
-var database        = process.env.DATABASE || "mongodb://localhost:27017";
+require('dotenv').load({ silent: true });
+const mongoose = require('mongoose');
+const database = process.env.DATABASE || "mongodb://localhost:27017";
 mongoose.connect(database);
 
-var UserController = require('../app/server/controllers/UserController');
+const UserController = require('../app/server/controllers/UserController');
 
-var users = 1000;
-var username = 'hacker';
+const users = 1000;
+const username = 'hacker';
 
-for (var i = 0; i < users; i++){
+for (const i = 0; i < users; i++) {
   console.log(username, i);
   UserController
-    .createUser(username + i + '@school.edu', 'foobar', function(err, {token, user}){
-      if (err) console.log(err);      
+    .createUser(username + i + '@school.edu', 'foobar', function (err, { token, user }) {
+      if (err) console.log(err);
     });
 }

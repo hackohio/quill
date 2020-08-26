@@ -1,24 +1,24 @@
 const $ = require('jquery');
 
-var angular = require('angular');
-var uiRouter = require('angular-ui-router');
+const angular = require('angular');
+const uiRouter = require('angular-ui-router');
 
-var app = angular.module('reg', [
+const app = angular.module('reg', [
   'ui.router',
 ]);
 
 const constants = require('./constants.js');
 
-var AuthService = require('./services/AuthService.js');
-var AuthInterceptor = require('./interceptors/AuthInterceptor.js');
-var Session = require('./modules/Session.js');
+const AuthService = require('./services/AuthService.js');
+const AuthInterceptor = require('./interceptors/AuthInterceptor.js');
+const Session = require('./modules/Session.js');
 
-var routes = require('./routes.js');
+const routes = require('./routes.js');
 
 app
   .config([
     '$httpProvider',
-    function($httpProvider){
+    function ($httpProvider) {
 
       // Add auth token to Authorization header
       $httpProvider.interceptors.push('AuthInterceptor');
@@ -27,12 +27,12 @@ app
   .run([
     'AuthService',
     'Session',
-    function(AuthService, Session){
+    function (AuthService, Session) {
 
       // Startup, login if there's  a token.
-      var token = Session.getToken();
-      if (token){
+      const token = Session.getToken();
+      if (token) {
         AuthService.loginWithToken(token);
       }
 
-  }]);
+    }]);

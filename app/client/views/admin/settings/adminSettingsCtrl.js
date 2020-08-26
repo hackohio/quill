@@ -7,7 +7,7 @@ angular.module('reg')
     '$scope',
     '$sce',
     'SettingsService',
-    function($scope, $sce, SettingsService){
+    function ($scope, $sce, SettingsService) {
 
       $scope.settings = {};
       SettingsService
@@ -16,9 +16,9 @@ angular.module('reg')
           updateSettings(response.data);
         });
 
-      function updateSettings(settings){
+      function updateSettings(settings) {
         $scope.loading = false;
-         // Format the dates in settings.
+        // Format the dates in settings.
         settings.timeOpen = new Date(settings.timeOpen);
         settings.timeClose = new Date(settings.timeClose);
         settings.timeConfirm = new Date(settings.timeConfirm);
@@ -35,7 +35,7 @@ angular.module('reg')
             $scope.settings.allowMinors = response.data.allowMinors;
             const successText = $scope.settings.allowMinors ?
               "Minors are now allowed to register." :
-              "Minors are no longer allowed to register."
+              "Minors are no longer allowed to register.";
             swal("Looks good!", successText, "success");
           });
       };
@@ -48,7 +48,7 @@ angular.module('reg')
           $scope.whitelist = response.data.join(", ");
         });
 
-      $scope.updateWhitelist = function(){
+      $scope.updateWhitelist = function () {
         SettingsService
           .updateWhitelistedEmails($scope.whitelist.replace(/ /g, '').split(','))
           .then(response => {
@@ -59,8 +59,8 @@ angular.module('reg')
 
       // Registration Times -----------------------------
 
-      $scope.formatDate = function(date){
-        if (!date){
+      $scope.formatDate = function (date) {
+        if (!date) {
           return "Invalid Date";
         }
 
@@ -70,7 +70,7 @@ angular.module('reg')
       };
 
       // Take a date and remove the seconds.
-      function cleanDate(date){
+      function cleanDate(date) {
         return new Date(
           date.getFullYear(),
           date.getMonth(),
@@ -80,15 +80,15 @@ angular.module('reg')
         );
       }
 
-      $scope.updateRegistrationTimes = function(){
+      $scope.updateRegistrationTimes = function () {
         // Clean the dates and turn them to ms.
-        var open = cleanDate($scope.settings.timeOpen).getTime();
-        var close = cleanDate($scope.settings.timeClose).getTime();
+        const open = cleanDate($scope.settings.timeOpen).getTime();
+        const close = cleanDate($scope.settings.timeClose).getTime();
 
-        if (open < 0 || close < 0 || open === undefined || close === undefined){
+        if (open < 0 || close < 0 || open === undefined || close === undefined) {
           return swal('Oops...', 'You need to enter valid times.', 'error');
         }
-        if (open >= close){
+        if (open >= close) {
           swal('Oops...', 'Registration cannot open after it closes.', 'error');
           return;
         }
@@ -103,8 +103,8 @@ angular.module('reg')
 
       // Confirmation Time -----------------------------
 
-      $scope.updateConfirmationTime = function(){
-        var confirmBy = cleanDate($scope.settings.timeConfirm).getTime();
+      $scope.updateConfirmationTime = function () {
+        const confirmBy = cleanDate($scope.settings.timeConfirm).getTime();
 
         SettingsService
           .updateConfirmationTime(confirmBy)
@@ -116,14 +116,14 @@ angular.module('reg')
 
       // Acceptance / Confirmation Text ----------------
 
-      var converter = new showdown.Converter();
+      const converter = new showdown.Converter();
 
-      $scope.markdownPreview = function(text){
+      $scope.markdownPreview = function (text) {
         return $sce.trustAsHtml(converter.makeHtml(text));
       };
 
-      $scope.updateWaitlistText = function(){
-        var text = $scope.settings.waitlistText;
+      $scope.updateWaitlistText = function () {
+        const text = $scope.settings.waitlistText;
         SettingsService
           .updateWaitlistText(text)
           .then(response => {
@@ -132,8 +132,8 @@ angular.module('reg')
           });
       };
 
-      $scope.updateAcceptanceText = function(){
-        var text = $scope.settings.acceptanceText;
+      $scope.updateAcceptanceText = function () {
+        const text = $scope.settings.acceptanceText;
         SettingsService
           .updateAcceptanceText(text)
           .then(response => {
@@ -142,8 +142,8 @@ angular.module('reg')
           });
       };
 
-      $scope.updateConfirmationText = function(){
-        var text = $scope.settings.confirmationText;
+      $scope.updateConfirmationText = function () {
+        const text = $scope.settings.confirmationText;
         SettingsService
           .updateConfirmationText(text)
           .then(response => {

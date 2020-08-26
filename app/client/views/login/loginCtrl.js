@@ -6,10 +6,10 @@ angular.module('reg')
     'settings',
     'Utils',
     'AuthService',
-    function($scope, $http, $state, settings, Utils, AuthService){
+    function ($scope, $http, $state, settings, Utils, AuthService) {
 
       // Is registration open?
-      var Settings = settings.data;
+      const Settings = settings.data;
       $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       // Start state for login
@@ -19,32 +19,32 @@ angular.module('reg')
         $state.go('app.dashboard');
       }
 
-      function onError(data){
+      function onError(data) {
         $scope.error = data.message;
       }
 
-      function resetError(){
+      function resetError() {
         $scope.error = null;
       }
 
-      $scope.login = function(){
+      $scope.login = function () {
         resetError();
         AuthService.loginWithPassword(
           $scope.email, $scope.password, onSuccess, onError);
       };
 
-      $scope.register = function(){
+      $scope.register = function () {
         resetError();
         AuthService.register(
           $scope.email, $scope.password, onSuccess, onError);
       };
 
-      $scope.setLoginState = function(state) {
+      $scope.setLoginState = function (state) {
         $scope.loginState = state;
       };
 
-      $scope.sendResetEmail = function() {
-        var email = $scope.email;
+      $scope.sendResetEmail = function () {
+        const email = $scope.email;
         AuthService.sendResetEmail(email);
         swal("Don't sweat!", "An email should be sent to you shortly.\nIf you can't find your email, please check your spam folder.", "success");
       };

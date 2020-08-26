@@ -1,14 +1,14 @@
 angular.module('reg')
   .factory('AuthInterceptor', [
     'Session',
-    function(Session){
+    function (Session) {
       return {
-          request: function(config){
-            var token = Session.getToken();
-            if (token){
-              config.headers['x-access-token'] = token;
-            }
-            return config;
+        request: function (config) {
+          const token = Session.getToken();
+          if (token) {
+            config.headers['x-access-token'] = token;
           }
-        };
+          return config;
+        }
+      };
     }]);

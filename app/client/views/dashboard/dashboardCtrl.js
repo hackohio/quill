@@ -14,16 +14,16 @@ angular.module('reg')
     'UserService',
     'EVENT_INFO',
     'DASHBOARD',
-    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASHBOARD){
-      var Settings = settings.data;
-      var user = currentUser.data;
+    function ($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASHBOARD) {
+      const Settings = settings.data;
+      const user = currentUser.data;
       $scope.user = user;
       $scope.timeClose = Utils.formatTime(Settings.timeClose);
       $scope.timeConfirm = Utils.formatTime(Settings.timeConfirm);
 
       $scope.DASHBOARD = DASHBOARD;
 
-      for (var msg in $scope.DASHBOARD) {
+      for (const msg in $scope.DASHBOARD) {
         if ($scope.DASHBOARD[msg].includes('[APP_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
         }
@@ -33,13 +33,13 @@ angular.module('reg')
       }
 
       // Is registration open?
-      var regIsOpen = $scope.regIsOpen = Utils.isRegOpen(Settings);
+      const regIsOpen = $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       // Is it past the user's confirmation time?
-      var pastConfirmation = $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
+      const pastConfirmation = $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
 
-      $scope.dashState = function(status){
-        var user = $scope.user;
+      $scope.dashState = function (status) {
+        const user = $scope.user;
         switch (status) {
           case 'unverified':
             return !user.verified;
@@ -71,7 +71,7 @@ angular.module('reg')
 
       $scope.showWaitlist = !regIsOpen && user.status.completedProfile && !user.status.admitted;
 
-      $scope.resendEmail = function(){
+      $scope.resendEmail = function () {
         AuthService
           .resendVerificationEmail()
           .then(response => {
@@ -83,41 +83,41 @@ angular.module('reg')
       // -----------------------------------------------------
       // Text!
       // -----------------------------------------------------
-      var converter = new showdown.Converter();
+      const converter = new showdown.Converter();
       $scope.acceptanceText = $sce.trustAsHtml(converter.makeHtml(Settings.acceptanceText));
       $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml(Settings.confirmationText));
       $scope.waitlistText = $sce.trustAsHtml(converter.makeHtml(Settings.waitlistText));
 
-      $scope.declineAdmission = function(){
+      $scope.declineAdmission = function () {
 
-      swal({
-        title: "Whoa!",
-        text: "Are you sure you would like to decline your admission? \n\n You can't go back!",
-        icon: "warning",
-        buttons: {
-          cancel: {
-            text: "Cancel",
-            value: null,
-            visible: true
-          },
-          confirm: {
-            text: "Yes, I can't make it",
-            value: true,
-            visible: true,
-            className: "danger-button"
+        swal({
+          title: "Whoa!",
+          text: "Are you sure you would like to decline your admission? \n\n You can't go back!",
+          icon: "warning",
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true
+            },
+            confirm: {
+              text: "Yes, I can't make it",
+              value: true,
+              visible: true,
+              className: "danger-button"
+            }
           }
-        }
-      }).then(value => {
-        if (!value) {
-          return;
-        }
+        }).then(value => {
+          if (!value) {
+            return;
+          }
 
-        UserService
-          .declineAdmission(user._id)
-          .then(response => {
-            $rootScope.currentUser = response.data;
-            $scope.user = response.data;
-          });
-      });
-    };
-  }]);
+          UserService
+            .declineAdmission(user._id)
+            .then(response => {
+              $rootScope.currentUser = response.data;
+              $scope.user = response.data;
+            });
+        });
+      };
+    }]);

@@ -2,7 +2,7 @@ ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 ADMIN_PASSWORD = process.env.ADMIN_PASS;
 
 // Create a default admin user.
-var User = require('../app/server/models/User');
+const User = require('../app/server/models/User');
 
 const setupAdmin = () => {
   return User.findOne({

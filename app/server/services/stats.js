@@ -132,7 +132,7 @@ function calculateStats(_err, registrationTimes) {
       async.each(users, function (user, callback) {
 
         // Grab the email extension
-        var email = user.email.split('@')[1];
+        const email = user.email.split('@')[1];
 
         // Count verified
         newStats.verified += user.verified ? 1 : 0;
@@ -255,7 +255,7 @@ function calculateStats(_err, registrationTimes) {
         callback(); // let async know we've finished
       }, function () {
         // Transform dietary restrictions into a series of objects
-        var restrictions = [];
+        const restrictions = [];
         _.keys(newStats.dietaryRestrictions)
           .forEach(function (key) {
             restrictions.push({
@@ -266,7 +266,7 @@ function calculateStats(_err, registrationTimes) {
         newStats.dietaryRestrictions = restrictions;
 
         // Transform majors into a series of objects
-        var majors = [];
+        const majors = [];
         _.keys(newStats.demo.majors)
           .forEach(function (key) {
             majors.push({
@@ -277,7 +277,7 @@ function calculateStats(_err, registrationTimes) {
         newStats.demo.majors = majors;
 
         // Transform schools into an array of objects
-        var schools = [];
+        const schools = [];
         _.keys(newStats.demo.schools)
           .forEach(function (key) {
             schools.push({
@@ -304,7 +304,7 @@ function calculateStats(_err, registrationTimes) {
         newStats.demoSummary = demoSummary;
 
         // Likewise, transform the teams into an array of objects
-        // var teams = [];
+        // const teams = [];
         // _.keys(newStats.teams)
         //   .forEach(function(key){
         //     teams.push({

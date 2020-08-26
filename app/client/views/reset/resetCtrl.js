@@ -6,16 +6,16 @@ angular.module('reg')
     '$stateParams',
     '$state',
     'AuthService',
-    function($scope, $stateParams, $state, AuthService){
-      var token = $stateParams.token;
+    function ($scope, $stateParams, $state, AuthService) {
+      const token = $stateParams.token;
 
       $scope.loading = true;
 
-      $scope.changePassword = function(){
-        var password = $scope.password;
-        var confirm = $scope.confirm;
+      $scope.changePassword = function () {
+        const password = $scope.password;
+        const confirm = $scope.confirm;
 
-        if (password !== confirm){
+        if (password !== confirm) {
           $scope.error = "Passwords don't match!";
           $scope.confirm = "";
           return;
@@ -32,6 +32,6 @@ angular.module('reg')
           data => {
             $scope.error = data.message;
             $scope.loading = false;
-        });
+          });
       };
     }]);

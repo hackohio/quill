@@ -38,8 +38,8 @@ angular.module('reg')
         $http
           .get('/assets/schools.json')
           .then(function (res) {
-            var schools = res.data;
-            var email = $scope.user.email.split('@')[1];
+            const schools = res.data;
+            const email = $scope.user.email.split('@')[1];
 
             if (schools[email]) {
               $scope.user.profile.school = schools[email].school;
@@ -53,7 +53,7 @@ angular.module('reg')
             $scope.schools = res.data.split('\n');
             $scope.schools.push('Other');
 
-            var content = [];
+            const content = [];
 
             for (i = 0; i < $scope.schools.length; i++) {
               $scope.schools[i] = $scope.schools[i].trim();
@@ -80,7 +80,7 @@ angular.module('reg')
           .then(function (res) {
             $scope.majors = res.data.split('\n');
 
-            var content = [];
+            const content = [];
 
             for (i = 0; i < $scope.majors.length; i++) {
               $scope.majors[i] = $scope.majors[i].trim();

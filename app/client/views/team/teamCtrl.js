@@ -6,9 +6,9 @@ angular.module('reg')
     'Utils',
     'UserService',
     'TEAM',
-    function($scope, currentUser, settings, Utils, UserService, TEAM){
+    function ($scope, currentUser, settings, Utils, UserService, TEAM) {
       // Get the current user's most recent data.
-      var Settings = settings.data;
+      const Settings = settings.data;
 
       $scope.regIsOpen = Utils.isRegOpen(Settings);
 
@@ -22,14 +22,14 @@ angular.module('reg')
           .then(response => {
             $scope.error = null;
             $scope.teammates = response.data;
-          })
+          });
       }
 
-      if ($scope.user.teamCode){
+      if ($scope.user.teamCode) {
         _populateTeammates();
       }
 
-      $scope.joinTeam = function(){
+      $scope.joinTeam = function () {
         UserService
           .joinOrCreateTeam($scope.code)
           .then(response => {
@@ -41,7 +41,7 @@ angular.module('reg')
           });
       };
 
-      $scope.leaveTeam = function(){
+      $scope.leaveTeam = function () {
         UserService
           .leaveTeam()
           .then(response => {

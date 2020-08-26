@@ -1,12 +1,12 @@
 const swal = require('sweetalert');
 
 angular.module('reg')
-  .controller('AdminUserCtrl',[
+  .controller('AdminUserCtrl', [
     '$scope',
     '$http',
     'user',
     'UserService',
-    function($scope, $http, User, UserService){
+    function ($scope, $http, User, UserService) {
       $scope.selectedUser = User.data;
 
       // Populate the school dropdown
@@ -17,14 +17,14 @@ angular.module('reg')
       /**
        * TODO: JANK WARNING
        */
-      function populateSchools(){
+      function populateSchools() {
         $http
           .get('assets/schools.json')
-          .then(function(res){
-            var schools = res.data;
-            var email = $scope.selectedUser.email.split('@')[1];
+          .then(function (res) {
+            const schools = res.data;
+            const email = $scope.selectedUser.email.split('@')[1];
 
-            if (schools[email]){
+            if (schools[email]) {
               $scope.selectedUser.profile.school = schools[email].school;
               $scope.autoFilledSchool = true;
             }
@@ -32,56 +32,56 @@ angular.module('reg')
 
         $http
           .get('/assets/schools.csv')
-          .then(function(res){
+          .then(function (res) {
             $scope.schools = res.data.split('\n');
             $scope.schools.push('Other');
 
-            var content = [];
+            const content = [];
 
-            for(i = 0; i < $scope.schools.length; i++) {
+            for (i = 0; i < $scope.schools.length; i++) {
               $scope.schools[i] = $scope.schools[i].trim();
-              content.push({title: $scope.schools[i]})
+              content.push({ title: $scope.schools[i] });
             }
 
             $('#school.ui.search')
               .search({
                 source: content,
                 cache: true,
-                onSelect: function(result, response) {
+                onSelect: function (result, response) {
                   $scope.selectedUser.profile.school = result.title.trim();
                 }
-              })
+              });
           });
       }
 
       /**
        * TODO: JANK WARNING
        */
-      function populateMajors(){
+      function populateMajors() {
         $http
           .get('/assets/majors.csv')
-          .then(function(res){
+          .then(function (res) {
             $scope.majors = res.data.split('\n');
 
-            var content = [];
+            const content = [];
 
-            for(i = 0; i < $scope.majors.length; i++) {
+            for (i = 0; i < $scope.majors.length; i++) {
               $scope.majors[i] = $scope.majors[i].trim();
-              content.push({title: $scope.majors[i]})
+              content.push({ title: $scope.majors[i] });
             }
 
             $('#major.ui.search')
               .search({
                 source: content,
                 cache: true,
-                onSelect: function(result, response) {
+                onSelect: function (result, response) {
                   $scope.selectedUser.profile.major = result.title.trim();
                 }
-              })
+              });
           });
       }
 
-      var dietaryRestrictions = {
+      const dietaryRestrictions = {
         'Vegetarian': false,
         'Vegan': false,
         'Halal': false,
@@ -89,9 +89,9 @@ angular.module('reg')
         'Nut Allergy': false
       };
 
-      if ($scope.selectedUser.confirmation.dietaryRestrictions){
-        $scope.selectedUser.confirmation.dietaryRestrictions.forEach(function(restriction){
-          if (restriction in dietaryRestrictions){
+      if ($scope.selectedUser.confirmation.dietaryRestrictions) {
+        $scope.selectedUser.confirmation.dietaryRestrictions.forEach(function (restriction) {
+          if (restriction in dietaryRestrictions) {
             dietaryRestrictions[restriction] = true;
           }
         });
@@ -99,25 +99,25 @@ angular.module('reg')
 
       $scope.dietaryRestrictions = dietaryRestrictions;
 
-      $scope.submitProfile = function(){
-        if ($('.ui.form#profile').form('validate form')){
+      $scope.submitProfile = function () {
+        if ($('.ui.form#profile').form('validate form')) {
           _updateProfile();
         }
-        else{
+        else {
           sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
 
-      $scope.submitConfirmation = function(){
-        if ($('.ui.form#confirmation').form('validate form')){
+      $scope.submitConfirmation = function () {
+        if ($('.ui.form#confirmation').form('validate form')) {
           _updateConfirmation();
         }
-        else{
+        else {
           sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
         }
-      }
+      };
 
-      function _setupForm(){
+      function _setupForm() {
         // Semantic-UI form validation
         $('.ui.form#profile').form({
           inline: true,
@@ -249,7 +249,7 @@ angular.module('reg')
         });
       }
 
-      function _updateProfile(){
+      function _updateProfile() {
         UserService
           .updateProfile($scope.selectedUser._id, $scope.selectedUser.profile)
           .then(response => {
@@ -260,12 +260,12 @@ angular.module('reg')
           });
       }
 
-      function _updateConfirmation(){
-        var confirmation = $scope.selectedUser.confirmation;
+      function _updateConfirmation() {
+        const confirmation = $scope.selectedUser.confirmation;
         // Get the dietary restrictions as an array
-        var drs = [];
-        Object.keys($scope.dietaryRestrictions).forEach(function(key){
-          if ($scope.dietaryRestrictions[key]){
+        const drs = [];
+        Object.keys($scope.dietaryRestrictions).forEach(function (key) {
+          if ($scope.dietaryRestrictions[key]) {
             drs.push(key);
           }
         });
