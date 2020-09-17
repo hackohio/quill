@@ -63,6 +63,7 @@ function calculateStats(_err, registrationTimes) {
         '2021': 0,
         '2022': 0,
         '2023': 0,
+        '2024': 0,
       },
       degree: {
         'Associates': 0,
