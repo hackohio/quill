@@ -63,6 +63,7 @@ module.exports = function (router) {
     });
   }
 
+
   /**
    * Default response to send an error and the data.
    * @param  {[type]} res [description]
