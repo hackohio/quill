@@ -255,6 +255,25 @@ function calculateStats(_err, registrationTimes) {
 
         callback(); // let async know we've finished
       }, function () {
+
+        const demoSummary = {
+          basedOff: 'Submitted',
+          count: newStats.submitted,
+          key: 'submitted',
+        };
+        const now = Date.now();
+        if (now > registrationTimes.timeClose) {
+          demoSummary.basedOff = 'Confirmed';
+          demoSummary.count = newStats.confirmed;
+          demoSummary.key = 'confirmed';
+        }
+        if (now > process.env.EVENT_START_TIME) {
+          demoSummary.basedOff = 'Checked In';
+          demoSummary.count = newStats.checkedIn;
+          demoSummary.key = 'checkedIn';
+        }
+        newStats.demoSummary = demoSummary;
+
         // Transform dietary restrictions into a series of objects
         const restrictions = [];
         _.keys(newStats.dietaryRestrictions)
@@ -283,26 +302,11 @@ function calculateStats(_err, registrationTimes) {
           .forEach(function (key) {
             schools.push({
               email: key,
-              count: newStats.demo.schools[key].confirmed,
+              count: newStats.demo.schools[key][newStats.demoSummary.key],
               stats: newStats.demo.schools[key]
             });
           });
         newStats.demo.schools = schools;
-
-        const demoSummary = {
-          basedOff: 'Submitted',
-          count: newStats.submitted
-        };
-        const now = Date.now();
-        if (now > registrationTimes.timeClose) {
-          demoSummary.basedOff = 'Confirmed';
-          demoSummary.count = newStats.confirmed;
-        }
-        if (now > process.env.EVENT_START_TIME) {
-          demoSummary.basedOff = 'Checked In';
-          demoSummary.count = newStats.checkedIn;
-        }
-        newStats.demoSummary = demoSummary;
 
         // Likewise, transform the teams into an array of objects
         // const teams = [];

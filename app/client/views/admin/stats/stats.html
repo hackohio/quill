@@ -219,7 +219,7 @@
       </div>
       <div class="item">
         <strong>Senior:</strong> {{stats.demo.year['2021']}}
-        ({{stats.demo.year['2021'] + stats.demo.year['2020'] / stats.demoSummary.count * 100 | number: 1}}%)
+        ({{(stats.demo.year['2021'] + stats.demo.year['2020']) / stats.demoSummary.count * 100 | number: 1}}%)
       </div>
       <div class="item">
         <strong>Graduating this year:</strong> {{stats.demo.year['2020']}}
