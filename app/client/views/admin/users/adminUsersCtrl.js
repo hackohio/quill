@@ -31,7 +31,7 @@ angular.module('reg')
         $scope.pageSize = data.size;
 
         const p = [];
-        for (const i = 0; i < data.totalPages; i++) {
+        for (let i = 0; i < data.totalPages; i++) {
           p.push(i);
         }
         $scope.pages = p;

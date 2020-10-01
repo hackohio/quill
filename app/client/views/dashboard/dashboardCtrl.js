@@ -23,7 +23,7 @@ angular.module('reg')
 
       $scope.DASHBOARD = DASHBOARD;
 
-      for (const msg in $scope.DASHBOARD) {
+      for (let msg in $scope.DASHBOARD) {
         if ($scope.DASHBOARD[msg].includes('[APP_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
         }

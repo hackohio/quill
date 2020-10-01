@@ -16,7 +16,7 @@ const UserController = require('../app/server/controllers/UserController');
 const users = 1000;
 const username = 'hacker';
 
-for (const i = 0; i < users; i++) {
+for (let i = 0; i < users; i++) {
   console.log(username, i);
   UserController
     .createUser(username + i + '@school.edu', 'foobar', function (err, { token, user }) {
