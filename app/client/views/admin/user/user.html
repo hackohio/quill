@@ -199,12 +199,14 @@
           Checking the box below affirms that you are or will be either an OSU
           undergraduate or 18 years or older by February 29, 2020.
         </p>
+        <!--
         <p>
           <strong>
             We will be checking ID. If you are a minor, you will be turned away
             at the door.
           </strong>
         </p>
+      -->
         <div class="ui checkbox">
           <input type="checkbox" id="adult"
             ng-model="selectedUser.profile.adult">
@@ -242,7 +244,7 @@
           ng-model="selectedUser.confirmation.phoneNumber"
           placeholder="(123) - 555 - 1234" required>
       </div>
-
+      <!--
       <div class="field">
         <label> Dietary Restrictions </label>
         <p>
@@ -264,7 +266,7 @@
 
         </div>
       </div>
-
+    -->
       <div class="field">
         <label> Shirt Size (required) </label>
         <p>
@@ -287,7 +289,7 @@
           <option value="WXXL">Women's XX-Large</option>
         </select>
       </div>
-
+      <!--
       <div class="field">
         <label>
           Will you be needing hardware?
@@ -311,7 +313,7 @@
         </p>
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
-
+    -->
       <div class="ui divider"></div>
 
       <div class="field">
@@ -342,8 +344,8 @@
           For legal reasons, our university asks that you read and accept the
           terms of our liability waiver. Again, as we mentioned in the original
           lottery application - you <strong> must </strong> be 18 years or older
-          or an OSU undergraduate by the day of the event, or <strong> we will
-            refuse you admission at the door. We will be checking ID. </strong>
+          or an OSU undergraduate by the day of the event.<!-- or <strong> we will
+            refuse you admission at the door. We will be checking ID. </strong>-->
         </p>
         <p>
           By writing my name below, I affirm that I have read and accepted the
