@@ -84,6 +84,15 @@ angular.module('reg')
                 }
               ]
             },
+            ethnicity: {
+              identifier: 'ethnicity',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a race/ethnicity.'
+                }
+              ]
+            },
             phone: {
               identifier: 'phone',
               rules: [
