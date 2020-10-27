@@ -8,7 +8,7 @@ angular.module('reg')
     'currentUser',
     'Utils',
     'UserService',
-    function($scope, $rootScope, $state, currentUser, Utils, UserService){
+    function ($scope, $rootScope, $state, currentUser, Utils, UserService) {
 
       // Set up the user
       const user = currentUser.data;
@@ -27,7 +27,7 @@ angular.module('reg')
       /**
        * Update dietary restriction checkboxes
        */
-      function _setupDietaryRestictions(){
+      function _setupDietaryRestictions() {
         const dietaryRestrictions = {
           'Vegetarian': false,
           'Vegan': false,
@@ -35,9 +35,9 @@ angular.module('reg')
           'Kosher': false,
           'Nut Allergy': false
         };
-        const userDR = user.confirmation.dietaryRestrictions
-        if (userDR != null){
-          userDR.forEach(function(restriction){
+        const userDR = user.confirmation.dietaryRestrictions;
+        if (userDR != null) {
+          userDR.forEach(function (restriction) {
             dietaryRestrictions[restriction] = true;
           });
         }
@@ -47,13 +47,13 @@ angular.module('reg')
       /**
        * Update the user confirmation using the user object in the scope.
        */
-      function _updateUserConfirmation(){
+      function _updateUserConfirmation() {
         const confirmation = $scope.user.confirmation;
 
         // Transform dietary restrictions form JSON to Array
         const drs = [];
-        Object.keys($scope.dietaryRestrictions).forEach(function(key){
-          if ($scope.dietaryRestrictions[key] === true){
+        Object.keys($scope.dietaryRestrictions).forEach(function (key) {
+          if ($scope.dietaryRestrictions[key] === true) {
             drs.push(key);
           }
         });
@@ -65,12 +65,12 @@ angular.module('reg')
       /**
        * Attach the sematntic UI form validations rules to the page. 
        */
-      function _setupForm(){
+      function _setupForm() {
         // Create rule to ensure resume file has been uploaded.
-        $.fn.form.settings.rules.resumeUpload = function(value) {
+        $.fn.form.settings.rules.resumeUpload = function (value) {
           return user.confirmation.resume || value != "";
         };
-        
+
         // Semantic-UI form validation
         $('.ui.form').form({
           inline: true,
@@ -130,22 +130,22 @@ angular.module('reg')
       function _uploadResume() {
         const resumeUploadData = new FormData($("#resume")[0]);
         return $.ajax({
-          url: "https://make-ohio-2020.s3.amazonaws.com",
+          url: "https://hack-ohio-2020.s3.amazonaws.com",
           type: 'POST',
           data: resumeUploadData,
           cache: false,
           contentType: false,
           processData: false
         })
-        .then(response => {
-          user.confirmation.resume = true;
-          return response
-        });
+          .then(response => {
+            user.confirmation.resume = true;
+            return response;
+          });
       }
-      
-      $scope.submitForm = function (){
+
+      $scope.submitForm = function () {
         if ($('.ui.form').form('validate form')) {
-            _uploadResume()
+          _uploadResume()
             .then(_updateUserConfirmation)
             .then(_response => swal("Woo!", "You're confirmed!", "success"))
             .then(_value => $state.go("app.dashboard"))
