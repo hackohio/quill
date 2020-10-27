@@ -108,14 +108,17 @@
             <form id="resume" method="post" enctype="multipart/form-data">
               <input type="hidden" name="key"
                 value="uploads/{{user.profile.name}} Resume">
-              <input type="hidden" name="AWSAccessKeyId"
-                value="AKIA5UVY2JRH7IHITYXX">
               <input type="hidden" name="acl"
                 value="bucket-owner-full-control" />
+              <input type="hidden" name="X-Amz-Credential"
+                value="AKIA5UVY2JRHVN747TLV/20201026/us-east-1/s3/aws4_request" />
+              <input type="hidden" name="X-Amz-Algorithm"
+                value="AWS4-HMAC-SHA256" />
+              <input type="hidden" name="X-Amz-Date" value="20201026T000000Z" />
               <input type="hidden" name="policy"
-                value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImJ1Y2tldCI6ICJtYWtlLW9oaW8tMjAyMCJ9LCAKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAogICAgeyJhY2wiOiAiYnVja2V0LW93bmVyLWZ1bGwtY29udHJvbCJ9LAogICAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDEwNDg1NzZdCiAgXQp9">
-              <input type="hidden" name="signature"
-                value="dofYCmxWXazEnQZVaPm4TZQabsk=">
+                value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJoYWNrLW9oaW8tMjAyMCJ9LCAKICAgIFsiY29udGVudC1sZW5ndGgtcmFuZ2UiLCAwLCAxMDQ4NTc2XSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAoKICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBNVVWWTJKUkhWTjc0N1RMVi8yMDIwMTAyNi91cy1lYXN0LTEvczMvYXdzNF9yZXF1ZXN0In0sCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sCiAgICB7IngtYW16LWRhdGUiOiAiMjAyMDEwMjZUMDAwMDAwWiIgfQogIF0KfQ==">
+              <input type="hidden" name="X-Amz-Signature"
+                value="79dd38559884a5da595b2b820ce48e56fd751289e820c03afa8bfd50caf4946e">
               <input id="resume_file" name="file" type="file" accept=".pdf" />
             </form>
           </div>
