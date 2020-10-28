@@ -105,7 +105,7 @@ const confirmation = {
   },
   legalName: String,
   ethnicity: String,
-  wantAWSDevAccount: Boolean,
+  wantAWSAccount: Boolean,
   // receipt: String,
   //
   // hostNeededFri: Boolean,
