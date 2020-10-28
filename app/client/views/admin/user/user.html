@@ -289,6 +289,32 @@
           <option value="WXXL">Women's XX-Large</option>
         </select>
       </div>
+
+      <div class="field">
+        <label> Ohio State values diversity in people and ideas.
+          We’re an inclusive, supportive community where you can comfortably
+          join in or confidently stand out. </label>
+        <p>
+          Please select your race/ethnicity below
+        </p>
+        <select name="ethnicity" ng-model="selectedUser.confirmation.ethnicity"
+          required>
+          <option value="" disabled hidden>Race/Ethnicity</option>
+          <option value="American Indian/Alaskan Native">American
+            Indian/Alaskan Native</option>
+          <option value="Asian">Asian</option>
+          <option value="Black or African American">Black or African
+            American</option>
+          <option value="Hispanic">Hispanic</option>
+          <option value="White">White</option>
+          <option value="Native Hawaiian/Pacific Islander">Native
+            Hawaiian/Pacific Islander</option>
+          <option value="Non-Resident Alien">Non-Resident Alien</option>
+          <option value="Two or more races">Two or more races</option>
+          <option value="Choose not to disclose">Choose not to disclose
+          </option>
+        </select>
+      </div>
       <!--
       <div class="field">
         <label>
@@ -316,17 +342,30 @@
     -->
       <div class="ui divider"></div>
 
+
       <div class="field">
-        <label> Resume (required) </label>
-        <p>
-          Upload a document outlining any skills or experience you'd like to
-          share. Please upload a PDF with your full name in the file name!
-        </p>
-        <a target="_blank"
-          href="https://www.dropbox.com/request/GcnwLomAlpGbmRc6ign3"
-          class="ui pink button">
-          Upload
-        </a>
+        <label ng-if="selectedUser.confirmation.resume" for="resume_file">
+          Thank you for uploading your resume! If you wish to change your
+          resume, upload your new version below!
+        </label>
+        <label ng-if="!selectedUser.confirmation.resume" for="resume_file">
+          Please upload your resume as a PDF.
+        </label>
+        <form id="resume" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="key"
+            value="uploads/{{user.profile.name}} Resume">
+          <input type="hidden" name="acl" value="bucket-owner-full-control" />
+          <input type="hidden" name="X-Amz-Credential"
+            value="AKIA5UVY2JRHVN747TLV/20201026/us-east-1/s3/aws4_request" />
+          <input type="hidden" name="X-Amz-Algorithm"
+            value="AWS4-HMAC-SHA256" />
+          <input type="hidden" name="X-Amz-Date" value="20201026T000000Z" />
+          <input type="hidden" name="policy"
+            value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJoYWNrLW9oaW8tMjAyMCJ9LCAKICAgIFsiY29udGVudC1sZW5ndGgtcmFuZ2UiLCAwLCAxMDQ4NTc2XSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAoKICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBNVVWWTJKUkhWTjc0N1RMVi8yMDIwMTAyNi91cy1lYXN0LTEvczMvYXdzNF9yZXF1ZXN0In0sCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sCiAgICB7IngtYW16LWRhdGUiOiAiMjAyMDEwMjZUMDAwMDAwWiIgfQogIF0KfQ==">
+          <input type="hidden" name="X-Amz-Signature"
+            value="79dd38559884a5da595b2b820ce48e56fd751289e820c03afa8bfd50caf4946e">
+          <input id="resume_file" name="file" type="file" accept=".pdf" />
+        </form>
       </div>
 
 
@@ -335,7 +374,7 @@
       <div class="field">
         <p>
           <a target="_blank"
-            href="http://hack.osu.edu/2018/pdf/2018_code_of_conduct.pdf">
+            href="https://hack.osu.edu/assets/pdf/Hack2020CodeOfConduct.pdf">
             HackOHI/O 2020 Code of Conduct & Liability Waiver
           </a>
         </p>
@@ -344,7 +383,8 @@
           For legal reasons, our university asks that you read and accept the
           terms of our liability waiver. Again, as we mentioned in the original
           lottery application - you <strong> must </strong> be 18 years or older
-          or an OSU undergraduate by the day of the event.<!-- or <strong> we will
+          or an OSU undergraduate by the day of the event.
+          <!-- or <strong> we will
             refuse you admission at the door. We will be checking ID. </strong>-->
         </p>
         <p>

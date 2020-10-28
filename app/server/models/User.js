@@ -104,6 +104,7 @@ const confirmation = {
     default: false,
   },
   legalName: String,
+  ethnicity: String,
   // receipt: String,
   //
   // hostNeededFri: Boolean,

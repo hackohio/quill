@@ -51,7 +51,7 @@
             </p>
             <select name="shirt" ng-model="user.confirmation.shirtSize"
               required>
-              <option value="">Shirt Size</option>
+              <option value="" disabled hidden>Shirt Size</option>
               <option value="XS">Unisex X-Small</option>
               <option value="S">Unisex Small</option>
               <option value="M">Unisex Medium</option>
@@ -64,6 +64,33 @@
               <option value="WL">Women's Large</option>
               <option value="WXL">Women's X-Large</option>
               <option value="WXXL">Women's XX-Large</option>
+            </select>
+          </div>
+
+
+          <div class="field">
+            <label> Ohio State values diversity in people and ideas.
+              We’re an inclusive, supportive community where you can comfortably
+              join in or confidently stand out. </label>
+            <p>
+              Please select your race/ethnicity below
+            </p>
+            <select name="ethnicity" ng-model="user.confirmation.ethnicity"
+              required>
+              <option value="" disabled hidden>Race/Ethnicity</option>
+              <option value="American Indian/Alaskan Native">American
+                Indian/Alaskan Native</option>
+              <option value="Asian">Asian</option>
+              <option value="Black or African American">Black or African
+                American</option>
+              <option value="Hispanic">Hispanic</option>
+              <option value="White">White</option>
+              <option value="Native Hawaiian/Pacific Islander">Native
+                Hawaiian/Pacific Islander</option>
+              <option value="Non-Resident Alien">Non-Resident Alien</option>
+              <option value="Two or more races">Two or more races</option>
+              <option value="Choose not to disclose">Choose not to disclose
+              </option>
             </select>
           </div>
 
@@ -131,7 +158,7 @@
           <div class="field">
             <p>
               <a target="_blank"
-                href="https://hack.osu.edu/make/2020/pdf/2020_code_of_conduct.pdf">
+                href="https://hack.osu.edu/assets/pdf/Hack2020CodeOfConduct.pdf">
                 HackOHI/O 2020 Code of Conduct & Liability Waiver
               </a>
             </p>
@@ -140,7 +167,8 @@
               For legal reasons, our university asks that you read and accept
               the terms of our liability waiver. Again, as we mentioned in the
               original lottery application - you <strong> must </strong> be 18
-               years or older or an OSU undergraduate by the day of the event. <!-- or
+              years or older or an OSU undergraduate by the day of the event.
+              <!-- or
               <strong> we will refuse you admission at the door. We will be
                 checking ID. </strong> -->
             </p>

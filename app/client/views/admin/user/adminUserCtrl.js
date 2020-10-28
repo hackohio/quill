@@ -108,9 +108,31 @@ angular.module('reg')
         }
       };
 
+
+      /***
+       * Upload the resume to the S3 bucket
+       */
+      function _uploadResume() {
+        const resumeUploadData = new FormData($("#resume")[0]);
+        return $.ajax({
+          url: "https://hack-ohio-2020.s3.amazonaws.com",
+          type: 'POST',
+          data: resumeUploadData,
+          cache: false,
+          contentType: false,
+          processData: false
+        })
+          .then(response => {
+            $scope.selectedUser.confirmation.resume = true;
+            return response;
+          });
+      }
+
       $scope.submitConfirmation = function () {
         if ($('.ui.form#confirmation').form('validate form')) {
-          _updateConfirmation();
+          _uploadResume()
+            .then(_updateConfirmation)
+            .catch(_error => swal("Uh oh!", "Something went wrong.", "error"));
         }
         else {
           sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
@@ -206,6 +228,15 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please give us a shirt size!'
+                }
+              ]
+            },
+            ethnicity: {
+              identifier: 'ethnicity',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a race/ethnicity.'
                 }
               ]
             },
