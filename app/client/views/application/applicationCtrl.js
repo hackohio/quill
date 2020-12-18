@@ -1,6 +1,6 @@
 const angular = require("angular");
 const swal = require("sweetalert");
-const Mailer = require('../services/email');
+
 
 angular.module('reg')
   .controller('ApplicationCtrl', [
