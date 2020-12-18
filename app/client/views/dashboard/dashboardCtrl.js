@@ -19,7 +19,8 @@ angular.module('reg')
       const user = currentUser.data;
       $scope.user = user;
       $scope.timeClose = Utils.formatTime(Settings.timeClose);
-      $scope.timeConfirm = Utils.formatTime(user.status.confirmBy);
+      $scope.timeConfirm = Utils.formatTime(currentUser.status.confirmBy);
+
 
       $scope.DASHBOARD = DASHBOARD;
 

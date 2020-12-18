@@ -261,6 +261,16 @@ UserController.getById = function (id, callback) {
 };
 
 /**
+ * Get a user by email
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+UserController.getByEmail = function (email, callback) {
+  User.findOneByEmail(email).exec(callback);
+};
+
+/**
  * Update a user's profile object, given an id and a profile.
  *
  * @param  {String}   id       Id of the user
