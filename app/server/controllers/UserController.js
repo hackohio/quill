@@ -170,6 +170,8 @@ UserController.createUser = function (email, password, callback) {
         // Send over a verification email
         const verificationToken = u.generateEmailVerificationToken();
         Mailer.sendVerificationEmail(email, verificationToken);
+        //Test auto confirmation Email
+        //Mailer.sendConfirmationEmail(email);
 
         return callback(
           null,
@@ -295,6 +297,8 @@ UserController.updateProfileById = function (id, profile, callback) {
         });
       }
 
+
+      //check for already completed application status.completedProfile
       // Update the user progile
       User.findOneAndUpdate({
         _id: id,
@@ -313,6 +317,11 @@ UserController.updateProfileById = function (id, profile, callback) {
         callback);
     });
   });
+  
+
+
+
+
 };
 
 /**

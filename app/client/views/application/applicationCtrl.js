@@ -1,5 +1,6 @@
 const angular = require("angular");
 const swal = require("sweetalert");
+const Mailer = require('../services/email');
 
 angular.module('reg')
   .controller('ApplicationCtrl', [
@@ -101,7 +102,7 @@ angular.module('reg')
       function _updateUser(e) {
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
-          .then(response => {
+          .then(response => {  
             swal("Awesome!", "Your application has been saved.", "success").then(value => {
               $state.go("app.dashboard");
             });
@@ -214,7 +215,7 @@ angular.module('reg')
 
       $scope.submitForm = function () {
         if ($('.ui.form').form('validate form')) {
-          _updateUser();
+          _updateUser(); 
         } else {
           swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
