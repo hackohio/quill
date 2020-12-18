@@ -2,6 +2,8 @@ const UserController = require('../controllers/UserController');
 const SettingsController = require('../controllers/SettingsController');
 
 const request = require('request');
+const { Parser } = require('json2csv');
+const flatten = require('flat');
 
 module.exports = function (router) {
 
@@ -141,6 +143,30 @@ module.exports = function (router) {
    */
   router.get('/users/stats', isAdmin, function (req, res) {
     UserController.getStats(defaultResponse(req, res));
+  });
+
+
+  /**
+   * [OWNER/ADMIN]
+   *
+   * GET - Get csv data for all users
+   */
+  router.get('/users/export', function (req, res) {
+    const json2csv = new Parser();
+    UserController.getAll(function (err, data) {
+      if (err) {
+        console.error("Error getting all users for CSV export");
+        console.error(err);
+        return;
+      }
+      const processed_user_data = data.map(user => {
+        return flatten(user.toObject(), { maxDepth: 5 });
+      });
+      const csv = json2csv.parse(processed_user_data);
+      res.header('Content-Type', 'text/csv');
+      res.attachment('Users.csv');
+      return res.send(csv);
+    });
   });
 
   /**
