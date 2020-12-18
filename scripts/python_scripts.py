@@ -237,7 +237,7 @@ class Scripts:
     #Generates full csv with appropriate information
 
     #Also use this command for a FULL dump:
-    # mongoexport --host MONGODBURI --ssl --username USERNAME --password ACCTPASSWORD --authenticationDatabase admin --db test  --collection users --type csv -f profile.name,email,status.admitted,status.confirmed,status.checkedIn,profile.major,profile.gender,profile.school,profile.degree,profile.graduationMonth,profile.graduationYear,profile.essay,profile.description,confirmation.shirtSize,confirmation.phoneNumber,confirmation.dietaryRestrictions,teamCode,confirmation.wantsHardware,confirmation.hardware,confirmation.notes,confirmation.needsReimbursement,confirmation.reimbursementType,confirmation.wantsLaptop --out dump.csv
+    # mongoexport --uri='mongodb://quillServer:OHIOathon%24ServerPassword@10.0.101.56:27017/Quill?authSource=Quill' --forceTableScan --collection users --type csv -f profile.name,email,verified,status.completedProfile,status.admitted,status.confirmed,status.declined,status.checkedIn,profile.major,profile.gender,profile.school,profile.degree,profile.graduationMonth,profile.graduationYear,profile.essay,profile.description,profile.swag,confirmation.shirtSize,confirmation.phoneNumber,confirmation.ethnicity,teamCode,confirmation.notes,confirmation.wantsAWSAccount --out dump.csv
     #Add additional fields as needed
     def csc_export():
         csv_rows = get_stats()
