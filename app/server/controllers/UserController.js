@@ -308,7 +308,20 @@ UserController.updateProfileById = function (id, profile, callback) {
       }
 
 
-      //check for already completed application status.completedProfile
+      
+      //find the user with the id 
+      User.findById(id).exec(function (err, user) {
+      
+        //Check if the status is complete of not
+        if(!user.status.completedProfile){
+          
+          //Send the confirmation email
+          Mailer.sendConfirmationEmail(user.email)
+        }
+      });
+
+
+      
       // Update the user progile
       User.findOneAndUpdate({
         _id: id,
@@ -327,11 +340,6 @@ UserController.updateProfileById = function (id, profile, callback) {
         callback);
     });
   });
-  
-
-
-
-
 };
 
 /**
