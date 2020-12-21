@@ -318,15 +318,11 @@ UserController.updateProfileById = function (id, profile, callback) {
           //Send the confirmation email
           Mailer.sendConfirmationEmail(user.email)
         }
-      });
-
-
-      
-      // Update the user progile
-      User.findOneAndUpdate({
-        _id: id,
-        verified: true
-      },
+         // Update the user progile
+        User.findOneAndUpdate({
+          _id: id,
+          verified: true
+        },
         {
           $set: {
             'lastUpdated': Date.now(),
@@ -338,6 +334,7 @@ UserController.updateProfileById = function (id, profile, callback) {
           new: true
         },
         callback);
+      });
     });
   });
 };
