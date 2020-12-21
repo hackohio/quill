@@ -209,10 +209,10 @@ controller.sendConfirmationEmail = function(email, callback){
   };
   sendOne('email-basic', options, locals, function (err, info) {
     if (err) {
-      console.log(err);
+      console.log("Error: " + err);
     }
     if (info) {
-      console.log(info.message);
+      console.log("Info.message: " + info.message);
     }
     if (callback) {
       callback(err, info);
