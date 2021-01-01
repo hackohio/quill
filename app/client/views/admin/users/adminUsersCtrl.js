@@ -302,7 +302,12 @@ angular.module('reg')
                 value: user.profile.essay
               }, {
                 name: 'Wants Swag',
-                value: user.profile.swag
+                value: user.profile.swag,
+                type: 'boolean'
+              }, {
+                name: 'Is Adult',
+                value: user.profile.adult,
+                type: 'boolean'
               }
             ]
           }, {
@@ -312,9 +317,12 @@ angular.module('reg')
                 name: 'Phone Number',
                 value: user.confirmation.phoneNumber
               }, {
+                name: 'Discord Username',
+                value: user.confirmation.discordUsername
+              }, /*{
                 name: 'Dietary Restrictions',
                 value: user.confirmation.dietaryRestrictions.join(', ')
-              }, {
+              },*/ {
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
               },/*{
@@ -327,15 +335,36 @@ angular.module('reg')
                 name: 'Needs Hardware',
                 value: user.confirmation.wantsHardware,
                 type: 'boolean'
-              },*/{
+              },{
                 name: 'Hardware Requested',
                 value: user.confirmation.hardware
-              }, {
+              }, */{
                 name: 'Resume Uploaded',
-                value: user.confirmation.resume
+                value: user.confirmation.resume,
+                type: 'boolean'
+              }, {
+                name: 'Interested In Employment',
+                value: user.confirmation.interestedInEmployment,
+                type: 'boolean'
+              }, {
+                name: 'Interested In Joining Org',
+                value: user.confirmation.intrestedInJoiningOrg,
+                type: 'boolean'
+              }, {
+                name: 'Legal Name',
+                value: user.confirmation.legalName
+              }, {
+                name: 'Ethnicity',
+                value: user.confirmation.ethnicity
               }, {
                 name: 'Additional Notes',
                 value: user.confirmation.notes
+              }, {
+                name: 'Signature on Liability Waiver',
+                value: user.confirmation.signatureLiability
+              }, {
+                name: 'Signature on Code of Conduct',
+                value: user.confirmation.signatureCodeOfConduct
               }
             ]
           },/*{

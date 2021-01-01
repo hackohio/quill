@@ -117,7 +117,7 @@ angular.module('reg')
       function _uploadResume() {
         const resumeUploadData = new FormData($("#resume")[0]);
         return $.ajax({
-          url: "https://hack-ohio-2020.s3.amazonaws.com",
+          url: "https://quill-dev.s3.amazonaws.com",
           type: 'POST',
           data: resumeUploadData,
           cache: false,
@@ -248,6 +248,16 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter a phone number.'
+                }
+              ]
+            },
+            discordUsername: {
+              identifier: 'discordUsername',
+              rules: [
+                {
+                  type: 'regExp',
+                  value: /^((?!(discordtag|everyone|here)#)((?!@|#|:|```).{2,32})#\d{4})/,
+                  prompt: 'Please enter a valid discord username.'
                 }
               ]
             },
