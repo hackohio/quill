@@ -304,6 +304,10 @@ angular.module('reg')
                 name: 'Wants Swag',
                 value: user.profile.swag,
                 type: 'boolean'
+              }, {
+                name: 'Is Adult',
+                value: user.profile.adult,
+                type: 'boolean'
               }
             ]
           }, {
@@ -312,6 +316,9 @@ angular.module('reg')
               {
                 name: 'Phone Number',
                 value: user.confirmation.phoneNumber
+              }, {
+                name: 'Discord Username',
+                value: user.confirmation.discordUsername
               }, /*{
                 name: 'Dietary Restrictions',
                 value: user.confirmation.dietaryRestrictions.join(', ')
@@ -336,8 +343,28 @@ angular.module('reg')
                 value: user.confirmation.resume,
                 type: 'boolean'
               }, {
+                name: 'Interested In Employment',
+                value: user.confirmation.interestedInEmployment,
+                type: 'boolean'
+              }, {
+                name: 'Interested In Joining Org',
+                value: user.confirmation.intrestedInJoiningOrg,
+                type: 'boolean'
+              }, {
+                name: 'Legal Name',
+                value: user.confirmation.legalName
+              }, {
+                name: 'Ethnicity',
+                value: user.confirmation.ethnicity
+              }, {
                 name: 'Additional Notes',
                 value: user.confirmation.notes
+              }, {
+                name: 'Signature on Liability Waiver',
+                value: user.confirmation.signatureLiability
+              }, {
+                name: 'Signature on Code of Conduct',
+                value: user.confirmation.signatureCodeOfConduct
               }
             ]
           },/*{

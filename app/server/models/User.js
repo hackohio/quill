@@ -83,6 +83,10 @@ const profile = {
 // Only after confirmed
 const confirmation = {
   phoneNumber: String,
+  discordUsername: {
+    type: String,
+    match: /^((?!(discordtag|everyone|here)#)((?!@|#|:|```).{2,32})#\d{4})/,
+  },
   dietaryRestrictions: [String],
   shirtSize: {
     type: String,
@@ -99,6 +103,16 @@ const confirmation = {
   github: String,
   website: String,
   resume: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  interestedInEmployment: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  intrestedInJoiningOrg: {
     type: Boolean,
     required: true,
     default: false,

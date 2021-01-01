@@ -102,6 +102,16 @@ angular.module('reg')
                 }
               ]
             },
+            discordUsername: {
+              identifier: 'discordUsername',
+              rules: [
+                {
+                  type: 'regExp',
+                  value: /^((?!(discordtag|everyone|here)#)((?!@|#|:|```).{2,32})#\d{4})/,
+                  prompt: 'Please enter a valid discord username.'
+                }
+              ]
+            },
             signatureLiability: {
               identifier: 'signatureLiabilityWaiver',
               rules: [
