@@ -302,7 +302,8 @@ angular.module('reg')
                 value: user.profile.essay
               }, {
                 name: 'Wants Swag',
-                value: user.profile.swag
+                value: user.profile.swag,
+                type: 'boolean'
               }
             ]
           }, {
@@ -311,10 +312,10 @@ angular.module('reg')
               {
                 name: 'Phone Number',
                 value: user.confirmation.phoneNumber
-              }, {
+              }, /*{
                 name: 'Dietary Restrictions',
                 value: user.confirmation.dietaryRestrictions.join(', ')
-              }, {
+              },*/ {
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
               },/*{
@@ -332,7 +333,8 @@ angular.module('reg')
                 value: user.confirmation.hardware
               }, */{
                 name: 'Resume Uploaded',
-                value: user.confirmation.resume
+                value: user.confirmation.resume,
+                type: 'boolean'
               }, {
                 name: 'Additional Notes',
                 value: user.confirmation.notes
