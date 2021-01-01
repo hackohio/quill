@@ -13,7 +13,7 @@ import hmac
 
 # ************* REQUEST VALUES *************
 service = 's3'
-host = 'hack-ohio-2020.s3.amazonaws.com'
+host = 'quill-dev.s3.amazonaws.com'
 region = 'us-east-1'
 
 # AWS access key and secret value
@@ -22,7 +22,7 @@ secret_key = "INSERT_SECRET_KEY_HERE"
 
 algorithm = 'AWS4-HMAC-SHA256'
 # String to sign is a base64 encoded policy
-string_to_sign = "eyJleHBpcmF0aW9uIjogIjIwMjEtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJoYWNrLW9oaW8tMjAyMCJ9LCAKICAgIFsiY29udGVudC1sZW5ndGgtcmFuZ2UiLCAwLCAxMDQ4NTc2XSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAoKICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBNVVWWTJKUkhWTjc0N1RMVi8yMDIwMTAyNi91cy1lYXN0LTEvczMvYXdzNF9yZXF1ZXN0In0sCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sCiAgICB7IngtYW16LWRhdGUiOiAiMjAyMDEwMjZUMDAwMDAwWiIgfQogIF0KfQ=="
+string_to_sign = "eyJleHBpcmF0aW9uIjogIjIwMjEtMDUtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJxdWlsbC1kZXYifSwgCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgMTA0ODU3Nl0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAidXBsb2Fkcy8iXSwKCiAgICB7IngtYW16LWNyZWRlbnRpYWwiOiAiQUtJQTVVVlkySlJIVERTTzNHTjYvMjAyMTAxMDEvdXMtZWFzdC0xL3MzL2F3czRfcmVxdWVzdCJ9LAogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LAogICAgeyJ4LWFtei1kYXRlIjogIjIwMjEwMTAxVDAwMDAwMFoiIH0KICBdCn0="
 
 
 # Key derivation functions. See:
