@@ -115,7 +115,7 @@ function calculateStats(_err, registrationTimes) {
     hostNeededNone: 0,*/
 
 
-    wantsHardware: 0,
+    // wantsHardware: 0,
     wantsSwag: 0,
 
     checkedIn: 0,
@@ -163,7 +163,7 @@ function calculateStats(_err, registrationTimes) {
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
         // Count the number of people who want hardware
-        newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
+        // newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
 
         // Count the number of people who want hardware
         newStats.wantsSwag += user.profile.swag ? 1 : 0;

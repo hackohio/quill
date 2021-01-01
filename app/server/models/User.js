@@ -90,12 +90,12 @@ const confirmation = {
       values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
     }
   },
-  wantsHardware: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-  hardware: String,
+  // wantsHardware: {
+  //   type: Boolean,
+  //   required: true,
+  //   default: false,
+  // },
+  // hardware: String,
   github: String,
   website: String,
   resume: {

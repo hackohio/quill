@@ -327,10 +327,10 @@ angular.module('reg')
                 name: 'Needs Hardware',
                 value: user.confirmation.wantsHardware,
                 type: 'boolean'
-              },*/{
+              },{
                 name: 'Hardware Requested',
                 value: user.confirmation.hardware
-              }, {
+              }, */{
                 name: 'Resume Uploaded',
                 value: user.confirmation.resume
               }, {
