@@ -260,15 +260,6 @@ angular.module('reg')
                 }
               ]
             },
-            /*signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },*/
             signatureCodeOfConduct: {
               identifier: 'signatureCodeOfConduct',
               rules: [

@@ -105,7 +105,6 @@ const confirmation = {
   },
   legalName: String,
   ethnicity: String,
-  wantAWSAccount: Boolean,
   // receipt: String,
   //
   // hostNeededFri: Boolean,
@@ -117,7 +116,6 @@ const confirmation = {
   //
   notes: String,
   signatureLiability: String,
-  signaturePhotoRelease: String,
   signatureCodeOfConduct: String,
 };
 
