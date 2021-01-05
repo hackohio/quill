@@ -6,7 +6,9 @@ angular.module('reg')
     '$http',
     'user',
     'UserService',
-    function ($scope, $http, User, UserService) {
+    'Utils',
+    function ($scope, $http, User, UserService, Utils) {
+      $scope.formatTime = Utils.formatTime;
       $scope.selectedUser = User.data;
 
       // Populate the school dropdown
