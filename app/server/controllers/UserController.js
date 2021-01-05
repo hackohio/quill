@@ -170,9 +170,6 @@ UserController.createUser = function (email, password, callback) {
         // Send over a verification email
         const verificationToken = u.generateEmailVerificationToken();
         Mailer.sendVerificationEmail(email, verificationToken);
-        //Test auto confirmation Email
-        //Mailer.sendConfirmationEmail(email);
-
         return callback(
           null,
           {
@@ -314,7 +311,8 @@ UserController.updateProfileById = function (id, profile, callback) {
       
         //Check if the status is complete of not
         if(!user.status.completedProfile){
-          
+          //Admit User
+          UserController.admitUser(id, user)
           //Send the confirmation email
           Mailer.sendConfirmationEmail(user.email)
         }

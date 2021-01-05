@@ -21,7 +21,6 @@ angular.module('reg')
       $scope.timeClose = Utils.formatTime(Settings.timeClose);
       $scope.timeConfirm = Utils.formatTime(currentUser.status.confirmBy);
 
-
       $scope.DASHBOARD = DASHBOARD;
 
       for (let msg in $scope.DASHBOARD) {
