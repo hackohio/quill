@@ -170,7 +170,6 @@ UserController.createUser = function (email, password, callback) {
         // Send over a verification email
         const verificationToken = u.generateEmailVerificationToken();
         Mailer.sendVerificationEmail(email, verificationToken);
-
         return callback(
           null,
           {
@@ -305,11 +304,23 @@ UserController.updateProfileById = function (id, profile, callback) {
         });
       }
 
-      // Update the user progile
-      User.findOneAndUpdate({
-        _id: id,
-        verified: true
-      },
+
+      
+      //find the user with the id 
+      User.findById(id).exec(function (err, user) {
+      
+        //Check if the status is complete of not
+        if(!user.status.completedProfile){
+          //Admit User
+          UserController.admitUser(id, user)
+          //Send the confirmation email
+          Mailer.sendConfirmationEmail(user.email)
+        }
+         // Update the user progile
+        User.findOneAndUpdate({
+          _id: id,
+          verified: true
+        },
         {
           $set: {
             'lastUpdated': Date.now(),
@@ -321,6 +332,7 @@ UserController.updateProfileById = function (id, profile, callback) {
           new: true
         },
         callback);
+      });
     });
   });
 };
