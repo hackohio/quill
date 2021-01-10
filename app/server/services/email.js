@@ -195,29 +195,4 @@ controller.sendPasswordChangedEmail = function (email, callback) {
 
 };
 
-
-controller.sendConfirmationEmail = function(email, callback){
-
-  const options = {
-    to: email,
-    subject: "[" + HACKATHON_NAME + "] - Test Auto Confirmation Email"
-  };
-
-  const locals ={
-    title: "Please confirm your registration.",
-    body: "Follow this link and answer a few more questions to confirm your registration."
-  };
-  sendOne('email-basic', options, locals, function (err, info) {
-    if (err) {
-      console.log("Error: " + err);
-    }
-    if (info) {
-      console.log("Info.message: " + info.message);
-    }
-    if (callback) {
-      callback(err, info);
-    }
-  });
-}
-
 module.exports = controller;
