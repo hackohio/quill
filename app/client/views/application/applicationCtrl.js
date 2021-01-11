@@ -103,7 +103,7 @@ angular.module('reg')
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
             swal("Awesome!", "Your application has been saved.", "success").then(value => {
-              $state.go("app.dashboard");
+              window.location.pathname = "/";
             });
           }, response => {
             swal("Uh oh!", "Something went wrong.", "error");
