@@ -200,12 +200,20 @@ controller.sendConfirmationEmail = function(email, callback){
 
   const options = {
     to: email,
-    subject: "[" + HACKATHON_NAME + "] - Test Auto Confirmation Email"
+    subject: "[" + HACKATHON_NAME + "] - Confirm Your Application"
   };
 
   const locals ={
     title: "Please confirm your registration.",
-    body: "Follow this link and answer a few more questions to confirm your registration."
+    body: 'We have your application!' + 
+    'MakeOHI/O is going to be better than ever this year. To complete your application process and receive further information on ' + 
+    "1) Accessing the MakeOHI/O event platform " + 
+    "2) Building your Hardware Kit " +
+    "3) Forming a team " + 
+    "You will need: " + 
+    "1) Your discord username (don't have one? register here: https://discord.com/) " + 
+    "2) Your resume for industry internships " + 
+    "Confirm and finalize your participation right here https://reghackohio.com/login. "
   };
   sendOne('email-basic', options, locals, function (err, info) {
     if (err) {
