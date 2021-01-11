@@ -41,7 +41,7 @@ const profile = {
   graduationYear: {
     type: String,
     enum: {
-      values: '2020 2021 2022 2023 2024'.split(' '),
+      values: '2021 2022 2023 2024'.split(' '),
     }
   },
 
@@ -364,7 +364,7 @@ schema.statics.validateProfile = function (profile, cb) {
     profile.school.length > 0 &&
     profile.major.length > 0 &&
     ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].indexOf(profile.graduationMonth) > -1 &&
-    ['2020', '2021', '2022', '2023', '2024'].indexOf(profile.graduationYear) > -1 &&
+    ['2021', '2022', '2023', '2024'].indexOf(profile.graduationYear) > -1 &&
     ['Associates', 'Bachelors', 'Masters', 'Doctorate'].indexOf(profile.degree) > -1 &&
     ['M', 'F', 'O', 'N', 'B'].indexOf(profile.gender) > -1
   ));
