@@ -13,3 +13,6 @@ app/client/plugins/
 
 # Secrets
 .env
+
+# IDE
+.vscode/
