@@ -301,10 +301,6 @@ angular.module('reg')
                 name: 'Essay',
                 value: user.profile.essay
               }, {
-                name: 'Wants Swag',
-                value: user.profile.swag,
-                type: 'boolean'
-              }, {
                 name: 'Is Adult',
                 value: user.profile.adult,
                 type: 'boolean'
@@ -325,6 +321,10 @@ angular.module('reg')
               },*/ {
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
+              }, {
+                name: 'Cannot Pickup Materials',
+                value: user.confirmation.cannotPickupMaterials,
+                type: 'boolean'
               },/*{
                 name: 'Github',
                 value: user.confirmation.github

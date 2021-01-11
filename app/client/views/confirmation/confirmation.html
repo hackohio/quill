@@ -80,6 +80,25 @@
           </div>
 
           <div class="field">
+            <label>Do you live more than 20 miles from the OSU campus and are unable to
+              pick up materials?</label>
+            <p>
+              MakeOHI/O will be allowing Teams to order material kits for their project
+              this year! Each team will be allowed to order one kit that includes their
+              desired supplies and tshirts and swag for each member will be included on
+              pickup. Kit ordering will take place from Feb 12th-14th and pickup will take
+              place in early March. Only one member per team will need to pickup the kit
+              for the team so be sure to know your group members shirt sizes.
+            </p>
+            <div class="ui checkbox">
+              <input type="checkbox" id="cannotPickupMaterials"
+                ng-model="user.confirmation.cannotPickupMaterials">
+              <label for="cannotPickupMaterials">I do live more than 20 miles from the OSU
+                campus and am unable to pick up materials</label>
+            </div>
+          </div>
+
+          <div class="field">
             <label>
               Are you interested in helping to plan more events like MakeOHI/O?
             </label>
@@ -163,14 +182,14 @@
               <input type="hidden" name="acl"
                 value="bucket-owner-full-control" />
               <input type="hidden" name="X-Amz-Credential"
-                value="AKIA5UVY2JRHTDSO3GN6/20210101/us-east-1/s3/aws4_request" />
+                value="AKIA5UVY2JRHTDSO3GN6/20210111/us-east-1/s3/aws4_request" />
               <input type="hidden" name="X-Amz-Algorithm"
                 value="AWS4-HMAC-SHA256" />
-              <input type="hidden" name="X-Amz-Date" value="20210101T000000Z" />
+              <input type="hidden" name="X-Amz-Date" value="20210111T000000Z" />
               <input type="hidden" name="policy"
-                value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDUtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJxdWlsbC1kZXYifSwgCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgMTA0ODU3Nl0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAidXBsb2Fkcy8iXSwKCiAgICB7IngtYW16LWNyZWRlbnRpYWwiOiAiQUtJQTVVVlkySlJIVERTTzNHTjYvMjAyMTAxMDEvdXMtZWFzdC0xL3MzL2F3czRfcmVxdWVzdCJ9LAogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LAogICAgeyJ4LWFtei1kYXRlIjogIjIwMjEwMTAxVDAwMDAwMFoiIH0KICBdCn0=">
+                value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDUtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJtYWtlLW9oaW8tMjAyMSJ9LCAKICAgIFsiY29udGVudC1sZW5ndGgtcmFuZ2UiLCAwLCAxMDQ4NTc2XSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAoKICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICIyMDIxMDExMS91cy1lYXN0LTEvczMvYXdzNF9yZXF1ZXN0In0sCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sCiAgICB7IngtYW16LWRhdGUiOiAiMjAyMTAxMTFUMDAwMDAwWiIgfQogIF0KfQ==">
               <input type="hidden" name="X-Amz-Signature"
-                value="9c1336991e219b1f43255407e3a2a8070dad195f8a8f8a31a1aa8e7642cc0b0a">
+                value="caf3ba91bf69011e4d01b1a820fc859d5bbd111a6aa49931016383835f698342">
               <input id="resume_file" name="file" type="file" accept=".pdf" />
             </form>
           </div>
@@ -205,7 +224,7 @@
             <p>
               For legal reasons, our university asks that you read and accept
               the terms of our liability waiver. Again, as we mentioned in the
-              original lottery application - you <strong> must </strong> be 18
+              original application - you <strong> must </strong> be 18
               years or older or an OSU undergraduate by the day of the event.
               <!-- or
               <strong> we will refuse you admission at the door. We will be

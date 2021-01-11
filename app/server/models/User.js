@@ -72,12 +72,6 @@ const profile = {
     }
   },
 
-  swag: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-
 };
 
 // Only after confirmed
@@ -105,6 +99,11 @@ const confirmation = {
   resume: {
     type: Boolean,
     required: true,
+    default: false,
+  },
+  cannotPickupMaterials: {
+    type: Boolean,
+    required: false,
     default: false,
   },
   interestedInEmployment: {
