@@ -16,9 +16,6 @@
     <script
       src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
-    <!-- Angular app -->
-    <script src="./build/app.js"></script>
-
     <!-- Custom styling -->
     <link rel="stylesheet" href="./stylesheets/normalize.css">
     <link rel="stylesheet" href="./build/site.css">
@@ -73,7 +70,9 @@
   </head>
 
   <body>
-    <div class="container" id="root-view" ui-view></div>
+    <div id="app"></div>
+    <!-- React app -->
+    <script src="./build/bundle.js"></script>
   </body>
 
 </html>

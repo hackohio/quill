@@ -4,9 +4,11 @@
   "version": "0.0.1",
   "private": "true",
   "dependencies": {
+    "@babel/core": "^7.12.10",
     "angular": "^1.7.5",
     "angular-ui-router": "^1.0.20",
     "async": "^2.6.1",
+    "babel-loader": "^8.2.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "browserify": "^16.2.3",
@@ -27,6 +29,8 @@
     "morgan": "^1.9.1",
     "nodemailer": "^4.7.0",
     "nodemailer-smtp-transport": "^2.7.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "request": "^2.88.0",
     "showdown": "^1.9.0",
     "sweetalert": "^2.1.2",
@@ -38,11 +42,15 @@
     "mongo": "mongod --dbpath db",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "watch": "gulp server",
-    "prod": "gulp build && node app.js",
-    "config": "cp .env.config .env"
+    "watch": "webpack --watch --mode development",
+    "prod": "webpack --mode production && node app.js",
+    "config": "cp .env.template .env"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
@@ -51,7 +59,10 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.19.4",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
   },
   "engines": {
     "node": "10.14.1"
