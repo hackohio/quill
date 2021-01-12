@@ -1,9 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const title = 'My Simple Express React Webpack Babel Setup';
+import { AppContainer } from 'react-hot-loader';
+import RootContainer from './RootContainer.js'
 
-ReactDOM.render(
-  <div>{title}</div>,
-  document.getElementById('app')
-);
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('app')
+  );
+};
+
+render(RootContainer);
+
+if (module.hot) {
+  module.hot.accept('./RootContainer.js', () => {
+    const RootContainer = require('./RootContainer.js').default;
+    render(RootContainer);
+  });
+}

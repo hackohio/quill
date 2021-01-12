@@ -3,7 +3,12 @@ const webpack = require('webpack');
 
 
 module.exports = {
-    entry: path.join(__dirname, 'app/client/src/app.js'),
+    mode: 'development',
+    entry: [
+        'react-hot-loader/patch',
+        'webpack-hot-middleware/client',
+        path.join(__dirname, 'app/client/src/app.js')
+    ],
     module: {
         rules: [
             {
@@ -16,18 +21,20 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['*', '.js', '.jsx'],
+        alias: { 'react-dom': '@hot-loader/react-dom' },
     },
     output: {
         path: path.join(__dirname, 'app/client/build'),
-        publicPath: '/',
+        publicPath: '/build/',
         filename: 'bundle.js',
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
         hot: true,
         historyApiFallback: true
-    }
+    },
+    devtool: 'eval-source-map'
 };
