@@ -101,11 +101,6 @@ const confirmation = {
     required: true,
     default: false,
   },
-  cannotPickupMaterials: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
   interestedInEmployment: {
     type: Boolean,
     required: true,

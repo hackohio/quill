@@ -116,7 +116,6 @@ function calculateStats(_err, registrationTimes) {
 
 
     // wantsHardware: 0,
-    cannotPickupMaterials: 0,
 
     checkedIn: 0,
   };
@@ -164,9 +163,6 @@ function calculateStats(_err, registrationTimes) {
 
         // Count the number of people who want hardware
         // newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
-
-        // Count the number of people who can pickup material
-        newStats.cannotPickupMaterials += user.confirmation.cannotPickupMaterials ? 1 : 0;
 
         // Count shirt sizes
         if (user.confirmation.shirtSize in newStats.shirtSizes) {

@@ -321,11 +321,7 @@ angular.module('reg')
               },*/ {
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
-              }, {
-                name: 'Cannot Pickup Materials',
-                value: user.confirmation.cannotPickupMaterials,
-                type: 'boolean'
-              },/*{
+              }, /*{
                 name: 'Github',
                 value: user.confirmation.github
               },{
