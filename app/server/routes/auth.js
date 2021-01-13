@@ -1,5 +1,3 @@
-const _ = require('underscore');
-
 const SettingsController = require('../controllers/SettingsController');
 const UserController = require('../controllers/UserController');
 

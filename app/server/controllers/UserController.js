@@ -1,4 +1,3 @@
-const _ = require('underscore');
 const User = require('../models/User');
 const Settings = require('../models/Settings');
 const Mailer = require('../services/email');
