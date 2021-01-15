@@ -209,6 +209,15 @@ angular.module('reg')
                 }
               ]
             },
+            ethnicity: {
+              identifier: 'ethnicity',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a race/ethnicity.'
+                }
+              ]
+            },
             adult: {
               identifier: 'adult',
               rules: [
@@ -230,15 +239,6 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please give us a shirt size!'
-                }
-              ]
-            },
-            ethnicity: {
-              identifier: 'ethnicity',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please select a race/ethnicity.'
                 }
               ]
             },
