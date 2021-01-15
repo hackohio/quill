@@ -71,6 +71,7 @@ const profile = {
       values: 'M F O N B'.split(' ')
     }
   },
+  ethnicity: String,
 
 };
 
@@ -112,7 +113,6 @@ const confirmation = {
     default: false,
   },
   legalName: String,
-  ethnicity: String,
   // receipt: String,
   //
   // hostNeededFri: Boolean,

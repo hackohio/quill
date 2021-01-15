@@ -280,6 +280,9 @@ angular.module('reg')
                 name: 'Gender',
                 value: user.profile.gender
               }, {
+                name: 'Ethnicity',
+                value: user.profile.ethnicity
+              }, {
                 name: 'School',
                 value: user.profile.school
               }, {
@@ -349,9 +352,6 @@ angular.module('reg')
               }, {
                 name: 'Legal Name',
                 value: user.confirmation.legalName
-              }, {
-                name: 'Ethnicity',
-                value: user.confirmation.ethnicity
               }, {
                 name: 'Additional Notes',
                 value: user.confirmation.notes
