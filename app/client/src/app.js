@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import RootContainer from './RootContainer.js'
+import RootContainer from './RootContainers/RootContainer.js'
 
 const render = Component => {
   ReactDOM.render(
@@ -13,8 +13,8 @@ const render = Component => {
 render(RootContainer);
 
 if (module.hot) {
-  module.hot.accept('./RootContainer.js', () => {
-    const RootContainer = require('./RootContainer.js').default;
+  module.hot.accept('./RootContainers/RootContainer.js', () => {
+    const RootContainer = require('./RootContainers/RootContainer.js').default;
     render(RootContainer);
   });
 }

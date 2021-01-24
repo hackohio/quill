@@ -4,12 +4,18 @@ const webpack = require('webpack');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+const generateImports = importModule => ['webpack-hot-middleware/client', importModule]
+
 module.exports = {
     mode: isDevelopment ? 'development' : 'production',
-    entry: [
-        'webpack-hot-middleware/client',
-        path.join(__dirname, 'app/client/src/app.js')
-    ],
+    entry: {
+        app: {
+            import: generateImports(path.join(__dirname, 'app/client/src/app.js'))
+        },
+        login: {
+            import: generateImports(path.join(__dirname, 'app/client/src/login.js'))
+        },
+    },
     module: {
         rules: [
             {
@@ -33,7 +39,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'app/client/build'),
         publicPath: '/build/',
-        filename: 'bundle.js',
+        filename: '[name].js',
     },
     plugins: [
         isDevelopment && new webpack.HotModuleReplacementPlugin(),
@@ -43,5 +49,5 @@ module.exports = {
         hot: true,
         historyApiFallback: true
     },
-    devtool: 'eval-source-map'
+    devtool: 'source-map'
 };

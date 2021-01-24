@@ -7,9 +7,9 @@ module.exports = function (app) {
     res.sendfile('./app/client/index.html');
   });
 
-  // Wildcard all other GET requests to the angular app
+  // Login
   app.get('*', function (req, res) {
-    res.sendfile('./app/client/index.html');
+    res.sendfile('./app/client/login.html');
   });
 
 };
