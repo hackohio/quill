@@ -41,7 +41,7 @@ const controller = {};
 controller.transporter = transporter;
 
 function sendOne(templateName, options, data, callback) {
-  if (NODE_ENV === "dev") {
+  if (NODE_ENV === "development") {
     console.log(templateName);
     console.log(JSON.stringify(data, "", 2));
   }

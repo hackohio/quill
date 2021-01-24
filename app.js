@@ -43,7 +43,7 @@ const setupApp = () => {
 
   app.use('/assets/', express.static(__dirname + '/app/client/assets'));
 
-  if (process.env.NODE_ENV === 'dev') {
+  if (process.env.NODE_ENV === 'development') {
     const compiler = webpack(webpackConfig);
     app.use(webpackDevMiddleware(compiler, {
       publicPath: '/build/'

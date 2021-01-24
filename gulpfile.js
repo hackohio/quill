@@ -29,7 +29,7 @@ gulp.task('default', function () {
 gulp.task('js', function () {
   const b = browserify({
     entries: 'app/client/src/app.js',
-    debug: environment === "dev",
+    debug: environment === "development",
     transform: [browserifyNgAnnotate]
   });
 
