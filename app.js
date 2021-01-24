@@ -9,12 +9,6 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 
-// Webpack
-const webpack = require('webpack');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackConfig = require('./webpack.config.js')
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -44,6 +38,11 @@ const setupApp = () => {
   app.use('/assets/', express.static(__dirname + '/app/client/assets'));
 
   if (process.env.NODE_ENV === 'development') {
+    // Webpack
+    const webpack = require('webpack');
+    const webpackConfig = require('./webpack.config.js');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
+    const webpackDevMiddleware = require('webpack-dev-middleware');
     const compiler = webpack(webpackConfig);
     app.use(webpackDevMiddleware(compiler, {
       publicPath: '/build/'

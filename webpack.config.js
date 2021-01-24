@@ -1,21 +1,27 @@
 const path = require("path");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpack = require('webpack');
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-    mode: 'development',
+    mode: isDevelopment ? 'development' : 'production',
     entry: [
-        'react-hot-loader/patch',
         'webpack-hot-middleware/client',
         path.join(__dirname, 'app/client/src/app.js')
     ],
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.([jt]sx?)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: "babel-loader",
+                    options: {
+                        plugins: [
+                            isDevelopment && require.resolve('react-refresh/babel'),
+                        ].filter(Boolean),
+                    },
                 }
             }
         ]
@@ -30,8 +36,9 @@ module.exports = {
         filename: 'bundle.js',
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-    ],
+        isDevelopment && new webpack.HotModuleReplacementPlugin(),
+        isDevelopment && new ReactRefreshWebpackPlugin(),
+    ].filter(Boolean),
     devServer: {
         hot: true,
         historyApiFallback: true
