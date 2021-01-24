@@ -6,9 +6,12 @@ const express = require('express');
 // Middleware!
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
+const session = require('express-session')
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+const isDevelopmentMode = process.env.NODE_ENV == 'development'
 
 const setupDB = () => {
   const mongoose = require('mongoose');
@@ -28,10 +31,13 @@ const setupApp = () => {
 
   app.use(express.urlencoded());
   app.use(express.json());
+  
+  // Use the session middleware
+  app.use(session({ secret: process.env.SESSION_SECRET, cookie: { httpOnly: true, maxAge: 60000, sameSite: 'Lax', secure: !isDevelopmentMode, } }))
 
   app.use('/assets/', express.static(__dirname + '/app/client/assets'));
 
-  if (process.env.NODE_ENV === 'development') {
+  if (isDevelopmentMode) {
     // Webpack
     const webpack = require('webpack');
     const webpackConfig = require('./webpack.config.js');
@@ -43,6 +49,9 @@ const setupApp = () => {
     }));
     app.use(webpackHotMiddleware(compiler));
   } else {
+    // Production Settings
+    app.set('trust proxy', 1); // trust first proxy
+    // Use prebuilt webpack bundles
     app.use('/build/', express.static(__dirname + '/app/client/build'));
   }
 
