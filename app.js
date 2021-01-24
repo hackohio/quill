@@ -4,8 +4,6 @@ require('dotenv').load({ silent: true });
 const express = require('express');
 
 // Middleware!
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 
@@ -28,12 +26,8 @@ const setupDB = () => {
 const setupApp = () => {
   app.use(morgan('dev'));
 
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
-  app.use(bodyParser.json());
-
-  app.use(methodOverride());
+  app.use(express.urlencoded());
+  app.use(express.json());
 
   app.use('/assets/', express.static(__dirname + '/app/client/assets'));
 
