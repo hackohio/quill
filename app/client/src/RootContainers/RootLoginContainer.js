@@ -24,7 +24,7 @@ const fields =
             <div className="field">
                 <lable>Email </lable>
                 <div className="ui mini icon input">
-                    <input type="text" placeholder="School Email" id="email-input"></input>
+                    <input type="text" placeholder="School Email" id="email"></input>
                 </div> 
             </div>
         </div>
@@ -32,7 +32,7 @@ const fields =
             <div className="field">
             <lable>Password </lable>
                 <div className="ui mini icon input">
-                    <input type="password" placeholder="Password" id="user-password"></input>
+                    <input type="password" placeholder="Password" id="password"></input>
                 </div> 
             </div>
         </div>
