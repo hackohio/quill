@@ -4,12 +4,11 @@ module.exports = function (app) {
 
   // Application ------------------------------------------
   app.get('/', function (req, res) {
-    res.sendfile('./app/client/index.html');
-  });
-
-  // Login
-  app.get('*', function (req, res) {
-    res.sendfile('./app/client/login.html');
+    if (req.session.isAuthorized) {
+      res.sendfile('./app/client/index.html');
+    } else {
+      res.sendfile('./app/client/login.html');
+    }
   });
 
 };
