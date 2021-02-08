@@ -1,67 +1,41 @@
 import React from 'react';
+import { Form, Grid, Segment, Button, Divider, Image, Header, Icon} from 'semantic-ui-react';
 
-const title = "Login";
 
-const loginButtons=
-    <div className="ui container">
-        <div className ="ui divider">
-            <br/>
-            <div class="ui container">
-                <div className="ui buttons">
-                    <button className="ui red button">Login</button>
-                    <div className="or"></div>
-                    <button className="ui blue button">Register</button>
-                </div>
-                <a href=""> Forgot Password?</a>
-            </div>
-        </div>
+const gridLayout = () => (
+    <div>
+        <Grid centered>
+            <Grid.Column style={{maxWidth:375,marginTop:275}}>
+                <Segment>
+                <Image src="assets/images/logo-color.svg" size="small" centered></Image>    
+                <Divider/>
+                    <Form>
+                        <Form.Field>
+                            <Form.Input placeholder ="School Email" label ="Email" name="email"></Form.Input>
+                        </Form.Field>
+                        <Form.Field>
+                            <Form.Input placeholder="Password" label="Password" name ="password"></Form.Input>
+                        </Form.Field>
+                        <Form.Group inline>       
+                            <Button fluid circular color="red" animated>
+                            <Button.Content visible>Login</Button.Content>
+                            <Button.Content hidden>
+                                <Icon name ="arrow right"/>
+                            </Button.Content>
+                            </Button>
+                            <Button fluid circular color="blue" animated>
+                                <Button.Content visible>Register</Button.Content>
+                                <Button.Content hidden>
+                                    <Icon name ="arrow right"/>
+                                </Button.Content>
+                            </Button>
+                        </Form.Group>
+                    </Form>
+                    <Divider/>
+                        <Header as="h4" textAlign="center"><a href="/">Forgot Password?</a></Header>
+                </Segment>
+            </Grid.Column>
+        </Grid>
     </div>
-;
-
-const fields = 
-    <div className ="ui stackable grid">
-        <div className="fields">
-            <div className="field">
-                <lable>Email </lable>
-                <div className="ui mini icon input">
-                    <input type="text" placeholder="School Email" id="email"></input>
-                </div> 
-            </div>
-        </div>
-        <div className="fields">
-            <div className="field">
-            <lable>Password </lable>
-                <div className="ui mini icon input">
-                    <input type="password" placeholder="Password" id="password"></input>
-                </div> 
-            </div>
-        </div>
-
-    </div>
-;
-
-const loginModal =
-    <form className="ui form">
-        <div className="ui container">
-        <img className="ui centered small image" src="assets/images/logo-color.svg"/>
-            <div className="ui container">
-                <div className="ui divider"></div>
-                <br/>
-                {fields}
-            </div>
-        </div>
-        {loginButtons}
-    </form>
-;
-
-
-
-export default () => { 
-    return (
-        <div className = "ui main container">
-            <div className = "ui raised very padded text container segment">
-                {loginModal}
-            </div>
-        </div>
-    );   
-};
+);
+export default gridLayout;
