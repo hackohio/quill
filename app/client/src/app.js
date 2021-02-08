@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 
 import RootContainer from './RootContainers/RootContainer.js'
 
-const render = Component => {
+const render = (Component) => {
   ReactDOM.render(
-    <Component />,
+    <Component/>,
     document.getElementById('app')
   );
 };
