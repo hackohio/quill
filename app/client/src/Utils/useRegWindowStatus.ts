@@ -10,6 +10,7 @@ const SETTINGS_URL = "/api/settings/";
  */
 export default function useRegWindowStatus(): boolean {
   const publicSettings = useFetch(SETTINGS_URL);
+
   if (publicSettings.status != STATUS.FETCHED) {
     return null;
   }

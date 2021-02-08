@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useEffect, useReducer, useRef } from "React";
+import { useEffect, useReducer, useRef } from "react";
 
 /**
- * =============================== ENUMS ========================================
+ * =============================== ENUMS =======================================
  */
 export enum STATUS {
   IDLE,
@@ -18,7 +18,7 @@ enum ACTION_TYPE {
 }
 
 /**
- * =============================== TYPES ========================================
+ * =============================== TYPES =======================================
  */
 
 /**
@@ -46,7 +46,7 @@ type Action = {
 const initialState: State = {
   status: STATUS.IDLE,
   error: null,
-  data: [],
+  data: null,
 };
 
 /**
@@ -57,24 +57,25 @@ const initialState: State = {
  * @param url The URL to get data from.
  */
 export default function useFetch(url: string) {
-  const cache = useRef<{ [key: string]: any }>({});
+  const cache = useRef<{ [url: string]: any }>({});
+
   const [state, dispatch] = useReducer(
     (state: State, action: Action): State => {
       switch (action.type) {
         case ACTION_TYPE.FETCHING:
           return {
-            ...initialState,
+            ...state,
             status: STATUS.FETCHING,
           };
         case ACTION_TYPE.FETCHED:
           return {
-            ...initialState,
+            ...state,
             status: STATUS.FETCHED,
             data: action.payload,
           };
         case ACTION_TYPE.FETCH_ERROR:
           return {
-            ...initialState,
+            ...state,
             status: STATUS.ERROR,
             error: action.payload,
           };
@@ -84,7 +85,7 @@ export default function useFetch(url: string) {
     },
     initialState
   );
-
+  
   useEffect(() => {
     let cancelRequest = false;
     if (!url) return;
