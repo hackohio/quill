@@ -6,6 +6,7 @@ import {
   Button,
   Divider,
   Image,
+  Icon
 } from "semantic-ui-react";
 
 const RootLoginContainer = () => {
@@ -14,7 +15,7 @@ const RootLoginContainer = () => {
   return (
     <div>
       <Grid centered>
-        <Grid.Column style={{ maxWidth: 375, marginTop: 275 }}>
+        <Grid.Column style={{ maxWidth: 375, marginTop: 200 }}>
           <Segment>
             <Image
               src="assets/images/logo-color.svg"
@@ -31,10 +32,13 @@ const RootLoginContainer = () => {
                 ></Form.Input>
               </Form.Field>
               {forgotPassword ? (
-                <Button fluid circular color="blue" onClick={() => {
+                <Button fluid circular animated color="green" onClick={() => {
                 setForgotPassword(false);}
                   }>
-                  Send Reset Email
+                      <Button.Content visible> Send Reset Email</Button.Content>
+                      <Button.Content hidden>
+                          <Icon name="mail"></Icon>
+                      </Button.Content>
                 </Button>     
               ) : (
                 <>
@@ -46,12 +50,12 @@ const RootLoginContainer = () => {
                   ></Form.Input>
                 </Form.Field>
                 <Form.Group inline>
-                  <Button fluid circular color="red">
-                    Login
-                  </Button>
-                  <Button fluid circular color="blue">
-                    Register
-                  </Button>
+                    <Button fluid circular color="red">
+                        Login
+                    </Button>
+                    <Button fluid circular color="blue">
+                        Register
+                    </Button>          
                 </Form.Group>
               </>
               )}
@@ -70,7 +74,7 @@ const RootLoginContainer = () => {
                   setForgotPassword(true);
                 }}
               >
-                Forgot Password
+                Forgot Password?
               </Button>
             </Form>
 
