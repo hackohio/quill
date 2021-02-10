@@ -10,11 +10,11 @@ import {
   Icon,
 } from "semantic-ui-react";
 import swal from "sweetalert";
-import useRegWindowStatus from "../Utils/useRegWindowStatus";
+import ForgotPasswordForm from "../Login/ForgotPasswordForm";
+import LoginForm from "../Login/LoginForm";
 
 const RootLoginContainer = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
-  const isRegOpen = useRegWindowStatus();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,7 +41,7 @@ const RootLoginContainer = () => {
     }
   };
 
-  const register = async () => {
+  const onClickRegister = async () => {
     const body = {
       email,
       password,
@@ -49,7 +49,7 @@ const RootLoginContainer = () => {
     await makeAPIRequest("auth/register", body);
   };
 
-  const login = async () => {
+  const onClickLogin = async () => {
     const body = {
       email,
       password,
@@ -68,70 +68,36 @@ const RootLoginContainer = () => {
         icon: "success",
       });
     } catch (_error) {
-      console.log("reste error");
       displayGenericErrorMessage();
     }
   };
 
   return (
-    <div>
-      <Grid centered>
-        <Grid.Column style={{ maxWidth: 375, marginTop: 200 }}>
-          <Segment>
-            <Image
-              src="assets/images/logo-color.svg"
-              size="small"
-              centered
-            ></Image>
-            <Divider />
-            <Form>
-              <Form.Field>
-                <Form.Input
-                  placeholder="School Email"
-                  label="Email"
-                  name="email"
-                  onChange={handleChange(setEmail)}
-                ></Form.Input>
-              </Form.Field>
-              {forgotPassword ? (
-                <Button
-                  fluid
-                  circular
-                  animated
-                  color="green"
-                  onClick={sendResetEmail}
-                >
-                  <Button.Content visible> Send Reset Email</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="mail"></Icon>
-                  </Button.Content>
-                </Button>
-              ) : (
-                <>
-                  <Form.Field>
-                    <Form.Input
-                      placeholder="Password"
-                      label="Password"
-                      name="password"
-                      type="password"
-                      onChange={handleChange(setPassword)}
-                    ></Form.Input>
-                  </Form.Field>
-                  <Form.Group inline>
-                    <Button fluid circular color="red" onClick={login}>
-                      Login
-                    </Button>
-                    {isRegOpen && (
-                      <Button fluid circular color="blue" onClick={register}>
-                        Register
-                      </Button>
-                    )}
-                  </Form.Group>
-                </>
-              )}
-            </Form>
-            <Divider />
-            {!forgotPassword && (
+    <Grid centered>
+      <Grid.Column style={{ maxWidth: 375, marginTop: 200 }}>
+        <Segment>
+          <Image
+            src="assets/images/logo-color.svg"
+            size="small"
+            centered
+          ></Image>
+          <Divider />
+          {forgotPassword ? (
+            <ForgotPasswordForm
+              onChangeEmail={handleChange(setEmail)}
+              onClickSendResetEmail={sendResetEmail}
+            />
+          ) : (
+            <LoginForm
+              onChangeEmail={handleChange(setEmail)}
+              onChangePassword={handleChange(setPassword)}
+              onClickLogin={onClickLogin}
+              onClickRegister={onClickRegister}
+            />
+          )}
+          {!forgotPassword && (
+            <>
+              <Divider />
               <Form>
                 <Button
                   fluid
@@ -144,11 +110,11 @@ const RootLoginContainer = () => {
                   Forgot Password?
                 </Button>
               </Form>
-            )}
-          </Segment>
-        </Grid.Column>
-      </Grid>
-    </div>
+            </>
+          )}
+        </Segment>
+      </Grid.Column>
+    </Grid>
   );
 };
 export default RootLoginContainer;

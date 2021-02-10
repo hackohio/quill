@@ -1,8 +1,8 @@
 const path = require("path");
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const webpack = require('webpack');
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const webpack = require("webpack");
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 const generateImports = importModule => [
   "webpack-hot-middleware/client",
@@ -57,7 +57,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ["*", ".ts", ".js", ".jsx"],
+    extensions: ["*", ".ts", ".tsx", ".js", ".jsx"],
     alias: { "react-dom": "@hot-loader/react-dom" },
   },
   output: {
