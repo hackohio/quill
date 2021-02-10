@@ -85,7 +85,7 @@ export default function useFetch(url: string) {
     },
     initialState
   );
-  
+
   useEffect(() => {
     let cancelRequest = false;
     if (!url) return;
@@ -97,7 +97,7 @@ export default function useFetch(url: string) {
         dispatch({ type: ACTION_TYPE.FETCHED, payload: data });
       } else {
         try {
-          const data = await axios.get(url);
+          const { data } = await axios.get(url);
           cache.current[url] = data;
           if (cancelRequest) return;
           dispatch({ type: ACTION_TYPE.FETCHED, payload: data });

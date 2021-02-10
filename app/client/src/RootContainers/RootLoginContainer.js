@@ -6,11 +6,13 @@ import {
   Button,
   Divider,
   Image,
-  Icon
+  Icon,
 } from "semantic-ui-react";
+import useRegWindowStatus from "../Utils/useRegWindowStatus";
 
 const RootLoginContainer = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
+  const isRegOpen = useRegWindowStatus();
 
   return (
     <div>
@@ -32,54 +34,59 @@ const RootLoginContainer = () => {
                 ></Form.Input>
               </Form.Field>
               {forgotPassword ? (
-                <Button fluid circular animated color="green" onClick={() => {
-                setForgotPassword(false);}
-                  }>
-                      <Button.Content visible> Send Reset Email</Button.Content>
-                      <Button.Content hidden>
-                          <Icon name="mail"></Icon>
-                      </Button.Content>
-                </Button>     
+                <Button
+                  fluid
+                  circular
+                  animated
+                  color="green"
+                  onClick={() => {
+                    setForgotPassword(false);
+                  }}
+                >
+                  <Button.Content visible> Send Reset Email</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="mail"></Icon>
+                  </Button.Content>
+                </Button>
               ) : (
                 <>
-                <Form.Field>
-                  <Form.Input
-                    placeholder="Password"
-                    label="Password"
-                    name="password"
-                  ></Form.Input>
-                </Form.Field>
-                <Form.Group inline>
+                  <Form.Field>
+                    <Form.Input
+                      placeholder="Password"
+                      label="Password"
+                      name="password"
+                    ></Form.Input>
+                  </Form.Field>
+                  <Form.Group inline>
                     <Button fluid circular color="red">
-                        Login
+                      Login
                     </Button>
-                    <Button fluid circular color="blue">
+                    {isRegOpen && (
+                      <Button fluid circular color="blue">
                         Register
-                    </Button>          
-                </Form.Group>
-              </>
+                      </Button>
+                    )}
+                  </Form.Group>
+                </>
               )}
             </Form>
             <Divider />
             {forgotPassword ? (
-                <>
-                </>
-            ):(
-            <Form>
-              <Button
-                fluid
-                circular
-                color="grey"
-                onClick={() => {
-                  setForgotPassword(true);
-                }}
-              >
-                Forgot Password?
-              </Button>
-            </Form>
-
+              <></>
+            ) : (
+              <Form>
+                <Button
+                  fluid
+                  circular
+                  color="grey"
+                  onClick={() => {
+                    setForgotPassword(true);
+                  }}
+                >
+                  Forgot Password?
+                </Button>
+              </Form>
             )}
-            
           </Segment>
         </Grid.Column>
       </Grid>
