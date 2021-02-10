@@ -42,6 +42,7 @@ module.exports = function (router) {
           if (err || !user) {
             return res.status(400).send(err);
           }
+          req.session.isAuthorized = true;
           return res.json({
             token: token,
             user: user,

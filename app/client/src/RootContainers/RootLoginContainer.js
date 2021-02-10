@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useCallback, useState } from "react";
 import {
   Form,
   Grid,
@@ -13,6 +14,24 @@ import useRegWindowStatus from "../Utils/useRegWindowStatus";
 const RootLoginContainer = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
   const isRegOpen = useRegWindowStatus();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = setterFunction => {
+    return event => {
+      setterFunction(event.target.value);
+    };
+  };
+
+  const login = () => {
+    const body = {
+      email,
+      password,
+    };
+    axios.post("/auth/login", body).then(_res => {
+      location.reload();
+    });
+  };
 
   return (
     <div>
@@ -31,6 +50,7 @@ const RootLoginContainer = () => {
                   placeholder="School Email"
                   label="Email"
                   name="email"
+                  onChange={handleChange(setEmail)}
                 ></Form.Input>
               </Form.Field>
               {forgotPassword ? (
@@ -55,10 +75,12 @@ const RootLoginContainer = () => {
                       placeholder="Password"
                       label="Password"
                       name="password"
+                      type="password"
+                      onChange={handleChange(setPassword)}
                     ></Form.Input>
                   </Form.Field>
                   <Form.Group inline>
-                    <Button fluid circular color="red">
+                    <Button fluid circular color="red" onClick={login}>
                       Login
                     </Button>
                     {isRegOpen && (
@@ -71,9 +93,7 @@ const RootLoginContainer = () => {
               )}
             </Form>
             <Divider />
-            {forgotPassword ? (
-              <></>
-            ) : (
+            {!forgotPassword && (
               <Form>
                 <Button
                   fluid
