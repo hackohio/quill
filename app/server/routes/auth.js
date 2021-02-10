@@ -1,8 +1,7 @@
-const SettingsController = require('../controllers/SettingsController');
-const UserController = require('../controllers/UserController');
+const SettingsController = require("../controllers/SettingsController");
+const UserController = require("../controllers/UserController");
 
 module.exports = function (router) {
-
   // ---------------------------------------------
   // AUTHENTICATION
   // ---------------------------------------------
@@ -20,37 +19,37 @@ module.exports = function (router) {
    * }
    *
    */
-  router.post('/login',
-    function (req, res, next) {
-      const email = req.body.email;
-      const password = req.body.password;
-      const token = req.body.token;
+  router.post("/login", function (req, res, next) {
+    const email = req.body.email;
+    const password = req.body.password;
+    const token = req.body.token;
 
-      if (token) {
-        UserController.loginWithToken(token,
-          function (err, token, user) {
-            if (err || !user) {
-              return res.status(400).send(err);
-            }
-            return res.json({
-              token: token,
-              user: user
-            });
+    if (token) {
+      UserController.loginWithToken(token, function (err, token, user) {
+        if (err || !user) {
+          return res.status(400).send(err);
+        }
+        return res.json({
+          token: token,
+          user: user,
+        });
+      });
+    } else {
+      UserController.loginWithPassword(
+        email,
+        password,
+        function (err, token, user) {
+          if (err || !user) {
+            return res.status(400).send(err);
+          }
+          return res.json({
+            token: token,
+            user: user,
           });
-      } else {
-        UserController.loginWithPassword(email, password,
-          function (err, token, user) {
-            if (err || !user) {
-              return res.status(400).send(err);
-            }
-            return res.json({
-              token: token,
-              user: user
-            });
-          });
-      }
-
-    });
+        }
+      );
+    }
+  });
 
   /**
    * Register a user with a username (email) and password.
@@ -62,37 +61,34 @@ module.exports = function (router) {
    * }
    *
    */
-  router.post('/register',
-    function (req, res, next) {
-      // Register with an email and password
-      const email = req.body.email;
-      const password = req.body.password;
+  router.post("/register", function (req, res, next) {
+    // Register with an email and password
+    const email = req.body.email;
+    const password = req.body.password;
 
-      UserController.createUser(email, password,
-        function (err, user) {
-          if (err) {
-            return res.status(400).send(err);
-          }
-          return res.json(user);
-        });
-    });
-
-  router.post('/reset',
-    function (req, res, next) {
-      const email = req.body.email;
-      if (!email) {
-        return res.status(400).send();
+    UserController.createUser(email, password, function (err, user) {
+      if (err) {
+        return res.status(400).send(err);
       }
+      return res.json(user);
+    });
+  });
 
-      UserController.sendPasswordResetEmail(email, function (err) {
-        if (err) {
-          return res.status(400).send(err);
-        }
-        return res.json({
-          message: 'Email Sent'
-        });
+  router.post("/reset", function (req, res, next) {
+    const email = req.body.email;
+    if (!email) {
+      return res.status(400).send();
+    }
+
+    UserController.sendPasswordResetEmail(email, function (err) {
+      if (err) {
+        return res.status(400).send(err);
+      }
+      return res.json({
+        message: "Email Sent",
       });
     });
+  });
 
   /**
    * Reset user's password.
@@ -101,7 +97,7 @@ module.exports = function (router) {
    *   password: STRING,
    * }
    */
-  router.post('/reset/password', function (req, res) {
+  router.post("/reset/password", function (req, res) {
     const pass = req.body.password;
     const token = req.body.token;
 
@@ -120,36 +116,31 @@ module.exports = function (router) {
    *   id: user id
    * }
    */
-  router.post('/verify/resend',
-    function (req, res, next) {
-      const id = req.body.id;
-      if (id) {
-        UserController.sendVerificationEmailById(id, function (err, user) {
-          if (err || !user) {
-            return res.status(400).send();
-          }
-          return res.status(200).send();
-        });
-      } else {
-        return res.status(400).send();
-      }
-    });
+  router.post("/verify/resend", function (req, res, next) {
+    const id = req.body.id;
+    if (id) {
+      UserController.sendVerificationEmailById(id, function (err, user) {
+        if (err || !user) {
+          return res.status(400).send();
+        }
+        return res.status(200).send();
+      });
+    } else {
+      return res.status(400).send();
+    }
+  });
 
   /**
    * Verify a user with a given token.
    */
-  router.get('/verify/:token',
-    function (req, res, next) {
-      const token = req.params.token;
-      UserController.verifyByToken(token, function (err, user) {
+  router.get("/verify/:token", function (req, res, next) {
+    const token = req.params.token;
+    UserController.verifyByToken(token, function (err, user) {
+      if (err || !user) {
+        return res.status(400).send(err);
+      }
 
-        if (err || !user) {
-          return res.status(400).send(err);
-        }
-
-        return res.json(user);
-
-      });
+      return res.json(user);
     });
-
+  });
 };
