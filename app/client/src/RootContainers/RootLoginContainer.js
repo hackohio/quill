@@ -9,6 +9,7 @@ import {
   Image,
   Icon,
 } from "semantic-ui-react";
+import swal from "sweetalert";
 import useRegWindowStatus from "../Utils/useRegWindowStatus";
 
 const RootLoginContainer = () => {
@@ -23,19 +24,21 @@ const RootLoginContainer = () => {
     };
   };
 
-  const login = async () => {
-    const body = {
-      email,
-      password,
-    };
-    await axios.post("/auth/login", body);
-    location.reload();
+  const displayGenericErrorMessage = () => {
+    swal({
+      title: "Uh Oh!",
+      text: "Looks like something went wrong. Please try again later",
+      icon: "error",
+    });
   };
 
-  const sendResetEmail = async () => {
-    const body = { email };
-    await axios.post("auth/reset", body);
-    console.log("Reset Email Sent");
+  const makeAPIRequest = async (url, body) => {
+    try {
+      await axios.post(url, body);
+      location.reload();
+    } catch (_error) {
+      displayGenericErrorMessage();
+    }
   };
 
   const register = async () => {
@@ -43,8 +46,31 @@ const RootLoginContainer = () => {
       email,
       password,
     };
-    await axios.post("auth/register", body);
-    location.reload();
+    await makeAPIRequest("auth/register", body);
+  };
+
+  const login = async () => {
+    const body = {
+      email,
+      password,
+    };
+    await makeAPIRequest("auth/login", body);
+  };
+
+  const sendResetEmail = async () => {
+    const body = { email };
+    try {
+      await axios.post("auth/reset", body);
+      swal({
+        title: "Don't sweat!",
+        text:
+          "An email should be sent to you shortly.\nIf you can't find your email, please check your spam folder.",
+        icon: "success",
+      });
+    } catch (_error) {
+      console.log("reste error");
+      displayGenericErrorMessage();
+    }
   };
 
   return (
