@@ -17,8 +17,8 @@ const RootLoginContainer = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleChange = setterFunction => {
-    return event => {
+  const handleChange = (setterFunction) => {
+    return (event) => {
       setterFunction(event.target.value);
     };
   };
@@ -28,7 +28,7 @@ const RootLoginContainer = () => {
       email,
       password,
     };
-    axios.post("/auth/login", body).then(_res => {
+    axios.post("/auth/login", body).then((_res) => {
       location.reload();
     });
   };
@@ -75,17 +75,6 @@ const RootLoginContainer = () => {
                       placeholder="Password"
                       label="Password"
                       name="password"
-<<<<<<< HEAD
-                    ></Form.Input>
-                  </Form.Field>
-                  <Form.Group inline>
-                    <Button fluid circular color="red">
-                      Login
-                    </Button>
-                    <Button fluid circular color="blue">
-                      Register
-                    </Button>
-=======
                       type="password"
                       onChange={handleChange(setPassword)}
                     ></Form.Input>
@@ -99,19 +88,12 @@ const RootLoginContainer = () => {
                         Register
                       </Button>
                     )}
->>>>>>> 2f4cd62d2db06235f847d4e8f34766ff6f2efc15
                   </Form.Group>
                 </>
               )}
             </Form>
             <Divider />
-<<<<<<< HEAD
-            {forgotPassword ? (
-              <></>
-            ) : (
-=======
             {!forgotPassword && (
->>>>>>> 2f4cd62d2db06235f847d4e8f34766ff6f2efc15
               <Form>
                 <Button
                   fluid
