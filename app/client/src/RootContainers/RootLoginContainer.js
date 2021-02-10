@@ -23,14 +23,28 @@ const RootLoginContainer = () => {
     };
   };
 
-  const login = () => {
+  const login = async () => {
     const body = {
       email,
       password,
     };
-    axios.post("/auth/login", body).then(_res => {
-      location.reload();
-    });
+    await axios.post("/auth/login", body);
+    location.reload();
+  };
+
+  const sendResetEmail = async () => {
+    const body = { email };
+    await axios.post("auth/reset", body);
+    console.log("Reset Email Sent");
+  };
+
+  const register = async () => {
+    const body = {
+      email,
+      password,
+    };
+    await axios.post("auth/register", body);
+    location.reload();
   };
 
   return (
@@ -59,9 +73,7 @@ const RootLoginContainer = () => {
                   circular
                   animated
                   color="green"
-                  onClick={() => {
-                    setForgotPassword(false);
-                  }}
+                  onClick={sendResetEmail}
                 >
                   <Button.Content visible> Send Reset Email</Button.Content>
                   <Button.Content hidden>
@@ -84,7 +96,7 @@ const RootLoginContainer = () => {
                       Login
                     </Button>
                     {isRegOpen && (
-                      <Button fluid circular color="blue">
+                      <Button fluid circular color="blue" onClick={register}>
                         Register
                       </Button>
                     )}
