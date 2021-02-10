@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useCallback, useState } from "react";
 import {
   Form,
   Grid,
@@ -6,11 +7,31 @@ import {
   Button,
   Divider,
   Image,
-  Icon
+  Icon,
 } from "semantic-ui-react";
+import useRegWindowStatus from "../Utils/useRegWindowStatus";
 
 const RootLoginContainer = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
+  const isRegOpen = useRegWindowStatus();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = setterFunction => {
+    return event => {
+      setterFunction(event.target.value);
+    };
+  };
+
+  const login = () => {
+    const body = {
+      email,
+      password,
+    };
+    axios.post("/auth/login", body).then(_res => {
+      location.reload();
+    });
+  };
 
   return (
     <div>
@@ -29,6 +50,7 @@ const RootLoginContainer = () => {
                   placeholder="School Email"
                   label="Email"
                   name="email"
+                  onChange={handleChange(setEmail)}
                 ></Form.Input>
               </Form.Field>
               {forgotPassword ? (
@@ -53,6 +75,7 @@ const RootLoginContainer = () => {
                       placeholder="Password"
                       label="Password"
                       name="password"
+<<<<<<< HEAD
                     ></Form.Input>
                   </Form.Field>
                   <Form.Group inline>
@@ -62,14 +85,33 @@ const RootLoginContainer = () => {
                     <Button fluid circular color="blue">
                       Register
                     </Button>
+=======
+                      type="password"
+                      onChange={handleChange(setPassword)}
+                    ></Form.Input>
+                  </Form.Field>
+                  <Form.Group inline>
+                    <Button fluid circular color="red" onClick={login}>
+                      Login
+                    </Button>
+                    {isRegOpen && (
+                      <Button fluid circular color="blue">
+                        Register
+                      </Button>
+                    )}
+>>>>>>> 2f4cd62d2db06235f847d4e8f34766ff6f2efc15
                   </Form.Group>
                 </>
               )}
             </Form>
             <Divider />
+<<<<<<< HEAD
             {forgotPassword ? (
               <></>
             ) : (
+=======
+            {!forgotPassword && (
+>>>>>>> 2f4cd62d2db06235f847d4e8f34766ff6f2efc15
               <Form>
                 <Button
                   fluid
