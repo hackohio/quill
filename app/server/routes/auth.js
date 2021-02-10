@@ -71,6 +71,7 @@ module.exports = function (router) {
       if (err) {
         return res.status(400).send(err);
       }
+      req.session.isAuthorized = true;
       return res.json(user);
     });
   });

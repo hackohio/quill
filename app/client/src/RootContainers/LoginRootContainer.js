@@ -9,6 +9,7 @@ import {
   Image,
   Icon,
 } from "semantic-ui-react";
+import swal from "sweetalert";
 import useRegWindowStatus from "../Utils/useRegWindowStatus";
 
 const RootLoginContainer = () => {
@@ -23,14 +24,53 @@ const RootLoginContainer = () => {
     };
   };
 
-  const login = () => {
+  const displayGenericErrorMessage = () => {
+    swal({
+      title: "Uh Oh!",
+      text: "Looks like something went wrong. Please try again later",
+      icon: "error",
+    });
+  };
+
+  const makeAPIRequest = async (url, body) => {
+    try {
+      await axios.post(url, body);
+      location.reload();
+    } catch (_error) {
+      displayGenericErrorMessage();
+    }
+  };
+
+  const register = async () => {
     const body = {
       email,
       password,
     };
-    axios.post("/auth/login", body).then((_res) => {
-      location.reload();
-    });
+    await makeAPIRequest("auth/register", body);
+  };
+
+  const login = async () => {
+    const body = {
+      email,
+      password,
+    };
+    await makeAPIRequest("auth/login", body);
+  };
+
+  const sendResetEmail = async () => {
+    const body = { email };
+    try {
+      await axios.post("auth/reset", body);
+      swal({
+        title: "Don't sweat!",
+        text:
+          "An email should be sent to you shortly.\nIf you can't find your email, please check your spam folder.",
+        icon: "success",
+      });
+    } catch (_error) {
+      console.log("reste error");
+      displayGenericErrorMessage();
+    }
   };
 
   return (
@@ -59,9 +99,7 @@ const RootLoginContainer = () => {
                   circular
                   animated
                   color="green"
-                  onClick={() => {
-                    setForgotPassword(false);
-                  }}
+                  onClick={sendResetEmail}
                 >
                   <Button.Content visible> Send Reset Email</Button.Content>
                   <Button.Content hidden>
@@ -84,7 +122,7 @@ const RootLoginContainer = () => {
                       Login
                     </Button>
                     {isRegOpen && (
-                      <Button fluid circular color="blue">
+                      <Button fluid circular color="blue" onClick={register}>
                         Register
                       </Button>
                     )}
