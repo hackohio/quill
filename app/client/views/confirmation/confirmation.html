@@ -1,41 +1,44 @@
 <div class="page">
-  <div class="divided title">
-    Confirmation
-  </div>
+  <div class="divided title">Confirmation</div>
 
   <div class="ui stackable page grid">
     <div class="column">
-
       <div class="ui form">
-
         <div class="divided title">Basic Details</div>
 
         <fieldset ng-disabled="pastConfirmation">
-
           <div class="field">
             <label> What's your phone number? (required) </label>
-            <p>
-              We need this in case we need to get ahold of you!
-            </p>
-            <input type="tel" name="phone"
+            <p>We need this in case we need to get ahold of you!</p>
+            <input
+              type="tel"
+              name="phone"
               ng-model="user.confirmation.phoneNumber"
-              placeholder="(123) - 555 - 1234" required>
+              placeholder="(123) - 555 - 1234"
+              required
+            />
           </div>
           <div class="field">
             <label> What's your discord username? (required) </label>
             <p>
-              Make 2021 will be hosted via Discord. The username you provide here is what
-              will be whitelisted for our discord server. If you change your username from
-              what you provide here, you may lose access to the event.
+              Make 2021 will be hosted via Discord. The username you provide
+              here is what will be whitelisted for our discord server. If you
+              change your username from what you provide here, you may lose
+              access to the event.
             </p>
             <p>
-              To find your Discord username, hover over your name in Discord in the bottom left and click on it. Your username
-              should be copied to your clipboard now.
+              To find your Discord username, hover over your name in Discord in
+              the bottom left and click on it. Your username should be copied to
+              your clipboard now.
             </p>
             <img src="/assets/images/DiscordInstruction.png" />
-            <input type="text" name="discordUsername"
-              ng-model="user.confirmation.discordUsername" placeholder="Username#1234"
-              required>
+            <input
+              type="text"
+              name="discordUsername"
+              ng-model="user.confirmation.discordUsername"
+              placeholder="Username#1234"
+              required
+            />
           </div>
 
           <!--
@@ -63,11 +66,12 @@
         -->
           <div class="field">
             <label> Shirt Size (required) </label>
-            <p>
-              Let's get you some swag!
-            </p>
-            <select name="shirt" ng-model="user.confirmation.shirtSize"
-              required>
+            <p>Let's get you some swag!</p>
+            <select
+              name="shirt"
+              ng-model="user.confirmation.shirtSize"
+              required
+            >
               <option value="" disabled hidden>Shirt Size</option>
               <option value="XS">Unisex X-Small</option>
               <option value="S">Unisex Small</option>
@@ -88,14 +92,16 @@
               Are you interested in helping to plan more events like MakeOHI/O?
             </label>
             <div class="ui checkbox">
-              <input type="checkbox" id="intrestedInJoiningOrg"
-                ng-model="user.confirmation.intrestedInJoiningOrg">
+              <input
+                type="checkbox"
+                id="intrestedInJoiningOrg"
+                ng-model="user.confirmation.intrestedInJoiningOrg"
+              />
               <label for="intrestedInJoiningOrg">
                 I am interested in helping to plan more events like MakeOHI/O
               </label>
             </div>
           </div>
-
 
           <!-- 
             <div class="field">
@@ -122,10 +128,10 @@
           </div> 
         -->
 
-          <br>
-          <br>
+          <br />
+          <br />
 
-          <div class="divided title"> Skills & Accomplishments </div>
+          <div class="divided title">Skills & Accomplishments</div>
 
           <div class="field">
             <label ng-if="user.confirmation.resume" for="resume_file">
@@ -133,23 +139,41 @@
               resume, upload your new version below!
             </label>
             <label ng-if="!user.confirmation.resume" for="resume_file">
-              Our sponsors ask us for the resumes of the event participants! Please
-              upload your resume as a PDF below.
+              Our sponsors ask us for the resumes of the event participants!
+              Please upload your resume as a PDF below.
             </label>
             <form id="resume" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="key" 
-                value="uploads/{{user.profile.name}} Resume">
-              <input type="hidden" name="acl"
-                value="bucket-owner-full-control" />
-              <input type="hidden" name="X-Amz-Credential"
-                value="AKIA5UVY2JRHT3373KNI/20210207/us-east-1/s3/aws4_request" />
-              <input type="hidden" name="X-Amz-Algorithm"
-                value="AWS4-HMAC-SHA256" />
-              <input type="hidden" name="X-Amz-Date" value="20210207T000000Z" />
-              <input type="hidden" name="policy"
-                value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDUtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJtYWtlLW9oaW8tMjAyMSJ9LCAKICAgIFsiY29udGVudC1sZW5ndGgtcmFuZ2UiLCAwLCAxMDQ4NTc2XSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAoKICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBNVVWWTJKUkhUMzM3M0tOSS8yMDIxMDIwNy91cy1lYXN0LTEvczMvYXdzNF9yZXF1ZXN0In0sCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sCiAgICB7IngtYW16LWRhdGUiOiAiMjAyMTAyMDdUMDAwMDAwWiIgfQogIF0KfQ==">
-              <input type="hidden" name="X-Amz-Signature"
-                value="90d656eef8d95f996648caf501ff9e4b4838efad9cdc40ce680f4ad348dd4b3a">
+              <input
+                type="hidden"
+                name="key"
+                value="uploads/{{user.profile.name}} Resume"
+              />
+              <input
+                type="hidden"
+                name="acl"
+                value="bucket-owner-full-control"
+              />
+              <input
+                type="hidden"
+                name="X-Amz-Credential"
+                value="AKIA5UVY2JRHXC5YGRNI/20210212/us-east-1/s3/aws4_request"
+              />
+              <input
+                type="hidden"
+                name="X-Amz-Algorithm"
+                value="AWS4-HMAC-SHA256"
+              />
+              <input type="hidden" name="X-Amz-Date" value="20210212T000000Z" />
+              <input
+                type="hidden"
+                name="policy"
+                value="eyJleHBpcmF0aW9uIjogIjIwMjEtMDUtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImFjbCI6ICJidWNrZXQtb3duZXItZnVsbC1jb250cm9sIn0sCiAgICB7ImJ1Y2tldCI6ICJtYWtlLW9oaW8tMjAyMSJ9LCAKICAgIFsiY29udGVudC1sZW5ndGgtcmFuZ2UiLCAwLCAxMDQ4NTc2XSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJ1cGxvYWRzLyJdLAoKICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBNVVWWTJKUkhYQzVZR1JOSS8yMDIxMDIxMi91cy1lYXN0LTEvczMvYXdzNF9yZXF1ZXN0In0sCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sCiAgICB7IngtYW16LWRhdGUiOiAiMjAyMTAyMTJUMDAwMDAwWiIgfQogIF0KfQ=="
+              />
+              <input
+                type="hidden"
+                name="X-Amz-Signature"
+                value="505df3fd6444e1f8bf4fb80f6da3b5954818c4cfe89cd0cb39f512687983e9af"
+              />
               <input id="resume_file" name="file" type="file" accept=".pdf" />
             </form>
           </div>
@@ -159,24 +183,28 @@
               Are you still looking for summer employment opportunities?
             </label>
             <div class="ui checkbox">
-              <input type="checkbox" id="interestedInEmployment"
-                ng-model="user.confirmation.interestedInEmployment">
+              <input
+                type="checkbox"
+                id="interestedInEmployment"
+                ng-model="user.confirmation.interestedInEmployment"
+              />
               <label for="interestedInEmployment">
-                I am still looking for summer employment
-                opportunities.
+                I am still looking for summer employment opportunities.
               </label>
             </div>
           </div>
 
-          <br>
-          <br>
+          <br />
+          <br />
 
           <div class="divided title">Legal</div>
 
           <div class="field">
             <p>
-              <a target="_blank"
-                href="https://hack.osu.edu/make/2021/assets/pdf/2021_code_of_conduct+photo_release.pdf">
+              <a
+                target="_blank"
+                href="https://hack.osu.edu/make/2021/assets/pdf/2021_code_of_conduct+photo_release.pdf"
+              >
                 MakeOHI/O 2021 Code of Conduct & Liability Waiver
               </a>
             </p>
@@ -184,8 +212,8 @@
             <p>
               For legal reasons, our university asks that you read and accept
               the terms of our liability waiver. Again, as we mentioned in the
-              original application - you <strong> must </strong> be 18
-              years or older or an OSU undergraduate by the day of the event.
+              original application - you <strong> must </strong> be 18 years or
+              older or an OSU undergraduate by the day of the event.
               <!-- or
               <strong> we will refuse you admission at the door. We will be
                 checking ID. </strong> -->
@@ -195,9 +223,12 @@
               the terms of the liability waiver above, and will be either an OSU
               undergraduate or 18 years or older at the time of the event.
             </p>
-            <input type="text" name="signatureLiabilityWaiver"
+            <input
+              type="text"
+              name="signatureLiabilityWaiver"
               placeholder="Your Full Legal Name"
-              ng-model="user.confirmation.signatureLiability">
+              ng-model="user.confirmation.signatureLiability"
+            />
           </div>
 
           <div class="field">
@@ -212,20 +243,21 @@
               By writing my name below, I affirm that I have read and will abide
               by the code of conduct detailed above.
             </p>
-            <input type="text" name="signatureCodeOfConduct"
+            <input
+              type="text"
+              name="signatureCodeOfConduct"
               placeholder="Your Full Legal Name"
-              ng-model="user.confirmation.signatureCodeOfConduct">
+              ng-model="user.confirmation.signatureCodeOfConduct"
+            />
           </div>
 
-          <br>
-          <br>
+          <br />
+          <br />
 
           <div class="divided title">everything else</div>
 
           <div class="field">
-            <label>
-              Additional Notes
-            </label>
+            <label> Additional Notes </label>
             <p>
               If there's anything else you need to let us know, tell us here!
             </p>
@@ -233,12 +265,14 @@
           </div>
 
           <div class="field" ng-hide="regIsClosed">
-            <button type="submit" class="fluid ui purple button"
-              ng-click="submitForm()">
+            <button
+              type="submit"
+              class="fluid ui purple button"
+              ng-click="submitForm()"
+            >
               Submit
             </button>
           </div>
-
         </fieldset>
       </div>
     </div>
