@@ -11,7 +11,7 @@ const render = Component => {
 render(RootContainer);
 
 if (module.hot) {
-  module.hot.accept("./RootContainers/RootLoginContainer.js", () => {
+  module.hot.accept("./RootContainers/LoginRootContainer.js", () => {
     const RootContainer = require("./RootContainers/LoginRootContainer.js")
       .default;
     render(RootContainer);
