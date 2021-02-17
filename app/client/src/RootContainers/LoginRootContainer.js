@@ -1,14 +1,6 @@
 import axios from "axios";
 import React, { useCallback, useState } from "react";
-import {
-  Form,
-  Grid,
-  Segment,
-  Button,
-  Divider,
-  Image,
-  Icon,
-} from "semantic-ui-react";
+import { Form, Grid, Segment, Button, Divider, Image } from "semantic-ui-react";
 import swal from "sweetalert";
 import ForgotPasswordForm from "../Login/ForgotPasswordForm";
 import LoginForm from "../Login/LoginForm";
