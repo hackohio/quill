@@ -159,7 +159,9 @@ angular.module('reg')
             .then(_updateUserConfirmation)
             .then(_response => swal("Woo!", "You're confirmed!", "success"))
             .then(_value => $state.go("app.dashboard"))
-            .catch(_error => swal("Uh oh!", "Something went wrong.", "error"));
+            .catch(error => {
+              swal("Uh oh!", "Something went wrong.", "error");
+            });
         }
         else {
           sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
