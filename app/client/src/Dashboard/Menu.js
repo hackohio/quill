@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Menu } from "semantic-ui-react";
 
 export default class MenuExampleVerticalPointing extends Component {
-  state = { activeItem: "home" };
+  state = { activeItem: "Dashboard" };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -12,18 +12,18 @@ export default class MenuExampleVerticalPointing extends Component {
     return (
       <Menu pointing vertical>
         <Menu.Item
-          name="home"
-          active={activeItem === "home"}
+          name="Dashboard"
+          active={activeItem === "Dashboard"}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name="messages"
-          active={activeItem === "messages"}
+          name="Application"
+          active={activeItem === "Application"}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name="friends"
-          active={activeItem === "friends"}
+          name="Logout"
+          active={activeItem === "Logout"}
           onClick={this.handleItemClick}
         />
       </Menu>
