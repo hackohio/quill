@@ -13,6 +13,7 @@ export default class MenuExampleVerticalPointing extends Component {
       <Menu pointing vertical>
         <Menu.Item
           name="Dashboard"
+          style={{ height: 65 }}
           active={activeItem === "Dashboard"}
           onClick={this.handleItemClick}
         />
