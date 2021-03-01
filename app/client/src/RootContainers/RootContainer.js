@@ -10,9 +10,11 @@ import {
   Divider,
   Button,
 } from "semantic-ui-react";
+import DashMenu from "../Dashboard/Menu";
 
 const DashboardDefault = () => (
   <div>
+    <DashMenu />
     <Grid centered>
       <Grid.Column style={{ maxWidth: 700, marginTop: 175 }}>
         <Header as="h1" textAlign="center">
