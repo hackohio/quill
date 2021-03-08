@@ -9,10 +9,11 @@ import {
 } from "semantic-ui-react";
 import DashMenu from "../Dashboard/Menu";
 import DashWindow from "../Dashboard/DashWindow";
+import ApplicationForm from "../Application/Application";
 
 const DashboardDefault = () => (
   <div>
-    <DashMenu />
+    <ApplicationForm />
   </div>
 );
 

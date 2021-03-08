@@ -10,10 +10,9 @@ export default class MenuExampleVerticalPointing extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu pointing vertical>
+      <Menu>
         <Menu.Item
           name="Dashboard"
-          style={{ height: 65 }}
           active={activeItem === "Dashboard"}
           onClick={this.handleItemClick}
         />
