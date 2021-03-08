@@ -10,7 +10,7 @@ export default class MenuExampleVerticalPointing extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu>
+      <Menu vertical pointing>
         <Menu.Item
           name="Dashboard"
           active={activeItem === "Dashboard"}

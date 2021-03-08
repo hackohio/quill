@@ -37,7 +37,6 @@ const gradYears = [
   { key: "2022", text: "2022", value: "2022" },
   { key: "2023", text: "2023", value: "2023" },
   { key: "2024", text: "2024", value: "2024" },
-  { key: "2024", text: "2024", value: "2024" },
 ];
 
 const genders = [
@@ -53,13 +52,40 @@ const genders = [
 ];
 
 const race = [
-  { key: "White", text: "White", value: "White" },
   { key: "Native", text: "American Indian/Alaskan Native", value: "Native" },
+  { key: "Asian", text: "Asian", value: "Asian" },
+  {
+    key: "Black or African American",
+    text: "Black or African American",
+    value: "Black or African American",
+  },
+  { key: "Hispanic", text: "Hispanic", value: "Hispanic" },
+  { key: "White", text: "White", value: "White" },
+  {
+    key: "Native Hawaiian/Pacific Islander",
+    text: "Native Hawaiian/Pacific Islander",
+    value: "Native Hawaiian/Pacific Islander",
+  },
+  {
+    keu: "Non-Resident Alien",
+    text: "Non-Resident Alien",
+    value: "Non-Resident Alien",
+  },
+  {
+    key: "Two or more races",
+    text: "Two or more races",
+    value: "Two or more races",
+  },
+  {
+    key: "Choose not to disclose",
+    text: "Choose not to disclose",
+    value: "Choose not to disclose",
+  },
 ];
 
 const ApplicationForm = () => (
   <Grid centered>
-    <Grid.Column style={{ maxWidth: 800, marginTop: 150 }}>
+    <Grid.Column style={{ marginTop: 100 }}>
       <Container textAlign="center">
         <Header size="huge">Application</Header>
       </Container>

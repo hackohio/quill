@@ -13,7 +13,14 @@ import ApplicationForm from "../Application/Application";
 
 const DashboardDefault = () => (
   <div>
-    <ApplicationForm />
+    <Grid columns={3}>
+      <Grid.Column>
+        <DashMenu />
+      </Grid.Column>
+      <Grid.Column>
+        <ApplicationForm />
+      </Grid.Column>
+    </Grid>
   </div>
 );
 
