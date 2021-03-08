@@ -20,7 +20,7 @@ const DashboardDefault = () => (
         <DashMenu />
         <Container textAlign="center">HackOHI/O 2021</Container>
       </Grid.Column>
-      <Grid.Column width={10}>
+      <Grid.Column textAlign="left" width={10}>
         <ApplicationForm />
       </Grid.Column>
     </Grid>
