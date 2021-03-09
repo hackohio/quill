@@ -22,7 +22,7 @@ const DashboardDefault = () => (
         <Container textAlign="center">HackOHI/O 2021</Container>
       </Grid.Column>
       <Grid.Column textAlign="left" width={10}>
-        <ApplicationForm />
+        <ConfirmationForm />
       </Grid.Column>
     </Grid>
   </div>
