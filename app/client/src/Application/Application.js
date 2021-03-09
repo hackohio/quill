@@ -87,7 +87,7 @@ const ApplicationForm = () => (
       <Header size="huge">Application</Header>
     </Container>
 
-    <Form>
+    <Form style={{ paddingTop: 100 }}>
       <Form.Field>
         <Form.Input
           placeholder="School Email"

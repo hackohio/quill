@@ -37,7 +37,7 @@ const ConfirmationForm = () => (
       <Header size="huge">Confirmation</Header>
     </Container>
 
-    <Form>
+    <Form style={{ paddingTop: 100 }}>
       <Header size="large">Basic Information</Header>
       <Form.Field>
         <Form.Input

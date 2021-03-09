@@ -15,13 +15,14 @@ import ConfirmationForm from "../Confirmation/confirmation";
 
 const DashboardDefault = () => (
   <div>
-    <Grid celled="internally">
+    <Grid>
       <Grid.Column color="red" width={2}>
         <Image src="../../assets/images/logo.svg" />
         <DashMenu />
         <Container textAlign="center">HackOHI/O 2021</Container>
       </Grid.Column>
-      <Grid.Column textAlign="left" width={10}>
+      <Grid.Column width={4} />
+      <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={5}>
         <ConfirmationForm />
       </Grid.Column>
     </Grid>
