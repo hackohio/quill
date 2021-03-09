@@ -12,9 +12,23 @@ import {
 } from "semantic-ui-react";
 
 const restrictions = [
+  { key: "None", text: "None", value: "None" },
   { key: "Vegan", text: "Vegan", value: "Vegan" },
   { key: "Kosher", text: "kosher", value: "Kosher" },
-  { key: "None", text: "None", value: "None" },
+  { key: "Vegetarian", text: "Vegetarian", value: "Vegetarian" },
+  { key: "Halal", text: "Halal", value: "Halal" },
+  {
+    key: "Lactose Intolerence",
+    text: "Lactose Intolerence",
+    value: "Lactose Intolerence",
+  },
+  { key: "Tree Nuts", text: "Tree Nuts", value: "Tree Nuts" },
+  { key: "Peanuts", text: "Peanuts", value: "Peanuts" },
+  { key: "Shellfish", text: "Shellfish", value: "Shellfish" },
+  { key: "Egg", text: "Egg", value: "Egg" },
+  { key: "Gluten", text: "Gluten", value: "Gluten" },
+  { key: "Soybean", text: "Soybean", value: "Soybean" },
+  { key: "Paleo", text: "Paleo", value: "Paleo" },
 ];
 
 const sizes = [
