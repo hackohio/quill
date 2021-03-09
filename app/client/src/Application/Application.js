@@ -102,26 +102,44 @@ const ApplicationForm = () => (
           name="name"
         ></Form.Input>
       </Form.Field>
-      <Form.Field required>
+      <Form.Field>
         <Form.Input
-          re
+          required
           placeholder="School"
           label="School"
           name="school"
         ></Form.Input>
       </Form.Field>
-      <Form.Field required>
-        <Form.Input placeholder="Major" label="Major" name="major"></Form.Input>
+      <Form.Field>
+        <Form.Input
+          required
+          placeholder="Major"
+          label="Major"
+          name="major"
+        ></Form.Input>
       </Form.Field>
       <Header>Anticipated Graduation</Header>
-      <Form.Field required>
-        <Dropdown fluid selection placeholder="Year" options={gradYears} />
-      </Form.Field>
-      <Form.Field required>
-        <Dropdown fluid selection placeholder="Month" options={months} />
-      </Form.Field>
-      <Form.Field required>
+      <Form.Field>
         <Dropdown
+          required
+          fluid
+          selection
+          placeholder="Year"
+          options={gradYears}
+        />
+      </Form.Field>
+      <Form.Field>
+        <Dropdown
+          required
+          fluid
+          selection
+          placeholder="Month"
+          options={months}
+        />
+      </Form.Field>
+      <Form.Field>
+        <Dropdown
+          required
           fluid
           selection
           placeholder="Anticipated Degree"
@@ -129,12 +147,24 @@ const ApplicationForm = () => (
         />
       </Form.Field>
       <Header size="small">Gender</Header>
-      <Form.Field required>
-        <Dropdown fluid selection placeholder="Gender" options={genders} />
+      <Form.Field>
+        <Dropdown
+          required
+          fluid
+          selection
+          placeholder="Gender"
+          options={genders}
+        />
       </Form.Field>
       <Header size="small">Race/Ethnicity</Header>
-      <Form.Field required>
-        <Dropdown fluid selection placeholder="Race/Ethnicity" options={race} />
+      <Form.Field>
+        <Dropdown
+          required
+          fluid
+          selection
+          placeholder="Race/Ethnicity"
+          options={race}
+        />
       </Form.Field>
       <Form.Field>
         <Header size="small">I would descirbe myself as...</Header>

@@ -11,6 +11,7 @@ import {
 import DashMenu from "../Dashboard/Menu";
 import DashWindow from "../Dashboard/DashWindow";
 import ApplicationForm from "../Application/Application";
+import ConfirmationForm from "../Confirmation/confirmation";
 
 const DashboardDefault = () => (
   <div>
