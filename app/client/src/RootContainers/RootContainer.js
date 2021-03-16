@@ -16,8 +16,9 @@ import ConfirmationForm from "../Confirmation/confirmation";
 const DashboardDefault = () => (
   <div>
     <Grid>
-      <Grid.Column color="red" width={2}>
+      <Grid.Column color="red" width={3}>
         <Image src="../../assets/images/logo.svg" />
+        <Divider />
         <DashMenu />
         <Container textAlign="center">HackOHI/O 2021</Container>
       </Grid.Column>
