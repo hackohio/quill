@@ -18,22 +18,21 @@ const DashboardDefault = () => (
         </Grid.Column>
         <Grid.Column width={4} />
         <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={5}>
-          <ConfirmationForm />
+          <Switch>
+            <Route path="/dashboard">
+              <DashWindow />
+            </Route>
+            <Route path="/application">
+              <ApplicationForm />
+            </Route>
+            <Route path="/confirmation">
+              <ConfirmationForm />
+            </Route>
+            <Route path="/team"></Route>
+            <Route path="/logout"></Route>
+          </Switch>
         </Grid.Column>
       </Grid>
-      <Switch>
-        <Route path="/dashboard">
-          <DashWindow />
-        </Route>
-        <Route path="/application">
-          <ApplicationForm />
-        </Route>
-        <Route path="/confirmation">
-          <ConfirmationForm />
-        </Route>
-        <Route path="/team"></Route>
-        <Route path="/logout"></Route>
-      </Switch>
     </Router>
   </div>
 );
