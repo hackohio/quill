@@ -1,31 +1,42 @@
 import React, { Component } from "react";
-import { Menu, Sidebar, Segment, Icon } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 
-const SidebarExampleVisible = () => (
-  <Sidebar.Pushable>
-    <Sidebar as={Menu} icon="labeled" inverted vertical visible width="wide">
-      <Menu.Item as="a">
-        <Icon name="home" />
-        Dashboard
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="address card outline" />
-        Application
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="file alternate outline" />
-        Confirmation
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="users" />
-        Team
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="log out" />
-        Logout
-      </Menu.Item>
-    </Sidebar>
-  </Sidebar.Pushable>
-);
+export default class MenuExampleVerticalSecondary extends Component {
+  state = { activeItem: "home" };
 
-export default SidebarExampleVisible;
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  render() {
+    const { activeItem } = this.state;
+
+    return (
+      <Menu color="red" pointing secondary vertical>
+        <Menu.Item
+          name="Dashboard"
+          active={activeItem === "dashboard"}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name="Application"
+          active={activeItem === "application"}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name="Confirmation"
+          active={activeItem === "confirmation"}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name="Team"
+          active={activeItem === "team"}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name="Logout"
+          active={activeItem === "logout"}
+          onClick={this.handleItemClick}
+        />
+      </Menu>
+    );
+  }
+}
