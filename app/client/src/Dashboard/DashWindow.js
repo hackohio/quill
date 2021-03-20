@@ -11,7 +11,7 @@ import {
 const DashboardConfirmed = () => (
   <div>
     <Grid centered>
-      <Grid.Column style={{ maxWidth: 700, marginTop: 175 }}>
+      <Grid.Column>
         <Header as="h1" textAlign="center">
           Dashboard
         </Header>
