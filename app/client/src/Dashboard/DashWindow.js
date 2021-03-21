@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Header,
   Grid,
@@ -7,6 +7,10 @@ import {
   Divider,
   Button,
 } from "semantic-ui-react";
+
+const confirmed = false;
+const verified = true;
+const submitted = true;
 
 const DashboardConfirmed = () => (
   <div>
@@ -20,9 +24,23 @@ const DashboardConfirmed = () => (
             Your Status:
           </Header>
           <Container>
-            <Segment inverted color="purple">
-              <Header as="h3">Confirmed</Header>
-            </Segment>
+            {confirmed ? (
+              <Segment inverted color="purple">
+                <Header as="h3">Confirmed</Header>
+              </Segment>
+            ) : submitted ? (
+              <Segment inverted color="blue">
+                <Header as="h3">Submitted</Header>
+              </Segment>
+            ) : verified ? (
+              <Segment inverted color="green">
+                <Header as="h3">Verified</Header>
+              </Segment>
+            ) : (
+              <Segment inverted color="grey">
+                <Header as="h3">Not Verified</Header>
+              </Segment>
+            )}
           </Container>
           <Divider />
           <Container>
@@ -31,14 +49,50 @@ const DashboardConfirmed = () => (
             </Header>
             <strong>Registration Deadline:</strong>
             <br />
-            <strong>Confirmation Deadline:</strong>
-            <br />
-            <strong>
-              You can edit your confirmation information until Friday, March 5th
-              2021, 6:59 pm (Eastern). You will have access to the discord
-              platform to start forming teams and start planning within 24 hrs
-              of your application confirmation.{" "}
-            </strong>
+            <Container className="dashboard-window-information">
+              {confirmed ? (
+                <Container>
+                  <strong>Confirmation Deadline:</strong>
+                  <br />
+                  <strong>
+                    You can edit your confirmation information until Friday,
+                    March 5th 2021, 6:59 pm (Eastern). You will have access to
+                    the discord platform to start forming teams and start
+                    planning within 24 hrs of your application confirmation.
+                  </strong>
+                </Container>
+              ) : submitted ? (
+                <Container>
+                  <strong>Application Deadline:</strong>
+                  <br />
+                  <strong>
+                    You can edit your application information until 'application
+                    deadline' (Eastern). You will have access to the discord
+                    platform to start forming teams and start planning within 24
+                    hrs of your application confirmation.
+                  </strong>
+                </Container>
+              ) : verified ? (
+                <Container>
+                  <strong>Application Deadline:</strong>
+                  <br />
+                  <strong>
+                    Please fill out the application under the application tab on
+                    the left. The deadline to fill out the application is
+                    'application deadline'
+                  </strong>
+                </Container>
+              ) : (
+                <Container>
+                  <strong>Please Verify Email</strong>
+                  <br />
+                  <strong>
+                    Please check your email and click the verify link so that
+                    you can fill out the application.
+                  </strong>
+                </Container>
+              )}
+            </Container>
           </Container>
           <Divider />
           <Button circular color="blue">
