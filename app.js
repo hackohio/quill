@@ -39,7 +39,6 @@ const setupApp = () => {
   app.use(
     session({
       secret: process.env.SESSION_SECRET,
-      resave: true,
       cookie: {
         httpOnly: true,
         maxAge: 60000,

@@ -9,7 +9,7 @@ import ConfirmationForm from "../Confirmation/confirmation";
 const DashboardDefault = () => (
   <div>
     <Router>
-      <Grid>
+      <Grid stackable>
         <Grid.Column color="red" width={3}>
           <Image src="../../assets/images/logo.svg" />
           <Divider />
