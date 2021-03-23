@@ -33,7 +33,19 @@ const setupApp = () => {
   app.use(express.json());
   
   // Use the session middleware
-  app.use(session({ secret: process.env.SESSION_SECRET, cookie: { httpOnly: true, maxAge: 60000, sameSite: 'Lax', secure: !isDevelopmentMode, } }))
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      saveUninitialized: true,
+      rolling: false,
+      cookie: {
+        httpOnly: true,
+        maxAge: 8 * 60 * 60 * 1000, // 8 hours
+        sameSite: 'lax',
+        secure: !isDevelopmentMode,
+      },
+    })
+  );
 
   app.use('/assets/', express.static(__dirname + '/app/client/assets'));
 
@@ -44,13 +56,15 @@ const setupApp = () => {
     const webpackHotMiddleware = require('webpack-hot-middleware');
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const compiler = webpack(webpackConfig);
-    app.use(webpackDevMiddleware(compiler, {
-      publicPath: '/build/'
-    }));
+    app.use(
+      webpackDevMiddleware(compiler, {
+        publicPath: '/build/',
+      })
+    );
     app.use(webpackHotMiddleware(compiler));
   } else {
     // Production Settings
-    app.set('trust proxy', 1); // trust first proxy
+    app.set('trust proxy', true); // trust proxy
     // Use prebuilt webpack bundles
     app.use('/build/', express.static(__dirname + '/app/client/build'));
   }

@@ -43,6 +43,7 @@ module.exports = function (router) {
             return res.status(400).send(err);
           }
           req.session.isAuthorized = true;
+          req.session.email = user.email;
           return res.json({
             token: token,
             user: user,
@@ -72,6 +73,7 @@ module.exports = function (router) {
         return res.status(400).send(err);
       }
       req.session.isAuthorized = true;
+      req.session.email = user.email;
       return res.json(user);
     });
   });
