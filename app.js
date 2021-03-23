@@ -40,7 +40,7 @@ const setupApp = () => {
     session({
       secret: process.env.SESSION_SECRET,
       saveUninitialized: true,
-      rolling: false,
+      resave: false,
       cookie: {
         httpOnly: true,
         maxAge: 8 * 60 * 60 * 1000, // 8 hours
