@@ -1,31 +1,69 @@
 import React, { Component } from "react";
-import { Menu, Sidebar, Segment, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { Menu, Container } from "semantic-ui-react";
 
-const SidebarExampleVisible = () => (
-  <Sidebar.Pushable>
-    <Sidebar as={Menu} icon="labeled" inverted vertical visible width="wide">
-      <Menu.Item as="a">
-        <Icon name="home" />
-        Dashboard
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="address card outline" />
-        Application
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="file alternate outline" />
-        Confirmation
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="users" />
-        Team
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Icon name="log out" />
-        Logout
-      </Menu.Item>
-    </Sidebar>
-  </Sidebar.Pushable>
-);
+export default class MenuExampleVerticalSecondary extends Component {
+  state = { activeItem: "home" };
 
-export default SidebarExampleVisible;
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  render() {
+    const { activeItem } = this.state;
+    const submitted = true;
+    const verified = true;
+    return (
+      <Menu color="red" pointing secondary vertical>
+        <Link to="/dashboard">
+          <Menu.Item
+            name="Dashboard"
+            active={activeItem === "dashboard"}
+            onClick={this.handleItemClick}
+          />
+        </Link>
+        {submitted ? (
+          <Container>
+            <Link to="/application">
+              <Menu.Item
+                name="Application"
+                active={activeItem === "application"}
+                onClick={this.handleItemClick}
+              />
+            </Link>
+            <Link to="/confirmation">
+              <Menu.Item
+                name="Confirmation"
+                active={activeItem === "confirmation"}
+                onClick={this.handleItemClick}
+              />
+            </Link>
+            <Link to="/team">
+              <Menu.Item
+                name="Team"
+                active={activeItem === "team"}
+                onClick={this.handleItemClick}
+              />
+            </Link>
+          </Container>
+        ) : verified ? (
+          <Link to="/application">
+            <Menu.Item
+              name="Application"
+              active={activeItem === "application"}
+              onClick={this.handleItemClick}
+            />
+          </Link>
+        ) : (
+          <div />
+        )}
+
+        <Link to="/logout">
+          <Menu.Item
+            name="Logout"
+            active={activeItem === "logout"}
+            onClick={this.handleItemClick}
+          />
+        </Link>
+      </Menu>
+    );
+  }
+}
