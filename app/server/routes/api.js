@@ -6,7 +6,6 @@ const { Parser } = require('json2csv');
 const flatten = require('flat');
 
 module.exports = function (router) {
-
   function getToken(req) {
     return req.headers['x-access-token'];
   }
@@ -16,11 +15,9 @@ module.exports = function (router) {
    * you are, indeed, an admin.
    */
   function isAdmin(req, res, next) {
-
     const token = getToken(req);
 
     UserController.getByToken(token, function (err, user) {
-
       if (err) {
         return res.status(500).send(err);
       }
@@ -31,10 +28,22 @@ module.exports = function (router) {
       }
 
       return res.status(401).send({
-        message: 'Get outta here, punk!'
+        message: 'Get outta here, punk!',
       });
-
     });
+  }
+
+  /**
+   * Using the session, checks if user is logged in
+   */
+  function isLoggedIn(req, res, next) {
+    if (req.session.isAuthorized) {
+      return next();
+    } else {
+      return res.status(401).send({
+        message: 'Get outta here, punk!',
+      });
+    }
   }
 
   /**
@@ -51,7 +60,6 @@ module.exports = function (router) {
     const userId = req.params.id;
 
     UserController.getByToken(token, function (err, user) {
-
       if (err || !user) {
         return res.status(500).send(err);
       }
@@ -60,11 +68,10 @@ module.exports = function (router) {
         return next();
       }
       return res.status(400).send({
-        message: 'Token does not match user id.'
+        message: 'Token does not match user id.',
       });
     });
   }
-
 
   /**
    * Default response to send an error and the data.
@@ -76,31 +83,33 @@ module.exports = function (router) {
       if (err) {
         // SLACK ALERT!
         if (process.env.NODE_ENV === 'production') {
-          request
-            .post(process.env.SLACK_HOOK,
-              {
-                form: {
-                  payload: JSON.stringify({
-                    "text":
-                      "``` \n" +
-                      "Request: \n " +
-                      req.method + ' ' + req.url +
-                      "\n ------------------------------------ \n" +
-                      "Body: \n " +
-                      JSON.stringify(req.body, null, 2) +
-                      "\n ------------------------------------ \n" +
-                      "\nError:\n" +
-                      JSON.stringify(err, null, 2) +
-                      "``` \n"
-                  })
-                }
+          request.post(
+            process.env.SLACK_HOOK,
+            {
+              form: {
+                payload: JSON.stringify({
+                  text:
+                    '``` \n' +
+                    'Request: \n ' +
+                    req.method +
+                    ' ' +
+                    req.url +
+                    '\n ------------------------------------ \n' +
+                    'Body: \n ' +
+                    JSON.stringify(req.body, null, 2) +
+                    '\n ------------------------------------ \n' +
+                    '\nError:\n' +
+                    JSON.stringify(err, null, 2) +
+                    '``` \n',
+                }),
               },
-              function (error, response, body) {
-                return res.status(500).send({
-                  message: "Your error has been recorded, we'll get right on it!"
-                });
-              }
-            );
+            },
+            function (error, response, body) {
+              return res.status(500).send({
+                message: "Your error has been recorded, we'll get right on it!",
+              });
+            },
+          );
         } else {
           return res.status(err.status || 500).send(err);
         }
@@ -119,6 +128,14 @@ module.exports = function (router) {
   // ---------------------------------------------
 
   /**
+   *
+   * GET - Get currently signed in user
+   */
+  router.get('/user', isLoggedIn, function (req, res) {
+    UserController.getByEmail(req.session.email, defaultResponse(req, res));
+  });
+
+  /**
    * [ADMIN ONLY]
    *
    * GET - Get all users, or a page at a time.
@@ -128,13 +145,9 @@ module.exports = function (router) {
     const query = req.query;
 
     if (query.page && query.size) {
-
       UserController.getPage(query, defaultResponse(req, res));
-
     } else {
-
       UserController.getAll(defaultResponse(req, res));
-
     }
   });
 
@@ -145,7 +158,6 @@ module.exports = function (router) {
     UserController.getStats(defaultResponse(req, res));
   });
 
-
   /**
    * [OWNER/ADMIN]
    *
@@ -155,7 +167,7 @@ module.exports = function (router) {
     const json2csv = new Parser();
     UserController.getAll(function (err, data) {
       if (err) {
-        console.error("Error getting all users for CSV export");
+        console.error('Error getting all users for CSV export');
         console.error(err);
         return;
       }
@@ -199,7 +211,11 @@ module.exports = function (router) {
     const confirmation = req.body.confirmation;
     const id = req.params.id;
 
-    UserController.updateConfirmationById(id, confirmation, defaultResponse(req, res));
+    UserController.updateConfirmationById(
+      id,
+      confirmation,
+      defaultResponse(req, res),
+    );
   });
 
   /**
@@ -240,7 +256,6 @@ module.exports = function (router) {
         return res.json(data);
       }
     });
-
   });
 
   /**
@@ -322,7 +337,6 @@ module.exports = function (router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
-
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
   // ---------------------------------------------
@@ -350,7 +364,11 @@ module.exports = function (router) {
    */
   router.put('/settings/waitlist', isAdmin, function (req, res) {
     const text = req.body.text;
-    SettingsController.updateField('waitlistText', text, defaultResponse(req, res));
+    SettingsController.updateField(
+      'waitlistText',
+      text,
+      defaultResponse(req, res),
+    );
   });
 
   /**
@@ -361,7 +379,11 @@ module.exports = function (router) {
    */
   router.put('/settings/acceptance', isAdmin, function (req, res) {
     const text = req.body.text;
-    SettingsController.updateField('acceptanceText', text, defaultResponse(req, res));
+    SettingsController.updateField(
+      'acceptanceText',
+      text,
+      defaultResponse(req, res),
+    );
   });
 
   /**
@@ -372,7 +394,11 @@ module.exports = function (router) {
    */
   router.put('/settings/confirmation', isAdmin, function (req, res) {
     const text = req.body.text;
-    SettingsController.updateField('confirmationText', text, defaultResponse(req, res));
+    SettingsController.updateField(
+      'confirmationText',
+      text,
+      defaultResponse(req, res),
+    );
   });
 
   /**
@@ -383,7 +409,11 @@ module.exports = function (router) {
    */
   router.put('/settings/confirm-by', isAdmin, function (req, res) {
     const time = req.body.time;
-    SettingsController.updateField('timeConfirm', time, defaultResponse(req, res));
+    SettingsController.updateField(
+      'timeConfirm',
+      time,
+      defaultResponse(req, res),
+    );
   });
 
   /**
@@ -396,7 +426,11 @@ module.exports = function (router) {
   router.put('/settings/times', isAdmin, function (req, res) {
     const open = req.body.timeOpen;
     const close = req.body.timeClose;
-    SettingsController.updateRegistrationTimes(open, close, defaultResponse(req, res));
+    SettingsController.updateRegistrationTimes(
+      open,
+      close,
+      defaultResponse(req, res),
+    );
   });
 
   /**
@@ -420,7 +454,10 @@ module.exports = function (router) {
    */
   router.put('/settings/whitelist', isAdmin, function (req, res) {
     const emails = req.body.emails;
-    SettingsController.updateWhitelistedEmails(emails, defaultResponse(req, res));
+    SettingsController.updateWhitelistedEmails(
+      emails,
+      defaultResponse(req, res),
+    );
   });
 
   /**
@@ -433,7 +470,10 @@ module.exports = function (router) {
    */
   router.put('/settings/minors', isAdmin, function (req, res) {
     const allowMinors = req.body.allowMinors;
-    SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
+    SettingsController.updateField(
+      'allowMinors',
+      allowMinors,
+      defaultResponse(req, res),
+    );
   });
-
 };
