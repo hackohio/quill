@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Header,
   Grid,
@@ -6,105 +6,126 @@ import {
   Container,
   Divider,
   Button,
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
+import useCurrentUser from '../Utils/useCurrentUser';
+import useApplicationCloseTime from '../Utils/useApplicationCloseTime';
 
-const confirmed = false;
-const verified = true;
-const submitted = true;
+const DashboardConfirmed = () => {
+  const user = useCurrentUser();
 
-const DashboardConfirmed = () => (
-  <div>
-    <Grid centered>
-      <Grid.Column>
-        <Header as="h1" textAlign="center">
-          Dashboard
-        </Header>
-        <Segment textAlign="center">
-          <Header as="h2" textAlign="center">
-            Your Status:
+  const submitted = user?.status.completedProfile ?? false;
+  const confirmed = user?.confirmed ?? false;
+  const verified = user?.verified ?? false;
+  const confirmationDeadline = user?.status.confirmBy;
+  const applicationDeadline = useApplicationCloseTime();
+
+  return (
+    <div>
+      <Grid centered>
+        <Grid.Column>
+          <Header as="h1" textAlign="center">
+            Dashboard
           </Header>
-          <Container>
-            {confirmed ? (
-              <Segment inverted color="purple">
-                <Header as="h3">Confirmed</Header>
-              </Segment>
-            ) : submitted ? (
-              <Segment inverted color="blue">
-                <Header as="h3">Submitted</Header>
-              </Segment>
-            ) : verified ? (
-              <Segment inverted color="green">
-                <Header as="h3">Verified</Header>
-              </Segment>
-            ) : (
-              <Segment inverted color="grey">
-                <Header as="h3">Not Verified</Header>
-              </Segment>
-            )}
-          </Container>
-          <Divider />
-          <Container>
-            <Header as="h3">
-              <strong>Welcome back, "Participant name"</strong>
+
+          <Segment textAlign="center">
+            <Header as="h2" textAlign="center">
+              Your Status:
             </Header>
-            <strong>Registration Deadline:</strong>
-            <br />
-            <Container className="dashboard-window-information">
+
+            <Container>
               {confirmed ? (
-                <Container>
-                  <strong>Confirmation Deadline:</strong>
-                  <br />
-                  <strong>
-                    You can edit your confirmation information until Friday,
-                    March 5th 2021, 6:59 pm (Eastern). You will have access to
-                    the discord platform to start forming teams and start
-                    planning within 24 hrs of your application confirmation.
-                  </strong>
-                </Container>
+                <Segment inverted color="purple">
+                  <Header as="h3">Confirmed</Header>
+                </Segment>
               ) : submitted ? (
-                <Container>
-                  <strong>Application Deadline:</strong>
-                  <br />
-                  <strong>
-                    You can edit your application information until 'application
-                    deadline' (Eastern). You will have access to the discord
-                    platform to start forming teams and start planning within 24
-                    hrs of your application confirmation.
-                  </strong>
-                </Container>
+                <Segment inverted color="blue">
+                  <Header as="h3">Submitted</Header>
+                </Segment>
               ) : verified ? (
-                <Container>
-                  <strong>Application Deadline:</strong>
-                  <br />
-                  <strong>
-                    Please fill out the application under the application tab on
-                    the left. The deadline to fill out the application is
-                    'application deadline'
-                  </strong>
-                </Container>
+                <Segment inverted color="green">
+                  <Header as="h3">Verified</Header>
+                </Segment>
               ) : (
-                <Container>
-                  <strong>Please Verify Email</strong>
-                  <br />
-                  <strong>
-                    Please check your email and click the verify link so that
-                    you can fill out the application.
-                  </strong>
-                </Container>
+                <Segment inverted color="grey">
+                  <Header as="h3">Not Verified</Header>
+                </Segment>
               )}
             </Container>
-          </Container>
-          <Divider />
-          <Button circular color="blue">
-            Edit Confirmation
-          </Button>
-          <Button circular color="red">
-            Sorry, I can't make it
-          </Button>
-        </Segment>
-      </Grid.Column>
-    </Grid>
-  </div>
-);
+
+            <Divider />
+
+            <Container>
+              <Header as="h3">
+                <strong>Welcome back, "Participant name"</strong>
+              </Header>
+              <br />
+              <Container className="dashboard-window-information">
+                {confirmed ? (
+                  <Container>
+                    <strong>
+                      Confirmation Deadline: {confirmationDeadline}
+                    </strong>
+                    <br />
+                    <strong>
+                      You can edit your confirmation information until Friday,
+                      March 5th 2021, 6:59 pm (Eastern). You will have access to
+                      the discord platform to start forming teams and start
+                      planning within 24 hrs of your application confirmation.
+                    </strong>
+                  </Container>
+                ) : submitted ? (
+                  <Container>
+                    <strong>
+                      Application Deadline:
+                      {applicationDeadline != null &&
+                        applicationDeadline.toUTCString()}
+                    </strong>
+                    <br />
+                    <strong>
+                      You can edit your application information until
+                      'application deadline' (Eastern). You will have access to
+                      the discord platform to start forming teams and start
+                      planning within 24 hrs of your application confirmation.
+                    </strong>
+                  </Container>
+                ) : verified ? (
+                  <Container>
+                    <strong>
+                      Application Deadline:
+                      {applicationDeadline != null &&
+                        applicationDeadline.toUTCString()}
+                    </strong>
+                    <br />
+                    <strong>
+                      Please fill out the application under the application tab
+                      on the left. The deadline to fill out the application is
+                      'application deadline'
+                    </strong>
+                  </Container>
+                ) : (
+                  <Container>
+                    <strong>Please Verify Email</strong>
+                    <br />
+                    <strong>
+                      Please check your email and click the verify link so that
+                      you can fill out the application.
+                    </strong>
+                  </Container>
+                )}
+              </Container>
+            </Container>
+            <Divider />
+            <Button circular color="blue">
+              Edit Confirmation
+            </Button>
+            <Button circular color="red">
+              Sorry, I can't make it
+            </Button>
+          </Segment>
+        </Grid.Column>
+      </Grid>
+    </div>
+  );
+};
 
 export default DashboardConfirmed;
