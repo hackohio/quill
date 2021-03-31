@@ -72,6 +72,13 @@ const DashboardConfirmed = () => {
                       the discord platform to start forming teams and start
                       planning within 24 hrs of your application confirmation.
                     </strong>
+                    <Divider />
+                    <Button circular color="blue">
+                      Edit Confirmation
+                    </Button>
+                    <Button circular color="red">
+                      Sorry, I can't make it
+                    </Button>
                   </Container>
                 ) : submitted ? (
                   <Container>
@@ -101,6 +108,13 @@ const DashboardConfirmed = () => {
                       on the left. The deadline to fill out the application is
                       'application deadline'
                     </strong>
+                    <Divider />
+                    <Button circular color="purple">
+                      Complete Your Application
+                    </Button>
+                    <Button circular color="blue">
+                      Edit Application
+                    </Button>
                   </Container>
                 ) : (
                   <Container>
@@ -110,17 +124,14 @@ const DashboardConfirmed = () => {
                       Please check your email and click the verify link so that
                       you can fill out the application.
                     </strong>
+                    <Divider />
+                    <Button circular color="green">
+                      Resend Verification Email
+                    </Button>
                   </Container>
                 )}
               </Container>
             </Container>
-            <Divider />
-            <Button circular color="blue">
-              Edit Confirmation
-            </Button>
-            <Button circular color="red">
-              Sorry, I can't make it
-            </Button>
           </Segment>
         </Grid.Column>
       </Grid>
