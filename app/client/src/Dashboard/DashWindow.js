@@ -96,6 +96,9 @@ const DashboardConfirmed = () => {
                         : 'Submit '}
                       Confirmation Info
                     </Button>
+                    <Button circular color="red">
+                      Sorry, I cannot make it
+                    </Button>
                     <Divider />
                   </Container>
                 ) : submitted && !confirmed && confirmationDeadline ? (
@@ -107,36 +110,38 @@ const DashboardConfirmed = () => {
                       deadline.
                     </strong>
                   </Container>
-                ) : verified && submitted && applicationDeadline ? (
+                ) : (submitted && applicationDeadline) ||
+                  (!submitted && !applicationDeadline) ||
+                  (submitted && !applicationDeadline) ? (
                   <Container>
-                    <strong>You have submitted your application.</strong>
+                    <strong>
+                      Application Deadline: {applicationDeadline}.
+                    </strong>
                     <br />
                     <strong>
-                      Now that you have submitted your application, we will
-                      notify you when confirmation opens. When that happens,
-                      please be sure to fill out confirmation as soon as you can
-                      so we can make sure we have enough space for you and your
-                      team. You can view your application information below.
+                      You can {submitted ? 'Edit ' : 'Submit '} your application
+                      until {applicationDeadline}, after which you will only be
+                      able to view your application information.{' '}
+                      {submitted
+                        ? `Now that you
+                      have submitted your application, we will notify you when
+                      confirmation opens. When that happens, please be sure to
+                      fill out confirmation as soon as you can so we can make
+                      sure we have enough space for you and your team. You can
+                      view your application information below. `
+                        : ''}
                     </strong>
                     <Divider />
                     <Button circular color="blue">
-                      View Application Info
+                      {applicationDeadline
+                        ? 'View '
+                        : submitted
+                        ? 'Edit '
+                        : 'Submit '}{' '}
+                      Application Info
                     </Button>
-                  </Container>
-                ) : verified && submitted && !applicationDeadline ? (
-                  <Container>
-                    <strong>Thank you for submitting your application.</strong>
-                    <br />
-                    <strong>
-                      Now that you have submitted your application, we will
-                      notify you when confirmation opens. When that happens,
-                      please be sure to fill out confirmation as soon as you can
-                      so we can make sure we have enough space for you and your
-                      team. You can edit your application information below.
-                    </strong>
-                    <Divider />
-                    <Button circular color="blue">
-                      Edit Application
+                    <Button circular color="red">
+                      Sorry, I cannot make it
                     </Button>
                   </Container>
                 ) : verified && !submitted && applicationDeadline ? (
@@ -146,21 +151,6 @@ const DashboardConfirmed = () => {
                     <strong>
                       You did not submit your application before the deadline.
                     </strong>
-                  </Container>
-                ) : verified && !submitted && !applicationDeadline ? (
-                  <Container>
-                    <strong>
-                      You have not submitted your application yet.
-                    </strong>
-                    <br />
-                    <strong>
-                      Please click on the application button on the left or down
-                      below to fill out the application.
-                    </strong>
-                    <Divider />
-                    <Button circular color="blue">
-                      Submit Application
-                    </Button>
                   </Container>
                 ) : (
                   <Container>
