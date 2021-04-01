@@ -69,7 +69,7 @@ const DashboardConfirmed = () => {
 
             <Container>
               <Header as="h3">
-                <strong>Welcome back, "Participant name"</strong>
+                <strong>Welcome back, {user.profile.name}</strong>
               </Header>
               <br />
               <Container className="dashboard-window-information">
