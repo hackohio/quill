@@ -20,7 +20,9 @@ const DashboardConfirmed = () => {
   const applicationDeadline = useApplicationCloseTime();
 
   const getStatusBarColor = user => {
-    var statusColor = user?.confirmed
+    var statusColor = user?.declined
+      ? 'red'
+      : user?.confirmed
       ? 'purple'
       : user?.submitted
       ? 'blue'
@@ -70,40 +72,31 @@ const DashboardConfirmed = () => {
               </Header>
               <br />
               <Container className="dashboard-window-information">
-                {confirmed && confirmationDeadline ? (
+                {confirmed ||
+                (submitted && !confirmed && !confirmationDeadline) ? (
                   <Container>
                     <strong>
                       Confirmation Deadline: {confirmationDeadline}
                     </strong>
                     <br />
                     <strong>
-                      Thank you for confirming your spot! You can view you
-                      confirmation details below.
+                      You can {confirmed ? 'Edit ' : 'Submit '} your
+                      confirmation information until
+                      {confirmationDeadline}, after which you will only be able
+                      to view your confirmation information. You will have
+                      access to the discord platform to start forming teams and
+                      start planning within 24 hrs of your application
+                      confirmation.
                     </strong>
                     <Button circular color="green">
-                      View Confirmation Info
+                      {confirmationDeadline
+                        ? 'View '
+                        : confirmed
+                        ? 'Edit '
+                        : 'Submit '}
+                      Confirmation Info
                     </Button>
                     <Divider />
-                  </Container>
-                ) : confirmed && !confirmationDeadline ? (
-                  <Container>
-                    <strong>
-                      Confirmation Deadline: {confirmationDeadline}
-                    </strong>
-                    <br />
-                    <strong>
-                      You can edit your confirmation information until Friday,
-                      {confirmationDeadline}. You will have access to the
-                      discord platform to start forming teams and start planning
-                      within 24 hrs of your application confirmation.
-                    </strong>
-                    <Divider />
-                    <Button circular color="blue">
-                      Edit Confirmation
-                    </Button>
-                    <Button circular color="red">
-                      Sorry, I can't make it
-                    </Button>
                   </Container>
                 ) : submitted && !confirmed && confirmationDeadline ? (
                   <Container>
@@ -113,26 +106,6 @@ const DashboardConfirmed = () => {
                       You did not fill out the confirmation form before the
                       deadline.
                     </strong>
-                  </Container>
-                ) : submitted && !confirmed && !confirmationDeadline ? (
-                  <Container>
-                    <strong>
-                      Confirmation Deadline: {confirmationDeadline}
-                    </strong>
-                    <br />
-                    <strong>
-                      You can edit your confirmation information until Friday,
-                      March 5th 2021, 6:59 pm (Eastern). You will have access to
-                      the discord platform to start forming teams and start
-                      planning within 24 hrs of your application confirmation.
-                    </strong>
-                    <Divider />
-                    <Button circular color="blue">
-                      Submit Confirmation
-                    </Button>
-                    <Button circular color="red">
-                      Sorry, I can't make it
-                    </Button>
                   </Container>
                 ) : verified && submitted && applicationDeadline ? (
                   <Container>
