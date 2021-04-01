@@ -64,12 +64,13 @@ const DashboardConfirmed = () => {
                 <Header as="h3">{getStatusBarText(user)}</Header>
               </Segment>
             </Container>
-
             <Divider />
 
             <Container>
               <Header as="h3">
-                <strong>Welcome back, {user.profile.name}</strong>
+                <strong>
+                  Welcome back, {user?.submitted ? user.profile.name : ''}
+                </strong>
               </Header>
               <br />
               <Container className="dashboard-window-information">
