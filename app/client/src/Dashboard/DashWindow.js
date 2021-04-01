@@ -60,7 +60,51 @@ const DashboardConfirmed = () => {
               </Header>
               <br />
               <Container className="dashboard-window-information">
-                {confirmed ? (
+                {confirmed && confirmationDeadline ? (
+                  <Container>
+                    <strong>
+                      Confirmation Deadline: {confirmationDeadline}
+                    </strong>
+                    <br />
+                    <strong>
+                      Thank you for confirming your spot! You can view you
+                      confirmation details below.
+                    </strong>
+                    <Button circular color="green">
+                      View Confirmation Info
+                    </Button>
+                    <Divider />
+                  </Container>
+                ) : confirmed && !confirmationDeadline ? (
+                  <Container>
+                    <strong>
+                      Confirmation Deadline: {confirmationDeadline}
+                    </strong>
+                    <br />
+                    <strong>
+                      You can edit your confirmation information until Friday,
+                      {confirmationDeadline}. You will have access to the
+                      discord platform to start forming teams and start planning
+                      within 24 hrs of your application confirmation.
+                    </strong>
+                    <Divider />
+                    <Button circular color="blue">
+                      Edit Confirmation
+                    </Button>
+                    <Button circular color="red">
+                      Sorry, I can't make it
+                    </Button>
+                  </Container>
+                ) : submitted && !confirmed && confirmationDeadline ? (
+                  <Container>
+                    <strong>You are not confirmed.</strong>
+                    <br />
+                    <strong>
+                      You did not fill out the confirmation form before the
+                      deadline.
+                    </strong>
+                  </Container>
+                ) : submitted && !confirmed && !confirmationDeadline ? (
                   <Container>
                     <strong>
                       Confirmation Deadline: {confirmationDeadline}
@@ -74,59 +118,79 @@ const DashboardConfirmed = () => {
                     </strong>
                     <Divider />
                     <Button circular color="blue">
-                      Edit Confirmation
+                      Submit Confirmation
                     </Button>
                     <Button circular color="red">
                       Sorry, I can't make it
                     </Button>
                   </Container>
-                ) : submitted ? (
+                ) : verified && submitted && applicationDeadline ? (
                   <Container>
-                    <strong>
-                      Application Deadline:
-                      {applicationDeadline != null &&
-                        applicationDeadline.toUTCString()}
-                    </strong>
+                    <strong>You have submitted your application.</strong>
                     <br />
                     <strong>
-                      You can edit your application information until
-                      'application deadline' (Eastern). You will have access to
-                      the discord platform to start forming teams and start
-                      planning within 24 hrs of your application confirmation.
-                    </strong>
-                  </Container>
-                ) : verified ? (
-                  <Container>
-                    <strong>
-                      Application Deadline:
-                      {applicationDeadline != null &&
-                        applicationDeadline.toUTCString()}
-                    </strong>
-                    <br />
-                    <strong>
-                      Please fill out the application under the application tab
-                      on the left. The deadline to fill out the application is
-                      'application deadline'
+                      Now that you have submitted your application, we will
+                      notify you when confirmation opens. When that happens,
+                      please be sure to fill out confirmation as soon as you can
+                      so we can make sure we have enough space for you and your
+                      team. You can view your application information below.
                     </strong>
                     <Divider />
-                    <Button circular color="purple">
-                      Complete Your Application
+                    <Button circular color="blue">
+                      View Application Info
                     </Button>
+                  </Container>
+                ) : verified && submitted && !applicationDeadline ? (
+                  <Container>
+                    <strong>Thank you for submitting your application.</strong>
+                    <br />
+                    <strong>
+                      Now that you have submitted your application, we will
+                      notify you when confirmation opens. When that happens,
+                      please be sure to fill out confirmation as soon as you can
+                      so we can make sure we have enough space for you and your
+                      team. You can edit your application information below.
+                    </strong>
+                    <Divider />
                     <Button circular color="blue">
                       Edit Application
                     </Button>
                   </Container>
-                ) : (
+                ) : verified && !submitted && applicationDeadline ? (
                   <Container>
-                    <strong>Please Verify Email</strong>
+                    <strong>You did not submit your application.</strong>
                     <br />
                     <strong>
-                      Please check your email and click the verify link so that
-                      you can fill out the application.
+                      You did not submit your application before the deadline.
+                    </strong>
+                  </Container>
+                ) : verified && !submitted && !applicationDeadline ? (
+                  <Container>
+                    <strong>
+                      You have not submitted your application yet.
+                    </strong>
+                    <br />
+                    <strong>
+                      Please click on the application button on the left or down
+                      below to fill out the application.
                     </strong>
                     <Divider />
-                    <Button circular color="green">
-                      Resend Verification Email
+                    <Button circular color="blue">
+                      Submit Application
+                    </Button>
+                  </Container>
+                ) : (
+                  <Container>
+                    <strong>You have not verified your email yet.</strong>
+                    <br />
+                    <strong>
+                      Please click on the link in the email that we sent you. If
+                      you do not see one, check your spam and/or click the
+                      resend email button.
+                    </strong>
+                    <Divider />
+                    <Button circular color="blue">
+                      Resend Verificaiton Email
                     </Button>
                   </Container>
                 )}
