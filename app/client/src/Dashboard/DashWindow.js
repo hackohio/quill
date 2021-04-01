@@ -18,6 +18,7 @@ const DashboardConfirmed = () => {
   const verified = user?.verified ?? false;
   const confirmationDeadline = user?.status.confirmBy;
   const applicationDeadline = useApplicationCloseTime();
+  const today = new Date();
 
   const getStatusBarColor = user => {
     var statusColor = user?.declined
@@ -73,7 +74,7 @@ const DashboardConfirmed = () => {
               <br />
               <Container className="dashboard-window-information">
                 {confirmed ||
-                (submitted && !confirmed && !confirmationDeadline) ? (
+                (submitted && !confirmed && confirmationDeadline > today) ? (
                   <Container>
                     <strong>
                       Confirmation Deadline: {confirmationDeadline}
@@ -88,20 +89,21 @@ const DashboardConfirmed = () => {
                       start planning within 24 hrs of your application
                       confirmation.
                     </strong>
+                    <Divider />
                     <Button circular color="green">
-                      {confirmationDeadline
+                      {confirmationDeadline < today
                         ? 'View '
                         : confirmed
                         ? 'Edit '
                         : 'Submit '}
-                      Confirmation Info
+                      Confirmation
                     </Button>
                     <Button circular color="red">
                       Sorry, I cannot make it
                     </Button>
                     <Divider />
                   </Container>
-                ) : submitted && !confirmed && confirmationDeadline ? (
+                ) : submitted && !confirmed && confirmationDeadline < today ? (
                   <Container>
                     <strong>You are not confirmed.</strong>
                     <br />
@@ -110,9 +112,8 @@ const DashboardConfirmed = () => {
                       deadline.
                     </strong>
                   </Container>
-                ) : (submitted && applicationDeadline) ||
-                  (!submitted && !applicationDeadline) ||
-                  (submitted && !applicationDeadline) ? (
+                ) : (submitted && applicationDeadline < today) ||
+                  applicationDeadline > today ? (
                   <Container>
                     <strong>
                       Application Deadline: {applicationDeadline}.
@@ -133,18 +134,18 @@ const DashboardConfirmed = () => {
                     </strong>
                     <Divider />
                     <Button circular color="blue">
-                      {applicationDeadline
+                      {applicationDeadline < today
                         ? 'View '
                         : submitted
                         ? 'Edit '
-                        : 'Submit '}{' '}
-                      Application Info
+                        : 'Submit '}
+                      Application
                     </Button>
                     <Button circular color="red">
                       Sorry, I cannot make it
                     </Button>
                   </Container>
-                ) : verified && !submitted && applicationDeadline ? (
+                ) : verified && !submitted && applicationDeadline < today ? (
                   <Container>
                     <strong>You did not submit your application.</strong>
                     <br />
