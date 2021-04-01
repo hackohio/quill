@@ -19,6 +19,30 @@ const DashboardConfirmed = () => {
   const confirmationDeadline = user?.status.confirmBy;
   const applicationDeadline = useApplicationCloseTime();
 
+  const getStatusBarColor = user => {
+    var statusColor = user?.confirmed
+      ? 'purple'
+      : user?.submitted
+      ? 'blue'
+      : user?.verified
+      ? 'green'
+      : 'grey';
+    return statusColor;
+  };
+
+  const getStatusBarText = user => {
+    var statusText = user?.declined
+      ? 'Declined'
+      : user?.confirmed
+      ? 'Confirmed'
+      : user?.submitted
+      ? 'Submitted'
+      : user?.verified
+      ? 'Verified'
+      : 'Not Verified';
+    return statusText;
+  };
+
   return (
     <div>
       <Grid centered>
@@ -33,23 +57,9 @@ const DashboardConfirmed = () => {
             </Header>
 
             <Container>
-              {confirmed ? (
-                <Segment inverted color="purple">
-                  <Header as="h3">Confirmed</Header>
-                </Segment>
-              ) : submitted ? (
-                <Segment inverted color="blue">
-                  <Header as="h3">Submitted</Header>
-                </Segment>
-              ) : verified ? (
-                <Segment inverted color="green">
-                  <Header as="h3">Verified</Header>
-                </Segment>
-              ) : (
-                <Segment inverted color="grey">
-                  <Header as="h3">Not Verified</Header>
-                </Segment>
-              )}
+              <Segment inverted color={getStatusBarColor(user)}>
+                <Header as="h3">{getStatusBarText(user)}</Header>
+              </Segment>
             </Container>
 
             <Divider />
