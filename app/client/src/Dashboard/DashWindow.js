@@ -12,13 +12,32 @@ import useApplicationCloseTime from '../Utils/useApplicationCloseTime';
 
 const DashboardConfirmed = () => {
   const user = useCurrentUser();
-
+  const months = new Map();
+  months.set('1', 'January');
+  months.set('2', 'Febuary');
+  months.set('3', 'March');
+  months.set('4', 'April');
+  months.set('5', 'May');
+  months.set('6', 'June');
+  months.set('7', 'July');
+  months.set('8', 'August');
+  months.set('9', 'September');
+  months.set('10', 'October');
+  months.set('11', 'November');
+  months.set('12', 'December');
   const submitted = user?.status.completedProfile ?? false;
   const confirmed = user?.confirmed ?? false;
   const verified = user?.verified ?? false;
   const confirmationDeadline = user?.status.confirmBy;
   const applicationDeadline = useApplicationCloseTime();
   const today = new Date();
+  const getDateTimeString = DateTimeObj => {
+    var result = '';
+    result += months.get(String(DateTimeObj.getMonth())) + ' ';
+    result += String(DateTimeObj.getDay()) + ' ';
+    result += String(DateTimeObj.getFullYear());
+    return result;
+  };
 
   const getStatusBarColor = user => {
     var statusColor = user?.declined
@@ -78,17 +97,18 @@ const DashboardConfirmed = () => {
                 (submitted && !confirmed && confirmationDeadline > today) ? (
                   <Container>
                     <strong>
-                      Confirmation Deadline: {confirmationDeadline}
+                      Confirmation Deadline:{' '}
+                      {getDateTimeString(confirmationDeadline)}
                     </strong>
                     <br />
                     <strong>
                       You can {confirmed ? 'Edit ' : 'Submit '} your
                       confirmation information until
-                      {confirmationDeadline}, after which you will only be able
-                      to view your confirmation information. You will have
-                      access to the discord platform to start forming teams and
-                      start planning within 24 hrs of your application
-                      confirmation.
+                      {getDateTimeString(confirmationDeadline)}, after which you
+                      will only be able to view your confirmation information.
+                      You will have access to the discord platform to start
+                      forming teams and start planning within 24 hrs of your
+                      application confirmation.
                     </strong>
                     <Divider />
                     <Button circular color="green">
@@ -117,13 +137,15 @@ const DashboardConfirmed = () => {
                   applicationDeadline > today ? (
                   <Container>
                     <strong>
-                      Application Deadline: {applicationDeadline}.
+                      Application Deadline:{' '}
+                      {getDateTimeString(applicationDeadline)}.
                     </strong>
                     <br />
                     <strong>
                       You can {submitted ? 'Edit ' : 'Submit '} your application
-                      until {applicationDeadline}, after which you will only be
-                      able to view your application information.{' '}
+                      until {getDateTimeString(applicationDeadline)}, after
+                      which you will only be able to view your application
+                      information.{' '}
                       {submitted
                         ? `Now that you
                       have submitted your application, we will notify you when
