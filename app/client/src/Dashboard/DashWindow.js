@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   Header,
   Grid,
@@ -9,6 +9,7 @@ import {
 } from 'semantic-ui-react';
 import useCurrentUser from '../Utils/useCurrentUser';
 import useApplicationCloseTime from '../Utils/useApplicationCloseTime';
+import axios from 'axios';
 
 const DashboardConfirmed = () => {
   const user = useCurrentUser();
@@ -64,6 +65,12 @@ const DashboardConfirmed = () => {
       : 'Not Verified';
     return statusText;
   };
+
+  const sendVerificationEmail = useCallback(() => {
+    axios.post('/auth/verify/resend', {
+      id: user.id,
+    });
+  }, [user]);
 
   return (
     <div>
@@ -186,7 +193,11 @@ const DashboardConfirmed = () => {
                       resend email button.
                     </strong>
                     <Divider />
-                    <Button circular color="blue">
+                    <Button
+                      onClick={sendVerificationEmail}
+                      circular
+                      color="blue"
+                    >
                       Resend Verificaiton Email
                     </Button>
                   </Container>
