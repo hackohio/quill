@@ -10,7 +10,7 @@ import {
 import useCurrentUser from '../Utils/useCurrentUser';
 import useApplicationCloseTime from '../Utils/useApplicationCloseTime';
 
-const DashboardConfirmed = () => {
+const Dashboard = () => {
   const submitted = user?.status.completedProfile ?? false;
   const confirmed = user?.confirmed ?? false;
   const verified = user?.verified ?? false;
@@ -176,4 +176,4 @@ const DashboardConfirmed = () => {
   );
 };
 
-export default DashboardConfirmed;
+export default Dashboard;
