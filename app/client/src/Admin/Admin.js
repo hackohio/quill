@@ -121,7 +121,7 @@ export default function AdminBoard() {
             <List.Item>
               <List.Icon name="child" />
               <List.Content>
-                <strong>Unisex shirt sizes:</strong> :
+                <strong>Unisex shirt sizes</strong> :
                 {/* XS ({{stats.shirtSizes['XS']}})
             S ({{stats.shirtSizes['S']}})
             M ({{stats.shirtSizes['M']}})
@@ -132,7 +132,7 @@ export default function AdminBoard() {
             <List.Item>
               <List.Icon name="child" />
               <List.Content>
-                <strong>Women's shirt sizes:</strong> :
+                <strong>Women's shirt sizes</strong> :
                 {/* XS ({{stats.shirtSizes['WXS']}})
             S ({{stats.shirtSizes['WS']}})
             M ({{stats.shirtSizes['WM']}})
@@ -153,7 +153,7 @@ export default function AdminBoard() {
             <List.Item>
               <List.Icon name="food" />
               <List.Content>
-                <strong>Dietary Restrictions:</strong> :
+                <strong>Dietary Restrictions</strong> :
                 {/* stats.dietaryRestrictions.map(restriction =>{
                   <p> {{restriction.name}}: ({{restiction.count}}) </p>
                 }) */}

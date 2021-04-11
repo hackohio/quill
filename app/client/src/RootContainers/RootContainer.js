@@ -17,8 +17,8 @@ const DashboardDefault = () => (
           <DashMenu />
           <Container textAlign="center">HackOHI/O 2021</Container>
         </Grid.Column>
-        <Grid.Column width={4} />
-        <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={5}>
+
+        <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={10}>
           <Switch>
             <Route path="/dashboard">
               <DashWindow />
@@ -32,7 +32,7 @@ const DashboardDefault = () => (
             <Route path="/admin">
               <AdminBoard />
             </Route>
-            <Route path="/team"></Route>
+
             <Route path="/logout"></Route>
           </Switch>
         </Grid.Column>
