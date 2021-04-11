@@ -46,8 +46,8 @@ export default function AdminBoard() {
       </Menu>
       <Container>
         <Segment>
-          <Container>Download Data</Container>
-          <Container>
+          <Container textAlign="center">Download Data</Container>
+          <Container style={{ width: 250 }}>
             <Form method="get">
               <Button circular fluid primary type="submit">
                 Export CSV Data
