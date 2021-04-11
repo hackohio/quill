@@ -10,7 +10,6 @@ import {
   List,
 } from 'semantic-ui-react';
 import useCurrentUser from '../Utils/useCurrentUser';
-//import stats from '../../../server/services/stats';
 
 export default function AdminBoard() {
   const [activeItem, setActiveitem] = useState('stats');
