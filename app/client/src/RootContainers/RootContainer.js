@@ -11,7 +11,17 @@ const DashboardDefault = () => (
   <div>
     <Router>
       <Grid stackable>
-        <Grid.Column color="red" width={3}>
+        <Grid.Column
+          color="red"
+          width={3}
+          style={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            height: '100vh',
+            zIndex: 999,
+          }}
+        >
           <Image src="../../assets/images/logo.svg" />
           <Divider />
           <DashMenu />
