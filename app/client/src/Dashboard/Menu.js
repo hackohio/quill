@@ -14,6 +14,7 @@ export default function MenuExampleVerticalSecondary() {
 
   const submitted = user?.status.completedProfile ?? false;
   const verified = user?.verified ?? false;
+  const isAdmin = user?.admin ?? false;
 
   return (
     <Menu color="red" pointing secondary vertical>
@@ -24,7 +25,7 @@ export default function MenuExampleVerticalSecondary() {
           onClick={handleItemClick}
         />
       </Link>
-      {submitted ? (
+      {verified ? (
         <Container>
           <Link to="/application">
             <Menu.Item
@@ -33,29 +34,31 @@ export default function MenuExampleVerticalSecondary() {
               onClick={handleItemClick}
             />
           </Link>
-          <Link to="/confirmation">
-            <Menu.Item
-              name="Confirmation"
-              active={activeItem === 'confirmation'}
-              onClick={handleItemClick}
-            />
-          </Link>
-          <Link to="/team">
-            <Menu.Item
-              name="Team"
-              active={activeItem === 'team'}
-              onClick={handleItemClick}
-            />
-          </Link>
+          {submitted ? (
+            <>
+              <Link to="/confirmation">
+                <Menu.Item
+                  name="Confirmation"
+                  active={activeItem === 'confirmation'}
+                  onClick={handleItemClick}
+                />
+              </Link>
+              {isAdmin ? (
+                <Link to="/admin">
+                  <Menu.Item
+                    name="Admin"
+                    active={activeItem === 'admin'}
+                    onClick={handleItemClick}
+                  />
+                </Link>
+              ) : (
+                <div />
+              )}
+            </>
+          ) : (
+            <div />
+          )}
         </Container>
-      ) : verified ? (
-        <Link to="/application">
-          <Menu.Item
-            name="Application"
-            active={activeItem === 'application'}
-            onClick={handleItemClick}
-          />
-        </Link>
       ) : (
         <div />
       )}
