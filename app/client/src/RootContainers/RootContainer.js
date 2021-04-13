@@ -33,7 +33,7 @@ const DashboardDefault = () => (
         <Container textAlign="center">HackOHI/O 2021</Container>
       </Grid.Column>
       <Grid.Column width={4} />
-      <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={5}>
+      <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={10}>
         <Switch>
           <Route exact path="/">
             <Redirect to="/dashboard" />
