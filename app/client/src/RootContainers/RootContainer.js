@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import { Grid, Container, Divider, Image } from 'semantic-ui-react';
 import DashMenu from '../Dashboard/Menu';
 import DashWindow from '../Dashboard/DashWindow';
@@ -8,7 +14,6 @@ import ConfirmationForm from '../Confirmation/confirmation';
 import AdminBoard from '../Admin/Admin';
 
 const DashboardDefault = () => (
-  <div>
     <Router>
       <Grid stackable>
         <Grid.Column
@@ -30,6 +35,9 @@ const DashboardDefault = () => (
         <Grid.Column width={4} />
         <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={5}>
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/dashboard" />
+            </Route>
             <Route path="/dashboard">
               <DashWindow />
             </Route>
@@ -48,7 +56,6 @@ const DashboardDefault = () => (
         </Grid.Column>
       </Grid>
     </Router>
-  </div>
 );
 
 export default DashboardDefault;
