@@ -14,18 +14,30 @@ import ConfirmationForm from '../Confirmation/confirmation';
 import AdminBoard from '../Admin/Admin';
 
 const DashboardDefault = () => (
-<<<<<<< HEAD
   <Router>
     <Grid stackable>
-      <Grid.Column color="red" width={3} style={{ marginBottom: 0 }}>
+      <Grid.Column
+        color="red"
+        width={3}
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          height: '100vh',
+          zIndex: 999,
+        }}
+      >
         <Image src="../../assets/images/logo.svg" />
         <Divider />
         <DashMenu />
         <Container textAlign="center">HackOHI/O 2021</Container>
       </Grid.Column>
-
-      <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={10}>
+      <Grid.Column width={4} />
+      <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={5}>
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/dashboard" />
+          </Route>
           <Route path="/dashboard">
             <DashWindow />
           </Route>
@@ -38,56 +50,12 @@ const DashboardDefault = () => (
           <Route path="/admin">
             <AdminBoard />
           </Route>
-
+          <Route path="/team"></Route>
           <Route path="/logout"></Route>
         </Switch>
       </Grid.Column>
     </Grid>
   </Router>
-=======
-    <Router>
-      <Grid stackable>
-        <Grid.Column
-          color="red"
-          width={3}
-          style={{
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            height: '100vh',
-            zIndex: 999,
-          }}
-        >
-          <Image src="../../assets/images/logo.svg" />
-          <Divider />
-          <DashMenu />
-          <Container textAlign="center">HackOHI/O 2021</Container>
-        </Grid.Column>
-        <Grid.Column width={4} />
-        <Grid.Column style={{ marginTop: 100 }} textAlign="left" width={5}>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/dashboard" />
-            </Route>
-            <Route path="/dashboard">
-              <DashWindow />
-            </Route>
-            <Route path="/application">
-              <ApplicationForm />
-            </Route>
-            <Route path="/confirmation">
-              <ConfirmationForm />
-            </Route>
-            <Route path="/admin">
-              <AdminBoard />
-            </Route>
-            <Route path="/team"></Route>
-            <Route path="/logout"></Route>
-          </Switch>
-        </Grid.Column>
-      </Grid>
-    </Router>
->>>>>>> b41233784f038c8109aca90350d555463cf14b34
 );
 
 export default DashboardDefault;
