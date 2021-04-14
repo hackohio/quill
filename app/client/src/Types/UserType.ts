@@ -20,19 +20,13 @@ export type User = {
   };
   confirmation: {
     phoneNumber: string;
-    discordUsername: string;
     dietaryRestrictions: Array<string>;
     shirtSize: string;
-    github: string;
-    website: string;
-    resume: boolean;
-    cannotPickupMaterials: boolean;
-    interestedInEmployment: boolean;
     intrestedInJoiningOrg: boolean;
-    legalName: boolean;
-    notes: string;
+    interestedInEmployment: boolean;
     signatureLiability: string;
     signatureCodeOfConduct: string;
+    notes: string;
   };
   status: {
     completedProfile: boolean;
