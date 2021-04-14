@@ -9,6 +9,8 @@ import {
   Checkbox,
 } from 'semantic-ui-react';
 import useCurrentUser from '../Utils/useCurrentUser';
+import MajorSelector from './MajorSelector';
+import SchoolSelector from './SchoolSelector';
 const months = [
   { key: 'Jan', text: 'Janurary', value: 'Janurary' },
   { key: 'Feb', text: 'Feburary', value: 'Feburary' },
@@ -135,24 +137,10 @@ const ApplicationForm = () => {
           ></Form.Input>
         </Form.Field>
         <Form.Field>
-          <Form.Input
-            required
-            placeholder="School"
-            label="School"
-            name="school"
-            value={school}
-            onChange={onChangeField(setSchool)}
-          ></Form.Input>
+          <SchoolSelector onChangeSchool={setSchool} />
         </Form.Field>
         <Form.Field>
-          <Form.Input
-            required
-            placeholder="Major"
-            label="Major"
-            name="major"
-            value={major}
-            onChange={onChangeField(setMajor)}
-          ></Form.Input>
+          <MajorSelector onChangeMajor={setMajor} />
         </Form.Field>
         <Header>Anticipated Graduation</Header>
         <Form.Field>
