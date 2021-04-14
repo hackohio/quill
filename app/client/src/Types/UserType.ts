@@ -13,6 +13,7 @@ export type User = {
     graduationMonth: string;
     graduationYear: string;
     degree: string;
+    description: string;
     essay: string;
     gender: string;
     ethnicity: string;
