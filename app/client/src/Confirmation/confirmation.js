@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react";
+import React, { SyntheticEvent } from 'react';
 import {
   Form,
   Button,
@@ -9,41 +9,41 @@ import {
   Checkbox,
   Segment,
   Icon,
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
 const restrictions = [
-  { key: "None", text: "None", value: "None" },
-  { key: "Vegan", text: "Vegan", value: "Vegan" },
-  { key: "Kosher", text: "kosher", value: "Kosher" },
-  { key: "Vegetarian", text: "Vegetarian", value: "Vegetarian" },
-  { key: "Halal", text: "Halal", value: "Halal" },
+  { key: 'None', text: 'None', value: 'None' },
+  { key: 'Vegan', text: 'Vegan', value: 'Vegan' },
+  { key: 'Kosher', text: 'kosher', value: 'Kosher' },
+  { key: 'Vegetarian', text: 'Vegetarian', value: 'Vegetarian' },
+  { key: 'Halal', text: 'Halal', value: 'Halal' },
   {
-    key: "Lactose Intolerence",
-    text: "Lactose Intolerence",
-    value: "Lactose Intolerence",
+    key: 'Lactose Intolerence',
+    text: 'Lactose Intolerence',
+    value: 'Lactose Intolerence',
   },
-  { key: "Tree Nuts", text: "Tree Nuts", value: "Tree Nuts" },
-  { key: "Peanuts", text: "Peanuts", value: "Peanuts" },
-  { key: "Shellfish", text: "Shellfish", value: "Shellfish" },
-  { key: "Egg", text: "Egg", value: "Egg" },
-  { key: "Gluten", text: "Gluten", value: "Gluten" },
-  { key: "Soybean", text: "Soybean", value: "Soybean" },
-  { key: "Paleo", text: "Paleo", value: "Paleo" },
+  { key: 'Tree Nuts', text: 'Tree Nuts', value: 'Tree Nuts' },
+  { key: 'Peanuts', text: 'Peanuts', value: 'Peanuts' },
+  { key: 'Shellfish', text: 'Shellfish', value: 'Shellfish' },
+  { key: 'Egg', text: 'Egg', value: 'Egg' },
+  { key: 'Gluten', text: 'Gluten', value: 'Gluten' },
+  { key: 'Soybean', text: 'Soybean', value: 'Soybean' },
+  { key: 'Paleo', text: 'Paleo', value: 'Paleo' },
 ];
 
 const sizes = [
-  { key: "XS", text: "Unisex X-Small", value: "XS" },
-  { key: "S", text: "Unisex Small", value: "S" },
-  { key: "M", text: "Unisex Medium", value: "M" },
-  { key: "L", text: "Unisex Large", value: "L" },
-  { key: "XL", text: "Unisex X-Large", value: "XL" },
-  { key: "XXL", text: "Unisex XX-Large", value: "XXL" },
-  { key: "WXS", text: "Women's X-Small", value: "WXS" },
-  { key: "WS", text: "Women's Small", value: "WS" },
-  { key: "WM", text: "Women's Medium", value: "WM" },
-  { key: "WL", text: "Women's Large", value: "WL" },
-  { key: "WXL", text: "Women's X-Large", value: "WXL" },
-  { key: "WXXL", text: "Women's XX-Large", value: "WXXL" },
+  { key: 'XS', text: 'Unisex X-Small', value: 'XS' },
+  { key: 'S', text: 'Unisex Small', value: 'S' },
+  { key: 'M', text: 'Unisex Medium', value: 'M' },
+  { key: 'L', text: 'Unisex Large', value: 'L' },
+  { key: 'XL', text: 'Unisex X-Large', value: 'XL' },
+  { key: 'XXL', text: 'Unisex XX-Large', value: 'XXL' },
+  { key: 'WXS', text: "Women's X-Small", value: 'WXS' },
+  { key: 'WS', text: "Women's Small", value: 'WS' },
+  { key: 'WM', text: "Women's Medium", value: 'WM' },
+  { key: 'WL', text: "Women's Large", value: 'WL' },
+  { key: 'WXL', text: "Women's X-Large", value: 'WXL' },
+  { key: 'WXXL', text: "Women's XX-Large", value: 'WXXL' },
 ];
 const ConfirmationForm = () => (
   <div>
@@ -101,13 +101,8 @@ const ConfirmationForm = () => (
           Our sponsors ask us for the resumes of the event participants! Please
           upload your resume as a PDF below.
         </p>
-        <Segment placeholder>
-          <Header icon>
-            <Icon name="pdf file outline" />
-            No documents are listed for this customer.
-          </Header>
-          <Button primary>Add Document</Button>
-        </Segment>
+
+        <Button primary>Add Document</Button>
       </Form.Field>
       <Form.Field>
         <Header size="small">Looking for a job?</Header>
@@ -130,7 +125,7 @@ const ConfirmationForm = () => (
           application - you <strong> must </strong> be 18 years or older or an
           OSU undergraduate by the day of the event. or
           <strong>
-            we will refuse you admission at the door. We will be checking ID.{" "}
+            we will refuse you admission at the door. We will be checking ID.{' '}
           </strong>
         </p>
         <p>

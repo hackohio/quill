@@ -54,7 +54,7 @@ const Dashboard = () => {
   return (
     <div>
       <Grid centered>
-        <Grid.Column>
+        <Grid.Column width={10}>
           <Header as="h1" textAlign="center">
             Dashboard
           </Header>

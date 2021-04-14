@@ -10,7 +10,6 @@ import {
   List,
 } from 'semantic-ui-react';
 import useCurrentUser from '../Utils/useCurrentUser';
-//import stats from '../../../server/services/stats';
 
 export default function AdminBoard() {
   const [activeItem, setActiveitem] = useState('stats');
@@ -46,8 +45,8 @@ export default function AdminBoard() {
       </Menu>
       <Container>
         <Segment>
-          <Container>Download Data</Container>
-          <Container>
+          <Container textAlign="center">Download Data</Container>
+          <Container style={{ width: 250 }}>
             <Form method="get">
               <Button circular fluid primary type="submit">
                 Export CSV Data
@@ -121,7 +120,7 @@ export default function AdminBoard() {
             <List.Item>
               <List.Icon name="child" />
               <List.Content>
-                <strong>Unisex shirt sizes:</strong> :
+                <strong>Unisex shirt sizes</strong> :
                 {/* XS ({{stats.shirtSizes['XS']}})
             S ({{stats.shirtSizes['S']}})
             M ({{stats.shirtSizes['M']}})
@@ -132,7 +131,7 @@ export default function AdminBoard() {
             <List.Item>
               <List.Icon name="child" />
               <List.Content>
-                <strong>Women's shirt sizes:</strong> :
+                <strong>Women's shirt sizes</strong> :
                 {/* XS ({{stats.shirtSizes['WXS']}})
             S ({{stats.shirtSizes['WS']}})
             M ({{stats.shirtSizes['WM']}})
@@ -153,7 +152,7 @@ export default function AdminBoard() {
             <List.Item>
               <List.Icon name="food" />
               <List.Content>
-                <strong>Dietary Restrictions:</strong> :
+                <strong>Dietary Restrictions</strong> :
                 {/* stats.dietaryRestrictions.map(restriction =>{
                   <p> {{restriction.name}}: ({{restiction.count}}) </p>
                 }) */}
