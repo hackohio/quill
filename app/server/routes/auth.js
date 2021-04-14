@@ -44,6 +44,8 @@ module.exports = function (router) {
           }
           req.session.isAuthorized = true;
           req.session.email = user.email;
+          req.session.admin = user.admin;
+          req.session._id = user._id;
           return res.json({
             token: token,
             user: user,
