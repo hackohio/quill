@@ -1,15 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useReducer,
+  useCallback,
+} from 'react';
 import { Form, Search } from 'semantic-ui-react';
 import useFetch, { STATUS } from '../Utils/useFetch';
 
 type Props = {
   onChangeMajor: (school: string) => void;
+  major: string;
 };
 
 type ReducerState = {
   loading: boolean;
   results: Array<SearchResult>;
-  value: string;
 };
 
 type SearchResult = {
@@ -21,7 +27,6 @@ type ReducerActionType =
   | 'CLEAN_QUERY'
   | 'START_SEARCH'
   | 'FINISH_SEARCH'
-  | 'UPDATE_SELECTION';
 type ReducerAction = {
   type: ReducerActionType;
   query?: string;
@@ -32,7 +37,6 @@ type ReducerAction = {
 const initialState: ReducerState = {
   loading: false,
   results: [],
-  value: '',
 };
 
 function escapeRegex(string: string) {
@@ -43,26 +47,26 @@ export default function MajorSelector(props: Props) {
   const { status, error, data } = useFetch('/assets/majors.csv');
   const majors = data as string;
 
-  function exampleReducer(state: ReducerState, action: ReducerAction) {
+  function exampleReducer(
+    state: ReducerState,
+    action: ReducerAction,
+  ): ReducerState {
     switch (action.type) {
       case 'CLEAN_QUERY':
         return initialState;
       case 'START_SEARCH':
-        return { ...state, loading: true, value: action.query };
+        return { ...state, loading: true };
       case 'FINISH_SEARCH':
         return { ...state, loading: false, results: action.results };
-      case 'UPDATE_SELECTION':
-        return { ...state, value: action.selection };
       default:
         throw new Error();
     }
   }
-
-  const [state, dispatch] = React.useReducer(exampleReducer, initialState);
-  const { loading, results, value } = state;
+  const [state, dispatch] = useReducer(exampleReducer, initialState);
+  const { loading, results } = state;
 
   const timeoutRef = useRef(null);
-  const handleSearchChange = React.useCallback(
+  const handleSearchChange = useCallback(
     (e, searchData) => {
       clearTimeout(timeoutRef.current);
       dispatch({ type: 'START_SEARCH', query: searchData.value });
@@ -104,11 +108,10 @@ export default function MajorSelector(props: Props) {
         loading={status != STATUS.FETCHED || loading}
         onResultSelect={(e, data) => {
           props.onChangeMajor(data.result.title);
-          dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });
         }}
         onSearchChange={handleSearchChange}
         results={results}
-        value={value}
+        value={props.major}
       />
     </Form.Field>
   );

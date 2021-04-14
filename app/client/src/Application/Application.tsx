@@ -1,4 +1,5 @@
-import React, { SyntheticEvent, useCallback, useState } from 'react';
+import axios from 'axios';
+import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import {
   Form,
   Button,
@@ -9,8 +10,11 @@ import {
   Checkbox,
 } from 'semantic-ui-react';
 import useCurrentUser from '../Utils/useCurrentUser';
+import useToggle from '../Utils/useToggle';
 import MajorSelector from './MajorSelector';
 import SchoolSelector from './SchoolSelector';
+import swal from 'sweetalert';
+
 const months = [
   { key: 'Jan', text: 'Janurary', value: 'Janurary' },
   { key: 'Feb', text: 'Feburary', value: 'Feburary' },
@@ -27,9 +31,9 @@ const months = [
 ];
 
 const degrees = [
-  { key: 'Assoc', text: "Associate's", value: "Associate's" },
-  { key: 'Bach', text: "Bachleor's", value: "Bachleor's" },
-  { key: 'Mas', text: "Master's", value: "Master's" },
+  { key: 'Assoc', text: "Associate's", value: 'Associates' },
+  { key: 'Bach', text: "Bachelor's", value: 'Bachelors' },
+  { key: 'Mas', text: "Master's", value: 'Masters' },
   { key: 'Doc', text: 'Doctorate', value: 'Doctorate' },
 ];
 
@@ -41,14 +45,14 @@ const gradYears = [
 ];
 
 const genders = [
-  { key: 'male', text: 'Male', value: 'Male' },
-  { key: 'female', text: 'Female', value: 'Female' },
-  { key: 'Non-Binary', text: 'Non-Binary', value: 'Non-Binary' },
-  { key: 'other', text: 'Other', value: 'Other' },
+  { key: 'male', text: 'Male', value: 'M' },
+  { key: 'female', text: 'Female', value: 'F' },
+  { key: 'Non-Binary', text: 'Non-Binary', value: 'B' },
+  { key: 'other', text: 'Other', value: 'O' },
   {
     key: 'No Answer',
     text: 'I prefer not to answer',
-    value: 'Prefer not to answer',
+    value: 'N',
   },
 ];
 
@@ -94,9 +98,10 @@ const ApplicationForm = () => {
   const [gradMonth, setGradMonth] = useState<string>('');
   const [degree, setDegree] = useState<string>('');
   const [gender, setGender] = useState<string>('');
-  const [race, setRace] = useState<string>('');
+  const [ethnicity, setEthnicity] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [essay, setEssay] = useState<string>('');
+  const [adult, setAdult] = useToggle(false);
 
   const onChangeField = useCallback((setterFunction: (val: string) => void) => {
     return (
@@ -107,9 +112,89 @@ const ApplicationForm = () => {
     };
   }, []);
 
-  if (user != null && email != user.email) {
-    setEmail(user.email);
-  }
+  const onUpdateProfile = useCallback(() => {
+    const profile = {
+      name,
+      adult,
+      school,
+      major,
+      graduationMonth: gradMonth,
+      graduationYear: gradYear,
+      degree,
+      description,
+      essay,
+      gender,
+      ethnicity,
+    };
+    axios
+      .put(`/api/users/${user._id}/profile`, {
+        profile,
+      })
+      .then(
+        response => {
+          swal('Awesome!', 'Your application has been saved.', 'success').then(
+            value => {
+              window.location.pathname = '/';
+            },
+          );
+        },
+        response => {
+          swal('Uh oh!', 'Something went wrong.', 'error');
+        },
+      );
+  }, [
+    name,
+    adult,
+    school,
+    major,
+    gradMonth,
+    gradYear,
+    degree,
+    essay,
+    gender,
+    user,
+  ]);
+
+  useEffect(() => {
+    if (user != null) {
+      if (email != user.email) {
+        setEmail(user.email);
+      }
+      if (name == '' && user.profile.name != '') {
+        setName(user.profile.name);
+      }
+      if (school == '' && user.profile.school != '') {
+        setSchool(user.profile.school);
+      }
+      if (major == '' && user.profile.major != '') {
+        setMajor(user.profile.major);
+      }
+      if (gradYear == '' && user.profile.graduationYear != '') {
+        setGradYear(user.profile.graduationYear);
+      }
+      if (gradMonth == '' && user.profile.graduationMonth != '') {
+        setGradMonth(user.profile.graduationMonth);
+      }
+      if (degree == '' && user.profile.degree != '') {
+        setDegree(user.profile.degree);
+      }
+      if (gender == '' && user.profile.gender != '') {
+        setGender(user.profile.gender);
+      }
+      if (ethnicity == '' && user.profile.ethnicity != '') {
+        setEthnicity(user.profile.ethnicity);
+      }
+      if (description == '' && user.profile.description != '') {
+        setDescription(user.profile.description);
+      }
+      if (essay == '' && user.profile.essay != '') {
+        setEssay(user.profile.essay);
+      }
+      if (adult == false && user.profile.adult === true) {
+        setAdult(true);
+      }
+    }
+  }, [user]);
 
   return (
     <div>
@@ -137,10 +222,10 @@ const ApplicationForm = () => {
           ></Form.Input>
         </Form.Field>
         <Form.Field>
-          <SchoolSelector onChangeSchool={setSchool} />
+          <SchoolSelector onChangeSchool={setSchool} school={school} />
         </Form.Field>
         <Form.Field>
-          <MajorSelector onChangeMajor={setMajor} />
+          <MajorSelector onChangeMajor={setMajor} major={major} />
         </Form.Field>
         <Header>Anticipated Graduation</Header>
         <Form.Field>
@@ -196,8 +281,8 @@ const ApplicationForm = () => {
             selection
             placeholder="Race/Ethnicity"
             options={raceOptions}
-            value={race}
-            onChange={onChangeField(setRace)}
+            value={ethnicity}
+            onChange={onChangeField(setEthnicity)}
           />
         </Form.Field>
         <Form.Field>
@@ -227,9 +312,13 @@ const ApplicationForm = () => {
             2021. Checking the box below affirms that you are or will be either
             an OSU undergraduate or 18 years or older by March 5, 2021.
           </p>
-          <Checkbox label="I am 18 or older"></Checkbox>
+          <Checkbox
+            onChange={setAdult}
+            checked={adult}
+            label="I am 18 or older"
+          ></Checkbox>
         </Form.Field>
-        <Button primary fluid circular type="submit">
+        <Button primary fluid circular type="submit" onClick={onUpdateProfile}>
           Submit
         </Button>
       </Form>
