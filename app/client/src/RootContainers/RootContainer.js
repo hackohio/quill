@@ -10,7 +10,7 @@ import { Grid, Container, Divider, Image } from 'semantic-ui-react';
 import DashMenu from '../Dashboard/Menu';
 import DashWindow from '../Dashboard/DashWindow';
 import ApplicationForm from '../Application/Application';
-import ConfirmationForm from '../Confirmation/confirmation';
+import ConfirmationForm from '../Confirmation/Confirmation';
 import AdminBoard from '../Admin/Admin';
 
 const DashboardDefault = () => (

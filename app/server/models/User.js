@@ -5,7 +5,6 @@ const mongoose = require('mongoose'),
 JWT_SECRET = process.env.JWT_SECRET;
 
 const profile = {
-
   // Basic info
   name: {
     type: String,
@@ -34,44 +33,51 @@ const profile = {
   graduationMonth: {
     type: String,
     enum: {
-      values: 'January February March April May June July August September October November December'.split(' '),
-    }
+      values: 'January February March April May June July August September October November December'.split(
+        ' ',
+      ),
+    },
   },
 
   graduationYear: {
     type: String,
     enum: {
       values: '2021 2022 2023 2024'.split(' '),
-    }
+    },
   },
 
   degree: {
     type: String,
     enum: {
       values: 'Associates Bachelors Masters Doctorate'.split(' '),
-    }
+    },
   },
 
   description: {
     type: String,
     min: 0,
-    max: 300
+    max: 300,
   },
 
   essay: {
     type: String,
     min: 0,
-    max: 1500
+    max: 1500,
   },
 
   // Optional info for demographics
   gender: {
     type: String,
     enum: {
-      values: 'M F O N B'.split(' ')
-    }
+      values: 'M F O N B'.split(' '),
+    },
   },
 
+  ethnicity: {
+    type: String,
+    min: 0,
+    max: 300,
+  },
 };
 
 // Only after confirmed
@@ -85,8 +91,8 @@ const confirmation = {
   shirtSize: {
     type: String,
     enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
-    }
+      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' '),
+    },
   },
   // wantsHardware: {
   //   type: Boolean,
@@ -117,7 +123,6 @@ const confirmation = {
     default: false,
   },
   legalName: String,
-  ethnicity: String,
   // receipt: String,
   //
   // hostNeededFri: Boolean,
@@ -358,16 +363,34 @@ schema.statics.getByToken = function (token, callback) {
 };
 
 schema.statics.validateProfile = function (profile, cb) {
-  return cb(!(
-    profile.name.length > 0 &&
-    profile.adult &&
-    profile.school.length > 0 &&
-    profile.major.length > 0 &&
-    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].indexOf(profile.graduationMonth) > -1 &&
-    ['2021', '2022', '2023', '2024'].indexOf(profile.graduationYear) > -1 &&
-    ['Associates', 'Bachelors', 'Masters', 'Doctorate'].indexOf(profile.degree) > -1 &&
-    ['M', 'F', 'O', 'N', 'B'].indexOf(profile.gender) > -1
-  ));
+  return cb(
+    !(
+      profile.name.length > 0 &&
+      profile.adult &&
+      profile.school.length > 0 &&
+      profile.major.length > 0 &&
+      [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ].indexOf(profile.graduationMonth) > -1 &&
+      ['2021', '2022', '2023', '2024'].indexOf(profile.graduationYear) > -1 &&
+      ['Associates', 'Bachelors', 'Masters', 'Doctorate'].indexOf(
+        profile.degree,
+      ) > -1 &&
+      ['M', 'F', 'O', 'N', 'B'].indexOf(profile.gender) > -1 &&
+      profile.ethnicity.length > 0
+    ),
+  );
 };
 
 //=========================================

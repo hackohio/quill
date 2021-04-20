@@ -1,4 +1,5 @@
 export type User = {
+  _id: string;
   email: string;
   admin: boolean;
   lastUpdated: number;
@@ -12,25 +13,20 @@ export type User = {
     graduationMonth: string;
     graduationYear: string;
     degree: string;
+    description: string;
     essay: string;
     gender: string;
+    ethnicity: string;
   };
   confirmation: {
     phoneNumber: string;
-    discordUsername: string;
     dietaryRestrictions: Array<string>;
     shirtSize: string;
-    github: string;
-    website: string;
-    resume: boolean;
-    cannotPickupMaterials: boolean;
-    interestedInEmployment: boolean;
     intrestedInJoiningOrg: boolean;
-    legalName: boolean;
-    ethnicity: string;
-    notes: string;
+    interestedInEmployment: boolean;
     signatureLiability: string;
     signatureCodeOfConduct: string;
+    notes: string;
   };
   status: {
     completedProfile: boolean;

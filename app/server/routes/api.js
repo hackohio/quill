@@ -56,20 +56,12 @@ module.exports = function (router) {
    * want I suppose!
    */
   function isOwnerOrAdmin(req, res, next) {
-    const token = getToken(req);
     const userId = req.params.id;
-
-    UserController.getByToken(token, function (err, user) {
-      if (err || !user) {
-        return res.status(500).send(err);
-      }
-
-      if (user._id == userId || user.admin) {
-        return next();
-      }
-      return res.status(400).send({
-        message: 'Token does not match user id.',
-      });
+    if (req.session._id == userId || user.admin) {
+      return next();
+    }
+    return res.status(401).send({
+      message: 'User is not authorized to access this content',
     });
   }
 
@@ -111,6 +103,7 @@ module.exports = function (router) {
             },
           );
         } else {
+          console.log(err);
           return res.status(err.status || 500).send(err);
         }
       } else {
