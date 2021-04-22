@@ -4,20 +4,17 @@ import {
   Segment,
   Container,
   Divider,
-  Button,
   Form,
-  List,
   Grid,
-  Icon,
   Input,
   Pagination,
   Table,
-  Label,
 } from 'semantic-ui-react';
-import useFetch from '../Utils/useFetch';
-import useCurrentUser from '../Utils/useCurrentUser';
+import useFetch, { STATUS } from '../Utils/useFetch';
 
 export default function AdminUsers() {
+  //fetch an array of all of the users to be used to display to the page
+  const users = [];
   return (
     <Container>
       <Segment>
@@ -30,8 +27,11 @@ export default function AdminUsers() {
                 <Input icon="search" placeholder="Search..." />
               </Form.Field>
             </Form>
-            <Pagination defaultActivePage={1} totalPages={10} />
             <Divider />
+            <Container textAlign="center">
+              <Pagination defaultActivePage={1} totalPages={10} />
+            </Container>
+
             <Table celled>
               <Table.Header>
                 <Table.Row>
@@ -42,13 +42,15 @@ export default function AdminUsers() {
 
               <Table.Body>
                 <Table.Row>
-                  <Table.Cell>
-                    User Email
-                    {/*{{selectedUser.profile.name ? selectedUser.profile.name : selectedUser.email}}*/}
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Cell</Table.Cell>
+                  {/*{users.forEach(selectedUser => {
+                    return (
+                      <Table.Cell>
+                        {selectedUser.profile.name
+                          ? selectedUser.profile.name
+                          : selectedUser.email}
+                      </Table.Cell>
+                    );
+                  })} */}
                 </Table.Row>
               </Table.Body>
             </Table>

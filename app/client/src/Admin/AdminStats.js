@@ -8,10 +8,10 @@ import {
   Form,
   List,
 } from 'semantic-ui-react';
-import useFetch from '../Utils/useFetch';
+import useStats from '../Utils/useStats';
 
 export default function AdminStats() {
-  var stats = useFetch('/api/user/stats');
+  const stats = useStats;
 
   return (
     <div>

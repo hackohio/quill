@@ -10,8 +10,8 @@ let stats = {};
 /**
  * This is a function used to filter the demographics stats between sumbitted,
  * confirmed, and checkedIn based on when in the registation timeline it
- * currently is. 
- * 
+ * currently is.
+ *
  * @param {*} user The user to check
  * @returns Whether or not this user should be included in demographic information
  */
@@ -40,37 +40,37 @@ function calculateStats(_err, registrationTimes) {
         F: 0,
         B: 0,
         O: 0,
-        N: 0
+        N: 0,
       },
       schools: {},
       majors: {},
       month: {
-        'January': 0,
-        'February': 0,
-        'March': 0,
-        'April': 0,
-        'May': 0,
-        'June': 0,
-        'July': 0,
-        'August': 0,
-        'September': 0,
-        'October': 0,
-        'November': 0,
-        'December': 0,
+        January: 0,
+        February: 0,
+        March: 0,
+        April: 0,
+        May: 0,
+        June: 0,
+        July: 0,
+        August: 0,
+        September: 0,
+        October: 0,
+        November: 0,
+        December: 0,
       },
       year: {
-        '2020': 0,
-        '2021': 0,
-        '2022': 0,
-        '2023': 0,
-        '2024': 0,
+        2020: 0,
+        2021: 0,
+        2022: 0,
+        2023: 0,
+        2024: 0,
       },
       degree: {
-        'Associates': 0,
-        'Bachelors': 0,
-        'Masters': 0,
-        'Doctorate': 0,
-      }
+        Associates: 0,
+        Bachelors: 0,
+        Masters: 0,
+        Doctorate: 0,
+      },
     },
 
     teams: {},
@@ -88,19 +88,19 @@ function calculateStats(_err, registrationTimes) {
     confirmedNone: 0,
 
     shirtSizes: {
-      'XS': 0,
-      'S': 0,
-      'M': 0,
-      'L': 0,
-      'XL': 0,
-      'XXL': 0,
-      'WXS': 0,
-      'WS': 0,
-      'WM': 0,
-      'WL': 0,
-      'WXL': 0,
-      'WXXL': 0,
-      'None': 0
+      XS: 0,
+      S: 0,
+      M: 0,
+      L: 0,
+      XL: 0,
+      XXL: 0,
+      WXS: 0,
+      WS: 0,
+      WM: 0,
+      WL: 0,
+      WXL: 0,
+      WXXL: 0,
+      None: 0,
     },
 
     dietaryRestrictions: {},
@@ -114,24 +114,22 @@ function calculateStats(_err, registrationTimes) {
     hostNeededOther: 0,
     hostNeededNone: 0,*/
 
-
     // wantsHardware: 0,
     cannotPickupMaterials: 0,
 
     checkedIn: 0,
   };
 
-  User
-    .find({})
-    .exec(function (err, users) {
-      if (err || !users) {
-        throw err;
-      }
+  User.find({}).exec(function (err, users) {
+    if (err || !users) {
+      throw err;
+    }
 
-      newStats.total = users.length;
+    newStats.total = users.length;
 
-      async.each(users, function (user, callback) {
-
+    async.each(
+      users,
+      function (user, callback) {
         // Grab the email extension
         const email = user.email.split('@')[1];
 
@@ -148,13 +146,20 @@ function calculateStats(_err, registrationTimes) {
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
         // Count confirmed that are osu
-        newStats.confirmedOsu += user.status.confirmed && ((email === "osu.edu") || (email === "buckeyemail.osu.edu"));
+        newStats.confirmedOsu +=
+          user.status.confirmed &&
+          (email === 'osu.edu' || email === 'buckeyemail.osu.edu');
 
-        newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
-        newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
-        newStats.confirmedNonBinary += user.status.confirmed && user.profile.gender == "B" ? 1 : 0;
-        newStats.confirmedOther += user.status.confirmed && user.profile.gender == "O" ? 1 : 0;
-        newStats.confirmedNone += user.status.confirmed && user.profile.gender == "N" ? 1 : 0;
+        newStats.confirmedFemale +=
+          user.status.confirmed && user.profile.gender == 'F' ? 1 : 0;
+        newStats.confirmedMale +=
+          user.status.confirmed && user.profile.gender == 'M' ? 1 : 0;
+        newStats.confirmedNonBinary +=
+          user.status.confirmed && user.profile.gender == 'B' ? 1 : 0;
+        newStats.confirmedOther +=
+          user.status.confirmed && user.profile.gender == 'O' ? 1 : 0;
+        newStats.confirmedNone +=
+          user.status.confirmed && user.profile.gender == 'N' ? 1 : 0;
 
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
@@ -166,7 +171,10 @@ function calculateStats(_err, registrationTimes) {
         // newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
 
         // Count the number of people who can pickup material
-        newStats.cannotPickupMaterials += user.confirmation.cannotPickupMaterials ? 1 : 0;
+        newStats.cannotPickupMaterials += user.confirmation
+          .cannotPickupMaterials
+          ? 1
+          : 0;
 
         // Count shirt sizes
         if (user.confirmation.shirtSize in newStats.shirtSizes) {
@@ -202,7 +210,9 @@ function calculateStats(_err, registrationTimes) {
             declined: 0,
           };
         }
-        newStats.demo.schools[email].submitted += user.status.completedProfile ? 1 : 0;
+        newStats.demo.schools[email].submitted += user.status.completedProfile
+          ? 1
+          : 0;
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
@@ -244,7 +254,6 @@ function calculateStats(_err, registrationTimes) {
         newStats.hostNeededNone
           += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;*/
 
-
         // Majors
         if (user.profile.major) {
           if (!newStats.demo.majors[user.profile.major]) {
@@ -254,8 +263,8 @@ function calculateStats(_err, registrationTimes) {
         }
 
         callback(); // let async know we've finished
-      }, function () {
-
+      },
+      function () {
         const demoSummary = {
           basedOff: 'Submitted',
           count: newStats.submitted,
@@ -276,36 +285,33 @@ function calculateStats(_err, registrationTimes) {
 
         // Transform dietary restrictions into a series of objects
         const restrictions = [];
-        _.keys(newStats.dietaryRestrictions)
-          .forEach(function (key) {
-            restrictions.push({
-              name: key,
-              count: newStats.dietaryRestrictions[key],
-            });
+        _.keys(newStats.dietaryRestrictions).forEach(function (key) {
+          restrictions.push({
+            name: key,
+            count: newStats.dietaryRestrictions[key],
           });
+        });
         newStats.dietaryRestrictions = restrictions;
 
         // Transform majors into a series of objects
         const majors = [];
-        _.keys(newStats.demo.majors)
-          .forEach(function (key) {
-            majors.push({
-              name: key,
-              count: newStats.demo.majors[key],
-            });
+        _.keys(newStats.demo.majors).forEach(function (key) {
+          majors.push({
+            name: key,
+            count: newStats.demo.majors[key],
           });
+        });
         newStats.demo.majors = majors;
 
         // Transform schools into an array of objects
         const schools = [];
-        _.keys(newStats.demo.schools)
-          .forEach(function (key) {
-            schools.push({
-              email: key,
-              count: newStats.demo.schools[key][newStats.demoSummary.key],
-              stats: newStats.demo.schools[key]
-            });
+        _.keys(newStats.demo.schools).forEach(function (key) {
+          schools.push({
+            email: key,
+            count: newStats.demo.schools[key][newStats.demoSummary.key],
+            stats: newStats.demo.schools[key],
           });
+        });
         newStats.demo.schools = schools;
 
         // Likewise, transform the teams into an array of objects
@@ -322,18 +328,22 @@ function calculateStats(_err, registrationTimes) {
         console.log('Stats updated!');
         newStats.lastUpdated = new Date();
         stats = newStats;
-      });
-    });
-
+      },
+    );
+  });
 }
 
 // Calculate once every five minutes.
 SettingsController.getRegistrationTimes(calculateStats);
-setInterval(SettingsController.getRegistrationTimes.bind(this, calculateStats), 300000);
+setInterval(
+  SettingsController.getRegistrationTimes.bind(this, calculateStats),
+  300000,
+);
 
 const Stats = {};
 
 Stats.getUserStats = function () {
+  console.log(stats);
   return stats;
 };
 
