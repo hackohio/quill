@@ -12,9 +12,11 @@ import useApplicationCloseTime from '../Utils/useApplicationCloseTime';
 import axios from 'axios';
 
 const Dashboard = () => {
-  const submitted = user?.status.completedProfile ?? false;
-  const confirmed = user?.confirmed ?? false;
   const verified = user?.verified ?? false;
+  const submitted = user?.status.completedProfile ?? false;
+  const confirmed = user?.status.confirmed ?? false;
+  const admitted = user?.status.admitted ?? false;
+
   const confirmationDeadline = user?.status.confirmBy;
   const applicationDeadline = useApplicationCloseTime();
   const user = useCurrentUser();
@@ -22,24 +24,24 @@ const Dashboard = () => {
   const getStatusBarColor = user => {
     var statusColor = user?.declined
       ? 'red'
-      : user?.confirmed
+      : user?.status.confirmed
       ? 'purple'
-      : user?.submitted
+      : user?.status.submitted
       ? 'blue'
-      : user?.verified
+      : user?.status.verified
       ? 'green'
       : 'grey';
     return statusColor;
   };
 
   const getStatusBarText = user => {
-    var statusText = user?.declined
+    var statusText = user?.status.declined
       ? 'Declined'
-      : user?.confirmed
+      : user?.status.confirmed
       ? 'Confirmed'
-      : user?.submitted
+      : user?.status.submitted
       ? 'Submitted'
-      : user?.verified
+      : user?.status.verified
       ? 'Verified'
       : 'Not Verified';
     return statusText;

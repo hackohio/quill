@@ -145,6 +145,10 @@ module.exports = function (router) {
     }
   });
 
+  router.get('/chris/stats', function (req, res) {
+    UserController.getStats(defaultResponse(req, res));
+  });
+
   /**
    * [ADMIN ONLY]
    */

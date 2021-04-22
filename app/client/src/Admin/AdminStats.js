@@ -36,7 +36,7 @@ const AdminStats = () => {
             <List.Item>
               <List.Icon name="users" />
               <List.Content>
-                {/* <strong>Total Users</strong> :{stats.total} */}
+                <strong>Total Users</strong> :{stats.total}
               </List.Content>
             </List.Item>
             <List.Item>
