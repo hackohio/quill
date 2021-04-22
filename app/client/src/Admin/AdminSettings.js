@@ -16,13 +16,13 @@ import useFetch from '../Utils/useFetch';
 export default function AdminUsers() {
   return (
     <Container>
-      <Segment>
-        <Grid stackable>
-          <Container textAlign="center" style={{ paddingTop: 25 }}>
-            <Header size="huge">Settings</Header>
-          </Container>
+      <Grid stackable>
+        <Container textAlign="center" style={{ paddingTop: 25 }}>
+          <Header size="huge">Settings</Header>
+        </Container>
 
-          <Grid.Column width={6}>
+        <Grid.Column width={8}>
+          <Segment>
             <Form>
               <Header>Open/Close Registration</Header>
               <p>
@@ -58,9 +58,10 @@ export default function AdminUsers() {
                 Update
               </Button>
             </Form>
-          </Grid.Column>
-          <Grid.Column width={4}></Grid.Column>
-          <Grid.Column width={6}>
+          </Segment>
+        </Grid.Column>
+        <Grid.Column width={8}>
+          <Segment>
             <Form>
               <Header>Open/Close Confirmation</Header>
               <p>
@@ -86,9 +87,9 @@ export default function AdminUsers() {
                 Update
               </Button>
             </Form>
-          </Grid.Column>
-        </Grid>
-      </Segment>
+          </Segment>
+        </Grid.Column>
+      </Grid>
     </Container>
   );
 }

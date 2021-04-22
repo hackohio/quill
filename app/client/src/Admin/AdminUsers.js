@@ -12,9 +12,20 @@ import {
 } from 'semantic-ui-react';
 import useFetch, { STATUS } from '../Utils/useFetch';
 
+const USER_URL = '/users';
+
+const fetchUsers = USER_URL => {
+  const usersArray = useFetch(USER_URL);
+  if (usersArray.STATUS != STATUS.FETCHED) {
+    return null;
+  }
+  return usersArray.data;
+};
+
 export default function AdminUsers() {
   //fetch an array of all of the users to be used to display to the page
-  const users = [];
+  const users = fetchUsers();
+  console.log(users);
   return (
     <Container>
       <Segment>
@@ -31,12 +42,21 @@ export default function AdminUsers() {
             <Container textAlign="center">
               <Pagination defaultActivePage={1} totalPages={10} />
             </Container>
-
+            <Container>
+              <Header size="huge"> Users </Header>
+            </Container>
             <Table celled>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Users</Table.HeaderCell>
-                  <Table.HeaderCell>Status</Table.HeaderCell>
+                  <Table.HeaderCell>Name</Table.HeaderCell>
+                  <Table.HeaderCell>Email</Table.HeaderCell>
+                  <Table.HeaderCell>School</Table.HeaderCell>
+                  <Table.HeaderCell>Major</Table.HeaderCell>
+                  <Table.HeaderCell>Grad Month</Table.HeaderCell>
+                  <Table.HeaderCell>Grad Year</Table.HeaderCell>
+                  <Table.HeaderCell>V/S/A/C</Table.HeaderCell>
+                  <Table.HeaderCell>Link</Table.HeaderCell>
+                  <Table.HeaderCell>Make Admin</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 

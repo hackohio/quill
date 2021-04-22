@@ -343,7 +343,6 @@ setInterval(
 const Stats = {};
 
 Stats.getUserStats = function () {
-  console.log(stats);
   return stats;
 };
 

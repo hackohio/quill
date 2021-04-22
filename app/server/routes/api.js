@@ -107,6 +107,7 @@ module.exports = function (router) {
           return res.status(err.status || 500).send(err);
         }
       } else {
+        // console.log('returning json data');
         return res.json(data);
       }
     };

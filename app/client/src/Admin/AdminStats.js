@@ -10,8 +10,8 @@ import {
 } from 'semantic-ui-react';
 import useStats from '../Utils/useStats';
 
-export default function AdminStats() {
-  const stats = useStats;
+const AdminStats = () => {
+  const stats = useStats();
 
   return (
     <div>
@@ -26,6 +26,7 @@ export default function AdminStats() {
             </Form>
           </Container>
         </Segment>
+        <Divider />
       </Container>
       <Container className="stats-container">
         <Segment>
@@ -35,53 +36,53 @@ export default function AdminStats() {
             <List.Item>
               <List.Icon name="users" />
               <List.Content>
-                <strong>Total Users</strong> :{stats.total}
+                {/* <strong>Total Users</strong> :{stats.total} */}
               </List.Content>
             </List.Item>
             <List.Item>
               <List.Icon name="check circle outline" />
               <List.Content>
-                <strong>Verified Users</strong> :{stats.verified}(
-                {((stats.verified / stats.total) * 100) | 0}%)
+                {/* <strong>Verified Users</strong> :{stats.verified}(
+                {((stats.verified / stats.total) * 100) | 0}%) */}
               </List.Content>
             </List.Item>
             <List.Item>
               <List.Icon name="check circle outline" />
               <List.Content>
-                <strong>Submitted Users</strong> :{stats.submitted}(
-                {((stats.submitted / stats.total) * 100) | 0}%)
+                {/* <strong>Submitted Users</strong> :{stats.submitted}(
+                {((stats.submitted / stats.total) * 100) | 0}%) */}
               </List.Content>
             </List.Item>
 
             <List.Item>
               <List.Icon name="check circle outline" />
               <List.Content>
-                <strong>Admitted Users</strong> :{stats.admitted}
+                {/* <strong>Admitted Users</strong> :{stats.admitted} */}
               </List.Content>
             </List.Item>
             <Divider />
             <List.Item>
               <List.Icon name="check circle outline" />
               <List.Content>
-                <strong>Confirmed (Total) Users</strong> :{stats.confirmed}
+                {/* <strong>Confirmed (Total) Users</strong> :{stats.confirmed} */}
               </List.Content>
             </List.Item>
             <List.Item>
               <List.Icon name="check circle outline" />
               <List.Content>
-                <strong>Confirmed (OSU) Users</strong> :{stats.confirmedOsu}
+                {/* <strong>Confirmed (OSU) Users</strong> :{stats.confirmedOsu} */}
               </List.Content>
             </List.Item>
             <List.Item>
               <List.Icon name="cancel" />
               <List.Content>
-                <strong>Declined Users</strong> :{stats.declined}
+                {/* <strong>Declined Users</strong> :{stats.declined} */}
               </List.Content>
             </List.Item>
             <List.Item>
               <List.Icon name="flag checkered" />
               <List.Content>
-                <strong>Checked in</strong> :{stats.checkedIn}
+                {/* <strong>Checked in</strong> :{stats.checkedIn} */}
               </List.Content>
             </List.Item>
             <Divider />
@@ -307,4 +308,5 @@ export default function AdminStats() {
       </Container>
     </div>
   );
-}
+};
+export default AdminStats;
