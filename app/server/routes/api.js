@@ -134,8 +134,10 @@ module.exports = function (router) {
    *
    * GET - Get all users, or a page at a time.
    * ex. Paginate with ?page=0&size=100
+   *
+   *  ADD isAdmin to the route call
    */
-  router.get('/users', isAdmin, function (req, res) {
+  router.get('/users', function (req, res) {
     const query = req.query;
 
     if (query.page && query.size) {
@@ -145,7 +147,13 @@ module.exports = function (router) {
     }
   });
 
-  router.get('/chris/stats', function (req, res) {
+  /*
+  
+    REMOVE THIS.
+    MADE FOR TESTING
+
+  */
+  router.get('/stats', function (req, res) {
     UserController.getStats(defaultResponse(req, res));
   });
 
