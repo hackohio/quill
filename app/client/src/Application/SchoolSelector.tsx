@@ -59,7 +59,7 @@ export default function SchoolSelector(props: Props) {
       case 'CLEAN_QUERY':
         return initialState;
       case 'START_SEARCH':
-        return { ...state, loading: true  };
+        return { ...state, loading: true };
       case 'FINISH_SEARCH':
         return { ...state, loading: false, results: action.results };
       case 'UPDATE_SELECTION':
@@ -78,7 +78,7 @@ export default function SchoolSelector(props: Props) {
     (e, searchData) => {
       clearTimeout(timeoutRef.current);
       dispatch({ type: 'START_SEARCH', query: searchData.value });
-      props.onChangeSchool(searchData.value );
+      props.onChangeSchool(searchData.value);
 
       timeoutRef.current = setTimeout(() => {
         if (searchData.value.length === 0) {
@@ -112,6 +112,7 @@ export default function SchoolSelector(props: Props) {
 
   return (
     <Form.Field>
+      <label>School</label>
       <Search
         loading={status != STATUS.FETCHED || loading}
         onResultSelect={(e, data) =>

@@ -12,14 +12,13 @@ import useApplicationCloseTime from '../Utils/useApplicationCloseTime';
 import axios from 'axios';
 
 const Dashboard = () => {
+  const user = useCurrentUser();
   const verified = user?.verified ?? false;
   const submitted = user?.status.completedProfile ?? false;
   const confirmed = user?.status.confirmed ?? false;
-  const admitted = user?.status.admitted ?? false;
-
   const confirmationDeadline = user?.status.confirmBy;
   const applicationDeadline = useApplicationCloseTime();
-  const user = useCurrentUser();
+
   const today = new Date();
   const getStatusBarColor = user => {
     var statusColor = user?.status.declined
@@ -76,7 +75,7 @@ const Dashboard = () => {
             <Container>
               <Header as="h3">
                 <strong>
-                  Welcome back, {user?.submitted ? user.profile.name : ''}
+                  Welcome back, {submitted ? user?.profile.name : ''}
                 </strong>
               </Header>
               <br />
@@ -90,7 +89,7 @@ const Dashboard = () => {
                     </strong>
                     <br />
                     <strong>
-                      You can {confirmed ? 'Edit ' : 'Submit '} your
+                      You can {confirmed ? 'edit ' : 'submit '} your
                       confirmation information until
                       {confirmationDeadline.toString()}, after which you will
                       only be able to view your confirmation information. You

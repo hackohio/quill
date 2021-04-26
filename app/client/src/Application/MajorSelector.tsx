@@ -23,10 +23,7 @@ type SearchResult = {
   description?: string;
 };
 
-type ReducerActionType =
-  | 'CLEAN_QUERY'
-  | 'START_SEARCH'
-  | 'FINISH_SEARCH'
+type ReducerActionType = 'CLEAN_QUERY' | 'START_SEARCH' | 'FINISH_SEARCH';
 type ReducerAction = {
   type: ReducerActionType;
   query?: string;
@@ -104,6 +101,7 @@ export default function MajorSelector(props: Props) {
 
   return (
     <Form.Field>
+      <label>Major</label>
       <Search
         loading={status != STATUS.FETCHED || loading}
         onResultSelect={(e, data) => {
