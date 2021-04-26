@@ -22,13 +22,13 @@ const Dashboard = () => {
   const user = useCurrentUser();
   const today = new Date();
   const getStatusBarColor = user => {
-    var statusColor = user?.declined
+    var statusColor = user?.status.declined
       ? 'red'
       : user?.status.confirmed
       ? 'purple'
       : user?.status.submitted
       ? 'blue'
-      : user?.status.verified
+      : user?.verified
       ? 'green'
       : 'grey';
     return statusColor;
@@ -41,7 +41,7 @@ const Dashboard = () => {
       ? 'Confirmed'
       : user?.status.submitted
       ? 'Submitted'
-      : user?.status.verified
+      : user?.verified
       ? 'Verified'
       : 'Not Verified';
     return statusText;
@@ -121,15 +121,14 @@ const Dashboard = () => {
                       deadline.
                     </strong>
                   </Container>
-                ) : (submitted && applicationDeadline < today) ||
-                  applicationDeadline > today ? (
+                ) : (submitted || verified) && applicationDeadline > today ? (
                   <Container>
                     <strong>
                       Application Deadline: {applicationDeadline.toString()}.
                     </strong>
                     <br />
                     <strong>
-                      You can {submitted ? 'Edit ' : 'Submit '} your application
+                      You can {submitted ? 'edit ' : 'submit '} your application
                       until {applicationDeadline.toString()}, after which you
                       will only be able to view your application information.{' '}
                       {submitted
