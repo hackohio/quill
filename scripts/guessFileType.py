@@ -3,7 +3,7 @@ import filetype
 from os import listdir, rename
 from os.path import isfile, join
 
-mypath = r"D:\Libraries\Documents\OHIO\Hack 2020\resumes\uploads"
+mypath = r"D:\Libraries\Documents\OHIO\Hack 2021\resumes\uploads"
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
 prefix = mypath + "\\"

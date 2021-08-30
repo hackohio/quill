@@ -59,11 +59,11 @@ function calculateStats(_err, registrationTimes) {
         'December': 0,
       },
       year: {
-        '2020': 0,
         '2021': 0,
         '2022': 0,
         '2023': 0,
         '2024': 0,
+        '2025': 0,
       },
       degree: {
         'Associates': 0,
