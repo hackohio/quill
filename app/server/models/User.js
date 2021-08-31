@@ -31,6 +31,12 @@ const profile = {
     max: 150,
   },
 
+  secondMajor:{
+    type: String,
+    min:1,
+    max:150,
+  },
+
   graduationMonth: {
     type: String,
     enum: {
