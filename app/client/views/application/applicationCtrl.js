@@ -95,6 +95,14 @@ angular.module('reg')
                   $scope.user.profile.major = result.title.trim();
                 }
               });
+              // This needs to be separate from above because of line 103, it may be combined but I have not tested it.
+            $('#secondMajor.ui.search').search({
+              source: content,
+              cache: true,
+              onSelect: function(result, response){
+                $scope.user.profile.secondMajor = result.title.trim();
+              }
+            });
           });
       }
 

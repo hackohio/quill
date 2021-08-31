@@ -1,4 +1,17 @@
 <div id="application" class="page">
+  <script>
+    function toggleDoubleMajor(element){
+      if(element.checked){
+        document.getElementById("double-major-field").style.display = "inline-block"
+        document.getElementById("double-major-field").style.width = "800px"
+      }else{
+        document.getElementById("double-major-field").style.display = "none"
+      }
+    }
+    $(document).ready(function(){
+      toggleDoubleMajor(document.getElementById("show-second-major"))
+    })
+  </script>
   <div class="divided title">
     Application
   </div>
@@ -46,6 +59,22 @@
                 <input class="prompt" type="text" placeholder="Major"
                   name="major" ng-model="user.profile.major">
               </div>
+              <div class="results"></div>
+            </div>
+          </div>
+
+          <div class="ui checkbox">
+            <input type="checkbox" name="double" id="show-second-major" onchange="toggleDoubleMajor(this)" ng-checked="(user.profile.secondMajor.length > 0)" >
+            <label for="show-second-major"> Double Major? </label>
+          </div>
+
+          <div class="field" id="double-major-field">
+              <label> <strong> Second Major</strong> </label>
+              <div id="secondMajor" class="ui search" >
+                <div class="ui input">
+                  <input class="prompt" type="text" placeholder="Second Major"
+                  name="secondMajor" ng-model="user.profile.secondMajor">
+                </div>
               <div class="results"></div>
             </div>
           </div>
