@@ -179,6 +179,22 @@
             <textarea ng-model="user.profile.workshops">
           </textarea>
           </div>
+          
+
+          <div class="field">
+            <label>Participation Survey</label>
+            <p>
+              We will use the answers from this question to help accuratly estimate the number of in person attendees. 
+            </p>
+            <select name="participation" ng-model="user.profile.participation">
+              <option value="">Preferred Participation Method</option>
+              <option value="IP">I definitely want to attend physically</option>
+              <option value="SIP">I hope to attend physically if it's safe</option>
+              <option value="NS">I'm not sure yet</option>
+              <option value="PV">I'd prefer to attend virtually</option>
+              <option value="V">I definitely want to attend virtually</option>
+            </select>
+          </div>
 
           <div class="field">
             <label>Swag Pickup (Optional)</label>
