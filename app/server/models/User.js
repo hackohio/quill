@@ -91,7 +91,9 @@ const profile = {
     min: 0,
     max: 1500
   },
-
+  participation:{
+    type: String,
+  }
 };
 
 // Only after confirmed
