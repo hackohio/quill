@@ -83,6 +83,14 @@ const profile = {
     required: false,
     default: false,
   },
+  ethnicity: {
+    type: String
+  },
+  workshops: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
 
 };
 
@@ -110,7 +118,7 @@ const confirmation = {
     default: false,
   },
   legalName: String,
-  ethnicity: String,
+  // ethnicity: String,
   wantAWSAccount: Boolean,
   // receipt: String,
   //

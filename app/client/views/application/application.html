@@ -132,6 +132,32 @@
           </div>
 
           <div class="field">
+            <label> Ohio State values diversity in people and ideas.
+              We’re an inclusive, supportive community where you can comfortably
+              join in or confidently stand out. </label>
+            <p>
+              Please select your race/ethnicity below
+            </p>
+            <select name="ethnicity" ng-model="user.profile.ethnicity"
+              required>
+              <option value="" disabled hidden>Race/Ethnicity</option>
+              <option value="American Indian/Alaskan Native">American
+                Indian/Alaskan Native</option>
+              <option value="Asian">Asian</option>
+              <option value="Black or African American">Black or African
+                American</option>
+              <option value="Hispanic">Hispanic</option>
+              <option value="White">White</option>
+              <option value="Native Hawaiian/Pacific Islander">Native
+                Hawaiian/Pacific Islander</option>
+              <option value="Non-Resident Alien">Non-Resident Alien</option>
+              <option value="Two or more races">Two or more races</option>
+              <option value="Choose not to disclose">Choose not to disclose
+              </option>
+            </select>
+          </div>
+
+          <div class="field">
             <label>I would describe myself as a...</label>
             <input type="text"
               placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
@@ -143,6 +169,14 @@
               What would you like to learn or get out of HackOHI/O? (optional)
             </label>
             <textarea ng-model="user.profile.essay">
+          </textarea>
+          </div>
+
+          <div class="field">
+            <label>
+              We offer free workshops before HackOHI/O. What topic, tool, or skill would you most like to know about before the event?
+            </label>
+            <textarea ng-model="user.profile.workshops">
           </textarea>
           </div>
 
