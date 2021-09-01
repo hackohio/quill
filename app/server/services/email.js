@@ -200,14 +200,16 @@ controller.sendConfirmationEmail = function(email, callback){
 
   const options = {
     to: email,
-    subject: "[" + HACKATHON_NAME + "] - Test Auto Confirmation Email"
+    subject: "[" + HACKATHON_NAME + "] - Confirmation Email"
   };
 
   const locals ={
     title: "Please confirm your registration.",
-    body: "Follow this link and answer a few more questions to confirm your registration."
+    description: "Follow this link and answer a few more questions to confirm your registration.",
+    actionUrl: ROOT_URL + '/confirmation/',
+    actionName: "Confirm Registration"
   };
-  sendOne('email-basic', options, locals, function (err, info) {
+  sendOne('email-link-action', options, locals, function (err, info) {
     if (err) {
       console.log("Error: " + err);
     }
