@@ -314,7 +314,7 @@ UserController.updateProfileById = function (id, profile, callback) {
           //Admit User
           UserController.admitUser(id, user)
           //Send the confirmation email
-          Mailer.sendConfirmationEmail(user.email)
+          // Mailer.sendConfirmationEmail(user.email)
         }
          // Update the user progile
         User.findOneAndUpdate({
