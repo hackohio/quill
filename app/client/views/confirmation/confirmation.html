@@ -147,6 +147,9 @@
             <label ng-if="!user.confirmation.resume" for="resume_file">
               Please upload your resume as a PDF.
             </label>
+            <p>
+              We supply potential employers with the resumes from all of the participants.
+            </p>
             <form id="resume" method="post" enctype="multipart/form-data">
               <input type="hidden" name="key"
                 value="uploads/{{user.profile.name}} Resume">
