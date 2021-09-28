@@ -21,7 +21,7 @@
               ng-model="user.confirmation.phoneNumber"
               placeholder="(123) - 555 - 1234" required>
           </div>
-          <!--
+
           <div class="field">
             <label> Dietary Restrictions </label>
             <p>
@@ -43,7 +43,24 @@
 
             </div>
           </div>
-        -->
+
+          <div class="field">
+            <label> Hear at OHI/O, we understand that everyone may not be comfortable 
+            participating in the hackathon in person. That's why this year we have 
+            provided both an online and in person way to participate in the hackathon. </label>
+            <p>
+              Please select your race/ethnicity below
+            </p>
+            <select name="participation" ng-model="user.confirmation.participation"
+              required>
+              <option value="" disabled hidden>Participation</option>
+              <option value="Fully online">I/my group will be participating fully online</option>
+              <option value="Group hybrid">My group will have hybrid participation</option>
+              <option value="unsure">I am unsure</option>
+              <option value="Fully in person">I/my group will be participating fully in person</option>
+            </select>
+          </div>
+
           <div class="field">
             <label> Shirt Size (required) </label>
             <p>
