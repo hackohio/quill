@@ -121,7 +121,6 @@ const confirmation = {
   },
   legalName: String,
   // ethnicity: String,
-  participation: String, 
   wantAWSAccount: Boolean,
   // receipt: String,
   //
