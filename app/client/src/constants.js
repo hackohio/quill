@@ -6,9 +6,9 @@ angular.module('reg')
     })
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application! If you can\'t find your verification email, please check your spam folder.',
-        INCOMPLETE_TITLE: 'You still need to complete your application!',
-        INCOMPLETE: 'Please complete your application before [APP_DEADLINE].',
-        SUBMITTED_TITLE: 'Your application has been submitted!',
+        INCOMPLETE_TITLE: 'You still need to complete your registration!',
+        INCOMPLETE: 'Please complete your sign-up form before [APP_DEADLINE].',
+        SUBMITTED_TITLE: 'Your sign-up form has been submitted!',
         SUBMITTED: 'Feel free to edit it at any time. However, once registration is closed, you will not be able to edit it any further.\nPlease make sure your information is accurate before registration is closed!',
         CLOSED_AND_INCOMPLETE_TITLE: 'Unfortunately, registration has closed.',
         CLOSED_AND_INCOMPLETE: 'Sorry, you did not complete your application and registration is closed',
