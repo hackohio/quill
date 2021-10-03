@@ -106,6 +106,7 @@ const confirmation = {
       values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
     }
   },
+  discord: String,
   wantsHardware: {
     type: Boolean,
     required: true,
