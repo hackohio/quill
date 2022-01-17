@@ -2,7 +2,7 @@
      ng-class="{open: showSidebar}">
   <div ui-sref="app.dashboard"
        class="logo item">
-    <img src="assets/images/logo.svg">
+    <img src="assets/images/logo-white.svg">
   </div>
 
   <div ui-sref-active="active"
@@ -53,6 +53,7 @@
   </div>
 
   <div class="note">
+    <!-- Change this to manually say MakeOHI/O 2022 if the variable doesn't autmatically fill in correctly. It does not work locally -->
     {{ EVENT_INFO.NAME }}
   </div>
 
@@ -60,7 +61,7 @@
 
 <div class="tab"
   ng-click="toggleSidebar()">
-  <img ng-show="!showSidebar" src="assets/images/logo.svg" />
+  <img ng-show="!showSidebar" src="assets/images/.svg" />
   <span class="close" ng-show="showSidebar">&#x2715</span>
 </div>
 

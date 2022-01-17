@@ -117,6 +117,7 @@ angular.module('reg')
       function _uploadResume() {
         const resumeUploadData = new FormData($("#resume")[0]);
         return $.ajax({
+          // change below line when new s3 bucket is created 
           url: "https://make-ohio-2021.s3.amazonaws.com",
           type: 'POST',
           data: resumeUploadData,
