@@ -31,6 +31,12 @@ const profile = {
     max: 150,
   },
 
+  secondMajor:{
+    type: String,
+    min:1,
+    max:150,
+  },
+
   graduationMonth: {
     type: String,
     enum: {
@@ -83,18 +89,18 @@ const confirmation = {
     match: /^((?!(discordtag|everyone|here)#)((?!@|#|:|```).{2,32})#\d{4})/,
   },
   dietaryRestrictions: [String],
-  shirtSize: {
-    type: String,
-    enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
-    }
-  },
-  // wantsHardware: {
-  //   type: Boolean,
-  //   required: true,
-  //   default: false,
+  // shirtSize: {
+  //   type: String,
+  //   enum: {
+  //     values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
+  //   }
   // },
-  // hardware: String,
+   wantsHardware: {
+     type: Boolean,
+     required: true,
+     default: false,
+ },
+  hardware: String,
   github: String,
   website: String,
   resume: {
