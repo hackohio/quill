@@ -139,8 +139,9 @@ angular.module('reg')
        */
       function _uploadResume() {
         const resumeUploadData = new FormData($("#resume")[0]);
+        const url = "https://make-ohio-2022.s3.amazonaws.com"
         return $.ajax({
-          url: "https://make-ohio-2021.s3.amazonaws.com",
+          url: url,
           type: 'POST',
           data: resumeUploadData,
           cache: false,
