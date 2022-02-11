@@ -160,7 +160,10 @@ module.exports = function (router) {
         return;
       }
       const processed_user_data = data.map(user => {
-        return flatten(user.toObject(), { maxDepth: 5 });
+        var userData = flatten(user.toObject(), { maxDepth: 5 })
+        //Change this back to original when we do the final export for the even just in case
+        userData['_id.id'] = "Dummy text"
+        return userData;
       });
       const csv = json2csv.parse(processed_user_data);
       res.header('Content-Type', 'text/csv');
