@@ -13,7 +13,7 @@ import hmac
 
 # ************* REQUEST VALUES *************
 service = 's3'
-host = 'hack-ohio-2021.s3.amazonaws.com'
+host = 'hack-ohio-2022.s3.amazonaws.com'
 region = 'us-east-1'
 
 # AWS access key and secret value
