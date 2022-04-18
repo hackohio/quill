@@ -117,7 +117,7 @@ angular.module('reg')
       function _uploadResume() {
         const resumeUploadData = new FormData($("#resume")[0]);
         return $.ajax({
-          url: "https://hack-ohio-2021.s3.amazonaws.com",
+          url: "https://hack-ohio-2022.s3.amazonaws.com",
           type: 'POST',
           data: resumeUploadData,
           cache: false,
